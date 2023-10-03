@@ -2,6 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import Logo from '../../app/assets/images/logo-dpedra.jpg';
 import Image from 'next/image';
+import RenderQuestion from '../RenderQuestion/RenderQuestion';
 
 const Game = () => {
   return (
@@ -21,6 +22,7 @@ const Game = () => {
           src={Logo}
         />
       </Box>
+      <RenderQuestion />
     </Box>
   )
 };
