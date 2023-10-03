@@ -5,8 +5,12 @@ interface IAnswers {
   data: string;
 }
 
-export interface IQuestions {
+export interface IQuestionsProps {
   type: string;
   content: string | StaticImageData;
   options: IAnswers[]
+}
+
+export interface IQuestionPropsV2 {
+  questions: IQuestionsProps[]
 }

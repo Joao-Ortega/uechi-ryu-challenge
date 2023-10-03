@@ -1,11 +1,39 @@
-import { IQuestions } from '@/interfaces';
-import { Box, Container } from '@mui/material';
-import React, { ReactNode } from 'react';
+'use client'
+import { IQuestionPropsV2, IQuestionsProps } from '@/interfaces';
+import { Box, Container, Typography } from '@mui/material';
+import Image from 'next/image';
+import React, { ReactNode, useEffect, useState } from 'react';
 
-const RenderQuestion: React.FC<IQuestions[]> = (questions: IQuestions[]) => {
+const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions }: IQuestionPropsV2) => {
+  const [randomIndex, setRandomIndex] = useState<number>(Math.floor((Math.random() * questions.length)))
 
-  const buildQuestion = (question: IQuestions): JSX.Element => {
-    return <Box></Box>
+  useEffect(() => {
+    console.log('ola', questions);
+    console.log('selectQuestion', randomIndex)
+  }, [])
+
+  const buildQuestion = (question: IQuestionsProps): JSX.Element => {
+    if (question.type === 'text' && typeof question.content === 'string') {
+      return (
+        <Typography
+          variant='h6'
+          sx={{
+            textAlign: 'center',
+            color: 'white'
+          }}
+        >
+          {question.content}
+        </Typography>
+      )
+    }
+    return (
+      <Image
+        alt='image question'
+        src={question.content}
+        width={50}
+        height={50}
+      />
+    )
   }
 
   return (
@@ -17,7 +45,7 @@ const RenderQuestion: React.FC<IQuestions[]> = (questions: IQuestions[]) => {
         height: '40vh'
       }}
     >
-      {questions.length && questions.map((question: IQuestions, i: number) => buildQuestion(question))}
+      { questions.length && buildQuestion(questions[randomIndex]) }
     </Box>
   )
 };

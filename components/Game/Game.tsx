@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import Logo from '../../app/assets/images/logo-dpedra.jpg';
 import Image from 'next/image';
 import RenderQuestion from '../RenderQuestion/RenderQuestion';
+import challenges from '@/util/questions';
 
 const Game = () => {
   return (
@@ -22,7 +23,7 @@ const Game = () => {
           src={Logo}
         />
       </Box>
-      <RenderQuestion />
+      <RenderQuestion questions={challenges} />
     </Box>
   )
 };
