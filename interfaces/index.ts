@@ -1,7 +1,7 @@
 import { StaticImageData } from "next/image";
 
-interface IAnswers {
-  correct: boolean;
+export interface IAnswers {
+  correct: number;
   data: string;
 }
 
