@@ -12,5 +12,5 @@ export interface IQuestionsProps {
 }
 
 export interface IQuestionPropsV2 {
-  questions: IQuestionsProps[]
+  questions: IQuestionsProps[];
 }

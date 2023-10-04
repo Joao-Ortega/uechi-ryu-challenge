@@ -1,4 +1,5 @@
-import React from 'react';
+'use client'
+import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import Logo from '../../app/assets/images/logo-dpedra.jpg';
 import Image from 'next/image';
@@ -6,6 +7,12 @@ import RenderQuestion from '../RenderQuestion/RenderQuestion';
 import challenges from '@/util/questions';
 
 const Game = () => {
+  // const [indexesAnswered, setIndexesAnswered] = useState<number[]>([]);
+
+  // useEffect(() => {
+  //   setIndexesAnswered([])
+  // },[])
+
   return (
     <Box>
       <Box

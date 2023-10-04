@@ -1,19 +1,29 @@
-'use client'
 import { IAnswers, IQuestionPropsV2, IQuestionsProps } from '@/interfaces';
-import { Box, Button, Container, FormControl, FormControlLabel, LinearProgress, Radio, RadioGroup, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Container, FormControl, FormControlLabel, LinearProgress, Radio, RadioGroup, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import React, { ReactElement, ReactNode, useEffect, useState } from 'react';
 import path from 'path';
 
 const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions }: IQuestionPropsV2) => {
-  const [randomIndex, setRandomIndex] = useState<number>(Math.floor((Math.random() * questions.length)));
+  const [randomIndex, setRandomIndex] = useState<number>(0);
   const [isCorrect, setIsCorrect] = useState<string | undefined>(undefined);
   const [blockAnswer, setBlockAnswer] = useState<boolean>(false);
-  const [indexesAnswered, setIndexesAnswered] = useState<number[]>([randomIndex]);
+  const [indexesAnswered, setIndexesAnswered] = useState<number[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [mainLoading, setMainLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const random = Math.floor((Math.random() * questions.length));
+    setRandomIndex(random);
+    setIndexesAnswered([random])
+    console.log('random', random)
+    setMainLoading(false);
+  }, [])
 
   const generateNewQuestionIndex = async (): Promise<number> => {
     const newNumber = Math.floor((Math.random() * questions.length));
+    console.log('array', indexesAnswered);
+    console.log('validação', indexesAnswered.includes(newNumber))
     if (indexesAnswered.includes(newNumber)) return generateNewQuestionIndex();
     setIndexesAnswered([...indexesAnswered, newNumber])
     return newNumber;
@@ -34,7 +44,7 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions }: IQuestionProp
     setBlockAnswer(true);
     setTimeout(() => {
       buildNextQuestion();
-    }, 4500)
+    }, 2500)
   };
 
   const returnColor = (rightAnswer: number): string => {
@@ -114,41 +124,70 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions }: IQuestionProp
     }
   }
 
-  return (
-    <Box
-      sx={{
-        margin: '2% auto 0 auto',
-        width: '90vw',
-        height: '40vh'
-      }}
-    >
+  if (mainLoading) {
+    return (
       <Box
         sx={{
-          // border: '1px solid red',
-          margin: '4% auto 0 auto',
-          width: '90vw',
-          height: '30vh'
-        }}
-      >
-        { questions.length && buildQuestion(questions[randomIndex]) }
-      </Box>
-      <Box
-        sx={{
-          // border: '1px solid green',
+          color: 'white',
           margin: '2% auto 0 auto',
           width: '90vw',
-          height: '30vh'
+          height: '40vh'
         }}
+        display='flex'
+        justifyContent='center'
+        alignItems='center'
       >
-        { questions.length && buildAnswers(questions[randomIndex].options) }
+        <CircularProgress color='inherit' />
       </Box>
-      {isLoading && (
-        <Box>
-          <LinearProgress color='info' />
+    )
+  } else {
+      return (
+        <Box
+          sx={{
+            margin: '2% auto 0 auto',
+            width: '90vw',
+            height: '40vh'
+          }}
+        >
+          <Box
+            sx={{ color: 'white', fontWeight: 'bold', fontSize: '20px' }}
+            display='flex'
+            justifyContent='center'
+          >
+            {`${indexesAnswered.length}/10`}
+          </Box>
+          <Box
+            sx={{
+              // border: '1px solid red',
+              margin: '4% auto 0 auto',
+              width: '90vw',
+              height: '30vh'
+            }}
+            display='flex'
+            alignItems='center'
+            justifyContent='center'
+          >
+            { questions.length && buildQuestion(questions[randomIndex]) }
+          </Box>
+          <Box
+            sx={{
+              // border: '1px solid green',
+              margin: '2% auto 0 auto',
+              width: '90vw',
+              height: '30vh'
+            }}
+          >
+            { questions.length && buildAnswers(questions[randomIndex].options) }
+          </Box>
+          {isLoading && (
+            <Stack sx={{ color: 'white' }}>
+              <LinearProgress color='inherit' />
+            </Stack>
+          )}
         </Box>
-      )}
-    </Box>
-  )
+      )
+  }
+
 };
 
 export default RenderQuestion;

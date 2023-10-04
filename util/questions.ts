@@ -2,6 +2,7 @@ import { IQuestionsProps } from "../interfaces";
 import kiba from '../app/assets/images/kiba.png';
 import zen from '../app/assets/images/zen.png';
 import mu from '../app/assets/images/mu.png';
+import nek from '../app/assets/images/nek.png';
 
 const challenges: IQuestionsProps[] = [
   {
@@ -72,6 +73,46 @@ const challenges: IQuestionsProps[] = [
       {correct: 2, data: 'Mente de Principiante'},
       {correct: 0, data: 'Mente - Técnica - Corpo'},
       {correct: 3, data: 'Buscar Exelência'}
+    ]
+  },
+  {
+    type: 'image',
+    content: [nek, 'Qual o nome da base acima?'],
+    options: [
+      {correct: 0, data: 'Neko ashi Dachi'},
+      {correct: 1, data: 'Kokutsu Dachi'},
+      {correct: 2, data: 'Shiko Dachi'},
+      {correct: 3, data: 'Sanchin Dachi'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual palavra é conhecida por treinar o fortalecimento/calejamento das pernas?',
+    options: [
+      {correct: 1, data: 'Tai Kitae'},
+      {correct: 2, data: 'Kote Kitae'},
+      {correct: 0, data: 'Ashi Kitae'},
+      {correct: 3, data: 'Mone Kitae'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual palavra é conhecida por treinar o fortalecimento/calejamento das pernas?',
+    options: [
+      {correct: 1, data: 'Tai Kitae'},
+      {correct: 2, data: 'Kote Kitae'},
+      {correct: 0, data: 'Ashi Kitae'},
+      {correct: 3, data: 'Mone Kitae'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Ao realizar um golpe altura JODAN, em qual area ele será desferido?',
+    options: [
+      {correct: 1, data: 'Altura entre ombros e quadril'},
+      {correct: 2, data: 'Altura do quadril para baixo'},
+      {correct: 3, data: 'Altura entre ombros e quadril mas pelas costas'},
+      {correct: 0, data: 'Altura do ombro para cima'}
     ]
   },
 ];
