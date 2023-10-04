@@ -7,7 +7,7 @@ export interface IAnswers {
 
 export interface IQuestionsProps {
   type: string;
-  content: string | StaticImageData;
+  content: string | (string | StaticImageData)[];
   options: IAnswers[]
 }
 

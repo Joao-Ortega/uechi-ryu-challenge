@@ -1,15 +1,16 @@
 'use client'
 import { IAnswers, IQuestionPropsV2, IQuestionsProps } from '@/interfaces';
-import { Box, Button, Container, FormControl, FormControlLabel, Radio, RadioGroup, Typography } from '@mui/material';
+import { Box, Button, Container, FormControl, FormControlLabel, LinearProgress, Radio, RadioGroup, Typography } from '@mui/material';
 import Image from 'next/image';
 import React, { ReactElement, ReactNode, useEffect, useState } from 'react';
+import path from 'path';
 
 const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions }: IQuestionPropsV2) => {
   const [randomIndex, setRandomIndex] = useState<number>(Math.floor((Math.random() * questions.length)));
   const [isCorrect, setIsCorrect] = useState<string | undefined>(undefined);
   const [blockAnswer, setBlockAnswer] = useState<boolean>(false);
-  const [teste, setTeste] = useState<string>('');
-  const [indexesAnswered, setIndexesAnswered] = useState<number[]>([randomIndex])
+  const [indexesAnswered, setIndexesAnswered] = useState<number[]>([randomIndex]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const generateNewQuestionIndex = async (): Promise<number> => {
     const newNumber = Math.floor((Math.random() * questions.length));
@@ -23,10 +24,12 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions }: IQuestionProp
     const addIndex = [...indexesAnswered, nextQuestionIndex];
     setRandomIndex(nextQuestionIndex);
     setBlockAnswer(false);
-    setIsCorrect(undefined)
+    setIsCorrect(undefined);
+    setIsLoading(false);
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsLoading(true);
     setIsCorrect(event.target.value);
     setBlockAnswer(true);
     setTimeout(() => {
@@ -55,12 +58,19 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions }: IQuestionProp
       )
     }
     return (
-      <Image
-        alt='image question'
-        src={question.content}
-        width={50}
-        height={50}
-      />
+      <Box
+        display='flex'
+        flexDirection='column'
+        alignItems='center'
+      >
+        <Image
+          alt='image question'
+          src={question.content[0]}
+          width={180}
+          height={150}
+        />
+        <Typography sx={{ color: 'white', marginTop: '2%' }}>{question.content[1] as string}</Typography>
+      </Box>
     )
   }
 
@@ -114,7 +124,7 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions }: IQuestionProp
     >
       <Box
         sx={{
-          border: '1px solid red',
+          // border: '1px solid red',
           margin: '4% auto 0 auto',
           width: '90vw',
           height: '30vh'
@@ -124,7 +134,7 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions }: IQuestionProp
       </Box>
       <Box
         sx={{
-          border: '1px solid green',
+          // border: '1px solid green',
           margin: '2% auto 0 auto',
           width: '90vw',
           height: '30vh'
@@ -132,6 +142,11 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions }: IQuestionProp
       >
         { questions.length && buildAnswers(questions[randomIndex].options) }
       </Box>
+      {isLoading && (
+        <Box>
+          <LinearProgress color='info' />
+        </Box>
+      )}
     </Box>
   )
 };

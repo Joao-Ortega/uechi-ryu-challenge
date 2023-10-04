@@ -1,4 +1,7 @@
-import { IQuestionsProps } from "@/interfaces";
+import { IQuestionsProps } from "../interfaces";
+import kiba from '../app/assets/images/kiba.png';
+import zen from '../app/assets/images/zen.png';
+import mu from '../app/assets/images/mu.png';
 
 const challenges: IQuestionsProps[] = [
   {
@@ -17,7 +20,7 @@ const challenges: IQuestionsProps[] = [
     options: [
       {correct: 1, data: 'Sanchin - Seichin - Seryu'},
       {correct: 2, data: 'Kanchin - Kanshu - Seisan'},
-      {correct: 0, data: 'Seisan - Seryu - Sanchin'},
+      {correct: 0, data: 'Seisan - Sanseryu - Sanchin'},
       {correct: 3, data: 'Sanseryu - Seisan - Seichin'}
     ]
   },
@@ -29,6 +32,46 @@ const challenges: IQuestionsProps[] = [
       {correct: 0, data: 'Tigre - Dragão - Garça'},
       {correct: 2, data: 'Onça - Dragão - Urso'},
       {correct: 3, data: 'Aranha - Falcão - Garça'}
+    ]
+  },
+  {
+    type: 'image',
+    content: [kiba, 'Qual o nome da base acima?'],
+    options: [
+      {correct: 1, data: 'Shiko Dachi'},
+      {correct: 3, data: 'Zen Kutsu Dachi'},
+      {correct: 2, data: 'Heiko Dachi'},
+      {correct: 0, data: 'Kiba Dachi'}
+    ]
+  },
+  {
+    type: 'image',
+    content: [zen, 'Qual o nome da base acima?'],
+    options: [
+      {correct: 1, data: 'Shiko Dachi'},
+      {correct: 0, data: 'Zen Kutsu Dachi'},
+      {correct: 2, data: 'Heiko Dachi'},
+      {correct: 3, data: 'Kokutsu Dachi'}
+    ]
+  },
+  {
+    type: 'image',
+    content: [mu, 'Qual o nome da base acima?'],
+    options: [
+      {correct: 0, data: 'Musubi Dachi'},
+      {correct: 1, data: 'Zen Kutsu Dachi'},
+      {correct: 2, data: 'Heisoku Dachi'},
+      {correct: 3, data: 'Kokutsu Dachi'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque significa Shin Gi Tai?',
+    options: [
+      {correct: 1, data: '3 conflitos'},
+      {correct: 2, data: 'Mente de Principiante'},
+      {correct: 0, data: 'Mente - Técnica - Corpo'},
+      {correct: 3, data: 'Buscar Exelência'}
     ]
   },
 ];
