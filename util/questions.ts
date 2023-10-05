@@ -72,7 +72,7 @@ const challenges: IQuestionsProps[] = [
       {correct: 1, data: '3 conflitos'},
       {correct: 2, data: 'Mente de Principiante'},
       {correct: 0, data: 'Mente - Técnica - Corpo'},
-      {correct: 3, data: 'Buscar Exelência'}
+      {correct: 3, data: 'Buscar Excelência'}
     ]
   },
   {
@@ -87,12 +87,12 @@ const challenges: IQuestionsProps[] = [
   },
   {
     type: 'text',
-    content: 'Qual palavra é conhecida por treinar o fortalecimento/calejamento das pernas?',
+    content: 'Em qual lugar se difundiu o Karatê Uechi Ryu?',
     options: [
-      {correct: 1, data: 'Tai Kitae'},
-      {correct: 2, data: 'Kote Kitae'},
-      {correct: 0, data: 'Ashi Kitae'},
-      {correct: 3, data: 'Mone Kitae'}
+      {correct: 1, data: 'China'},
+      {correct: 0, data: 'Okinawa'},
+      {correct: 2, data: 'Fukien'},
+      {correct: 3, data: 'Hong Kong'}
     ]
   },
   {

@@ -16,22 +16,30 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions }: IQuestionProp
     const random = Math.floor((Math.random() * questions.length));
     setRandomIndex(random);
     setIndexesAnswered([random])
-    console.log('random', random)
     setMainLoading(false);
-  }, [])
+  }, []);
+
+  // const generateRandomNumber = () => {
+
+  // }
 
   const generateNewQuestionIndex = async (): Promise<number> => {
-    const newNumber = Math.floor((Math.random() * questions.length));
-    console.log('array', indexesAnswered);
-    console.log('validação', indexesAnswered.includes(newNumber))
-    if (indexesAnswered.includes(newNumber)) return generateNewQuestionIndex();
+    console.log('questions', questions)
+    let newNumber = Math.floor((Math.random() * questions.length));
+    while (indexesAnswered.includes(newNumber)) {
+      console.log('number gerado')
+      newNumber = Math.floor((Math.random() * questions.length));
+    }
+    console.log('Número gerado', newNumber)
+    console.log('Novo Array', [...indexesAnswered, newNumber]);
+    // if (indexesAnswered.some((n: number) => n === newNumber)) return generateNewQuestionIndex();
     setIndexesAnswered([...indexesAnswered, newNumber])
     return newNumber;
   }
 
   const buildNextQuestion = async () => {
     const nextQuestionIndex = await generateNewQuestionIndex();
-    const addIndex = [...indexesAnswered, nextQuestionIndex];
+    // const addIndex = [...indexesAnswered, nextQuestionIndex];
     setRandomIndex(nextQuestionIndex);
     setBlockAnswer(false);
     setIsCorrect(undefined);
