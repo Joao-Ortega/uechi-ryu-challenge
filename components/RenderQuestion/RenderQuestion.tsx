@@ -6,52 +6,46 @@ import path from 'path';
 
 const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions }: IQuestionPropsV2) => {
   const [randomIndex, setRandomIndex] = useState<number>(0);
+  const [copyQuestions, setCopyQuestions] = useState<IQuestionsProps[]>([]);
   const [isCorrect, setIsCorrect] = useState<string | undefined>(undefined);
   const [blockAnswer, setBlockAnswer] = useState<boolean>(false);
-  const [indexesAnswered, setIndexesAnswered] = useState<number[]>([]);
+  const [responsesLength, setResponsesLength] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [mainLoading, setMainLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const random = Math.floor((Math.random() * questions.length));
+    const copyInfos = [...questions];
+    const random = Math.floor((Math.random() * copyInfos.length));
+    setCopyQuestions(copyInfos);
     setRandomIndex(random);
-    setIndexesAnswered([random])
+    setResponsesLength(['.'])
     setMainLoading(false);
   }, []);
 
-  // const generateRandomNumber = () => {
+  const generateRandomIndex = (list: IQuestionsProps[]): number => Math.floor((Math.random() * list.length));
 
-  // }
-
-  const generateNewQuestionIndex = async (): Promise<number> => {
-    console.log('questions', questions)
-    let newNumber = Math.floor((Math.random() * questions.length));
-    while (indexesAnswered.includes(newNumber)) {
-      console.log('number gerado')
-      newNumber = Math.floor((Math.random() * questions.length));
-    }
-    console.log('Número gerado', newNumber)
-    console.log('Novo Array', [...indexesAnswered, newNumber]);
-    // if (indexesAnswered.some((n: number) => n === newNumber)) return generateNewQuestionIndex();
-    setIndexesAnswered([...indexesAnswered, newNumber])
-    return newNumber;
-  }
-
-  const buildNextQuestion = async () => {
-    const nextQuestionIndex = await generateNewQuestionIndex();
-    // const addIndex = [...indexesAnswered, nextQuestionIndex];
+  const buildNextQuestion = async (control: string[]) => {
+    copyQuestions.splice(randomIndex, 1);
+    const nextQuestionIndex = generateRandomIndex(copyQuestions);
+    setResponsesLength(control)
     setRandomIndex(nextQuestionIndex);
     setBlockAnswer(false);
     setIsCorrect(undefined);
     setIsLoading(false);
   }
-
+  
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsLoading(true);
     setIsCorrect(event.target.value);
     setBlockAnswer(true);
+    const TOTAL_RESPONSES = 11;
+    const isFinished = [...responsesLength, '.'];
+  if (isFinished.length === TOTAL_RESPONSES) {
+    console.log('game Finished');
+    return
+  }
+    setIsLoading(true);
     setTimeout(() => {
-      buildNextQuestion();
+      buildNextQuestion(isFinished);
     }, 2500)
   };
 
@@ -162,7 +156,7 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions }: IQuestionProp
             display='flex'
             justifyContent='center'
           >
-            {`${indexesAnswered.length}/10`}
+            {`${responsesLength.length}/10`}
           </Box>
           <Box
             sx={{
@@ -175,7 +169,7 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions }: IQuestionProp
             alignItems='center'
             justifyContent='center'
           >
-            { questions.length && buildQuestion(questions[randomIndex]) }
+            { copyQuestions.length && buildQuestion(copyQuestions[randomIndex]) }
           </Box>
           <Box
             sx={{
@@ -185,7 +179,7 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions }: IQuestionProp
               height: '30vh'
             }}
           >
-            { questions.length && buildAnswers(questions[randomIndex].options) }
+            { copyQuestions.length && buildAnswers(copyQuestions[randomIndex].options) }
           </Box>
           {isLoading && (
             <Stack sx={{ color: 'white' }}>

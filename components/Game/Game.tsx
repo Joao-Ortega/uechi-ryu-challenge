@@ -7,11 +7,6 @@ import RenderQuestion from '../RenderQuestion/RenderQuestion';
 import challenges from '@/util/questions';
 
 const Game = () => {
-  // const [indexesAnswered, setIndexesAnswered] = useState<number[]>([]);
-
-  // useEffect(() => {
-  //   setIndexesAnswered([])
-  // },[])
 
   return (
     <Box>
