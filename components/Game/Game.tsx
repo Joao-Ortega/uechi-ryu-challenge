@@ -5,8 +5,11 @@ import Logo from '../../app/assets/images/logo-dpedra.jpg';
 import Image from 'next/image';
 import RenderQuestion from '../RenderQuestion/RenderQuestion';
 import challenges from '@/util/questions';
+import FinishedGameModal from '../Modal/FinishedGameModal';
 
 const Game = () => {
+  const [gameEnded, setGameEnded] = useState<boolean>(false);
+  const [points, setPoints] = useState<number>(0);
 
   return (
     <Box>
@@ -25,7 +28,8 @@ const Game = () => {
           src={Logo}
         />
       </Box>
-      <RenderQuestion questions={challenges} />
+      <RenderQuestion questions={challenges} finishGame={setGameEnded} />
+      <FinishedGameModal points={points} open={gameEnded} setOpen={setGameEnded} />
     </Box>
   )
 };

@@ -13,4 +13,11 @@ export interface IQuestionsProps {
 
 export interface IQuestionPropsV2 {
   questions: IQuestionsProps[];
+  finishGame: Function;
+}
+
+export interface IFinishedGameProps {
+  open: boolean;
+  setOpen: Function;
+  points: number;
 }

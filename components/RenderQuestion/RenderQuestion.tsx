@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React, { ReactElement, ReactNode, useEffect, useState } from 'react';
 import path from 'path';
 
-const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions }: IQuestionPropsV2) => {
+const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions, finishGame }: IQuestionPropsV2) => {
   const [randomIndex, setRandomIndex] = useState<number>(0);
   const [copyQuestions, setCopyQuestions] = useState<IQuestionsProps[]>([]);
   const [isCorrect, setIsCorrect] = useState<string | undefined>(undefined);
@@ -21,6 +21,8 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions }: IQuestionProp
     setResponsesLength(['.'])
     setMainLoading(false);
   }, []);
+
+  const endGame = (): void => finishGame(true)
 
   const generateRandomIndex = (list: IQuestionsProps[]): number => Math.floor((Math.random() * list.length));
 
@@ -40,7 +42,9 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions }: IQuestionProp
     const TOTAL_RESPONSES = 11;
     const isFinished = [...responsesLength, '.'];
   if (isFinished.length === TOTAL_RESPONSES) {
-    console.log('game Finished');
+    setTimeout(() => {
+      endGame();
+    }, 1000);
     return
   }
     setIsLoading(true);
