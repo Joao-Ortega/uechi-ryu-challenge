@@ -13,11 +13,21 @@ export interface IQuestionsProps {
 
 export interface IQuestionPropsV2 {
   questions: IQuestionsProps[];
+  responses: string[];
+  countResponse: Function;
   finishGame: Function;
+  addPoints: Function;
+  points: number;
+  mainLoading: boolean;
+  setMainLoading: Function;
+  restoreGame: boolean;
 }
 
 export interface IFinishedGameProps {
   open: boolean;
   setOpen: Function;
   points: number;
+  setPoints: Function;
+  restart: Function;
+  setMainLoading: Function;
 }

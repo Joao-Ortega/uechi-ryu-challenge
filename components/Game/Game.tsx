@@ -10,6 +10,14 @@ import FinishedGameModal from '../Modal/FinishedGameModal';
 const Game = () => {
   const [gameEnded, setGameEnded] = useState<boolean>(false);
   const [points, setPoints] = useState<number>(0);
+  const [responsesLength, setResponsesLength] = useState<string[]>([]);
+  const [restoreGame, setRestoreGame] = useState<boolean>(false);
+  const [mainLoading, setMainLoading] = useState<boolean>(true);
+
+  // useEffect(() => {
+  //   console.log('oiii')
+
+  // }, [forceUpdate])
 
   return (
     <Box>
@@ -28,8 +36,25 @@ const Game = () => {
           src={Logo}
         />
       </Box>
-      <RenderQuestion questions={challenges} finishGame={setGameEnded} />
-      <FinishedGameModal points={points} open={gameEnded} setOpen={setGameEnded} />
+      <RenderQuestion
+        responses={responsesLength}
+        countResponse={setResponsesLength}
+        points={points}
+        addPoints={setPoints}
+        questions={challenges}
+        finishGame={setGameEnded}
+        mainLoading={mainLoading}
+        setMainLoading={setMainLoading}
+        restoreGame={restoreGame}
+      />
+      <FinishedGameModal
+        restart={setRestoreGame}
+        points={points}
+        setPoints={setPoints}
+        open={gameEnded}
+        setOpen={setGameEnded}
+        setMainLoading={setMainLoading}
+      />
     </Box>
   )
 };

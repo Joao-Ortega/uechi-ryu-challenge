@@ -4,23 +4,33 @@ import Image from 'next/image';
 import React, { ReactElement, ReactNode, useEffect, useState } from 'react';
 import path from 'path';
 
-const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions, finishGame }: IQuestionPropsV2) => {
+const RenderQuestion: React.FC<IQuestionPropsV2> = ({
+  questions,
+  responses,
+  countResponse,
+  finishGame,
+  addPoints,
+  points,
+  mainLoading,
+  setMainLoading,
+  restoreGame
+}: IQuestionPropsV2) => {
   const [randomIndex, setRandomIndex] = useState<number>(0);
   const [copyQuestions, setCopyQuestions] = useState<IQuestionsProps[]>([]);
   const [isCorrect, setIsCorrect] = useState<string | undefined>(undefined);
   const [blockAnswer, setBlockAnswer] = useState<boolean>(false);
-  const [responsesLength, setResponsesLength] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [mainLoading, setMainLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const copyInfos = [...questions];
     const random = Math.floor((Math.random() * copyInfos.length));
     setCopyQuestions(copyInfos);
     setRandomIndex(random);
-    setResponsesLength(['.'])
+    countResponse(['.'])
+    setBlockAnswer(false);
+    setIsCorrect(undefined)
     setMainLoading(false);
-  }, []);
+  }, [restoreGame]);
 
   const endGame = (): void => finishGame(true)
 
@@ -29,7 +39,7 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions, finishGame }: I
   const buildNextQuestion = async (control: string[]) => {
     copyQuestions.splice(randomIndex, 1);
     const nextQuestionIndex = generateRandomIndex(copyQuestions);
-    setResponsesLength(control)
+    countResponse(control)
     setRandomIndex(nextQuestionIndex);
     setBlockAnswer(false);
     setIsCorrect(undefined);
@@ -38,9 +48,10 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions, finishGame }: I
   
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsCorrect(event.target.value);
+    if (!(Number(event.target.value))) addPoints(points + 1)
     setBlockAnswer(true);
     const TOTAL_RESPONSES = 11;
-    const isFinished = [...responsesLength, '.'];
+    const isFinished = [...responses, '.'];
   if (isFinished.length === TOTAL_RESPONSES) {
     setTimeout(() => {
       endGame();
@@ -50,7 +61,7 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions, finishGame }: I
     setIsLoading(true);
     setTimeout(() => {
       buildNextQuestion(isFinished);
-    }, 2500)
+    }, 500)
   };
 
   const returnColor = (rightAnswer: number): string => {
@@ -160,7 +171,7 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({ questions, finishGame }: I
             display='flex'
             justifyContent='center'
           >
-            {`${responsesLength.length}/10`}
+            {`${responses.length}/10`}
           </Box>
           <Box
             sx={{

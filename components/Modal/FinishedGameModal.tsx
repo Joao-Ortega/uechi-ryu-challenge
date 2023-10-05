@@ -1,15 +1,29 @@
 import React from 'react';
 import { IFinishedGameProps } from '@/interfaces';
-import { Box, Modal, Typography } from '@mui/material';
+import { Box, Button, Modal, Typography } from '@mui/material';
 import oss from '../../app/assets/gifs/osu.gif';
 import Image from 'next/image';
 
 
-const FinishedGameModal = ({ open, setOpen, points = 0 }: IFinishedGameProps) => {
+const FinishedGameModal = ({
+  open,
+  setOpen,
+  points = 0,
+  setPoints,
+  restart,
+  setMainLoading
+}: IFinishedGameProps) => {
+  const restoreGame = () => {
+    setMainLoading(true);
+    restart(true);
+    setPoints(0);
+    setOpen(false);
+  }
+
   return (
     <Modal
       open={open}
-      onClose={() => setOpen(false)}
+      // onClose={() => {}}
     >
       <Box
         sx={{
@@ -25,7 +39,7 @@ const FinishedGameModal = ({ open, setOpen, points = 0 }: IFinishedGameProps) =>
           sx={{
             backgroundColor: 'white',
             borderRadius: '8px',
-            height: '45vh',
+            height: '50vh',
             width: '80vw'
           }}
           display='flex'
@@ -54,6 +68,14 @@ const FinishedGameModal = ({ open, setOpen, points = 0 }: IFinishedGameProps) =>
               <Typography fontSize={22} sx={{ color: 'green', fontWeight: 900 }}>{points}</Typography>
               <Typography fontSize={22} sx={{ fontWeight: 900 }}>/10</Typography>
             </Box>
+            <Button
+              variant='contained'
+              size='small'
+              sx={{ marginTop: '5%', backgroundColor: 'black' }}
+              onClick={restoreGame}
+            >
+              Reiniciar Teste
+            </Button>
           </Box>
         </Box>
       </Box>
