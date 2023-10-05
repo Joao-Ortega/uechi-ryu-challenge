@@ -24,7 +24,6 @@ const FinishedGameModal = ({
   return (
     <Modal
       open={open}
-      // onClose={() => {}}
     >
       <Box
         sx={{

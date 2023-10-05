@@ -26,7 +26,7 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({
     const random = Math.floor((Math.random() * copyInfos.length));
     setCopyQuestions(copyInfos);
     setRandomIndex(random);
-    countResponse(['.'])
+    countResponse(['.']);
     setBlockAnswer(false);
     setIsCorrect(undefined)
     setMainLoading(false);
@@ -34,7 +34,7 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({
 
   const endGame = (): void => finishGame(true)
 
-  const generateRandomIndex = (list: IQuestionsProps[]): number => Math.floor((Math.random() * list.length));
+  const generateRandomIndex = (list: any): number => Math.floor((Math.random() * list.length));
 
   const buildNextQuestion = async (control: string[]) => {
     copyQuestions.splice(randomIndex, 1);
@@ -52,16 +52,16 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({
     setBlockAnswer(true);
     const TOTAL_RESPONSES = 11;
     const isFinished = [...responses, '.'];
-  if (isFinished.length === TOTAL_RESPONSES) {
-    setTimeout(() => {
-      endGame();
-    }, 1000);
+    if (isFinished.length === TOTAL_RESPONSES) {
+      setTimeout(() => {
+        endGame();
+      }, 1000);
     return
   }
     setIsLoading(true);
     setTimeout(() => {
       buildNextQuestion(isFinished);
-    }, 500)
+    }, 2500)
   };
 
   const returnColor = (rightAnswer: number): string => {
@@ -101,8 +101,21 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({
     )
   }
 
+  const shuffleAnswers = (answersList: IAnswers[]): IAnswers[] => {
+    console.log(answersList)
+    const newList: IAnswers[] = [];
+    const copyAnswers = [...answersList];
+    answersList.forEach(() => {
+      const randomIndex = generateRandomIndex(copyAnswers);
+      console.log(randomIndex)
+      newList.push(copyAnswers[randomIndex])
+      copyAnswers.splice(randomIndex, 1)
+    })
+    return newList;
+  }
+
   const buildAnswers = (answersList: IAnswers[]): JSX.Element => {
-    const NUMBER_OF_ANSWERS = 4;
+      const NUMBER_OF_ANSWERS = 4;
     if (answersList.length === NUMBER_OF_ANSWERS) {
       return (
         <FormControl>
@@ -114,7 +127,6 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({
               <FormControlLabel
                 key={i}
                 value={answer.correct.toString()}
-                onClick={(e: any) => console.log(e.target.value)}
                 control={
                   <Radio
                     color='error'

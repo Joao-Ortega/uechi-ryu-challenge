@@ -14,11 +14,6 @@ const Game = () => {
   const [restoreGame, setRestoreGame] = useState<boolean>(false);
   const [mainLoading, setMainLoading] = useState<boolean>(true);
 
-  // useEffect(() => {
-  //   console.log('oiii')
-
-  // }, [forceUpdate])
-
   return (
     <Box>
       <Box

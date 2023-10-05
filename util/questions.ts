@@ -192,3 +192,20 @@ const challenges: IQuestionsProps[] = [
 ];
 
 export default challenges;
+
+function gerarNumerosAleatorios(): number[] {
+  const numerosAleatorios: number[] = [];
+  
+  while (numerosAleatorios.length < 10) {
+    const numeroAleatorio = Math.floor(Math.random() * 100); // Altere o limite (100) conforme necessário.
+    
+    if (!numerosAleatorios.includes(numeroAleatorio)) {
+      numerosAleatorios.push(numeroAleatorio);
+    }
+  }
+  
+  return numerosAleatorios;
+}
+
+const numeros = gerarNumerosAleatorios();
+console.log(numeros);
