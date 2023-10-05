@@ -3,6 +3,10 @@ import kiba from '../app/assets/images/kiba.png';
 import zen from '../app/assets/images/zen.png';
 import mu from '../app/assets/images/mu.png';
 import nek from '../app/assets/images/nek.png';
+import heiko from '../app/assets/images/heik.png';
+import shi from '../app/assets/images/shi.png';
+import san from '../app/assets/images/san.png';
+import heisoku from '../app/assets/images/heisoku.png';
 
 const challenges: IQuestionsProps[] = [
   {
@@ -113,6 +117,76 @@ const challenges: IQuestionsProps[] = [
       {correct: 2, data: 'Altura do quadril para baixo'},
       {correct: 3, data: 'Altura entre ombros e quadril mas pelas costas'},
       {correct: 0, data: 'Altura do ombro para cima'}
+    ]
+  },
+  {
+    type: 'image',
+    content: [heiko, 'Qual o nome da base acima?'],
+    options: [
+      {correct: 1, data: 'Kokutsu Dachi'},
+      {correct: 3, data: 'Heisoku Dachi'},
+      {correct: 0, data: 'Heiko Dachi'},
+      {correct: 2, data: 'Shiko Dachi'},
+    ]
+  },
+  {
+    type: 'image',
+    content: [shi, 'Qual o nome da base acima?'],
+    options: [
+      {correct: 1, data: 'Zen Kutsu Dachi'},
+      {correct: 0, data: 'Shiko Dachi'},
+      {correct: 2, data: 'Heiko Dachi'},
+      {correct: 3, data: 'Neko ashi Dachi'},
+    ]
+  },
+  {
+    type: 'image',
+    content: [san, 'Qual o nome da base acima?'],
+    options: [
+      {correct: 2, data: 'Shiko Dachi'},
+      {correct: 3, data: 'Neko ashi Dachi'},
+      {correct: 1, data: 'Heisoku Dachi'},
+      {correct: 0, data: 'Sanchin Dachi'},
+    ]
+  },
+  {
+    type: 'image',
+    content: [heisoku, 'Qual o nome da base acima?'],
+    options: [
+      {correct: 0, data: 'Heisoku Dachi'},
+      {correct: 2, data: 'Kokutsu Dachi'},
+      {correct: 1, data: 'Sanchin Dachi'},
+      {correct: 3, data: 'Neko ashi Dachi'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual significado da palavra Hajime?',
+    options: [
+      {correct: 1, data: 'Parar'},
+      {correct: 2, data: 'Permissão para começar'},
+      {correct: 0, data: 'Iniciar'},
+      {correct: 3, data: 'Frente'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual significado da palavra Yoi?',
+    options: [
+      {correct: 0, data: 'Permissão para começar'},
+      {correct: 1, data: 'Parar'},
+      {correct: 3, data: 'Repetir'},
+      {correct: 2, data: 'Iniciar'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual significado da palavra Yame?',
+    options: [
+      {correct: 1, data: 'Saudação'},
+      {correct: 0, data: 'Parar'},
+      {correct: 3, data: 'Repetir'},
+      {correct: 2, data: 'Iniciar'},
     ]
   },
 ];

@@ -24,6 +24,7 @@ export interface IQuestionPropsV2 {
 }
 
 export interface IFinishedGameProps {
+  currentState: boolean;
   open: boolean;
   setOpen: Function;
   points: number;

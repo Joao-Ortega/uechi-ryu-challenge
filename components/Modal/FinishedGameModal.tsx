@@ -6,6 +6,7 @@ import Image from 'next/image';
 
 
 const FinishedGameModal = ({
+  currentState,
   open,
   setOpen,
   points = 0,
@@ -15,7 +16,7 @@ const FinishedGameModal = ({
 }: IFinishedGameProps) => {
   const restoreGame = () => {
     setMainLoading(true);
-    restart(true);
+    restart(!currentState);
     setPoints(0);
     setOpen(false);
   }

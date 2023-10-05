@@ -48,6 +48,7 @@ const Game = () => {
         restoreGame={restoreGame}
       />
       <FinishedGameModal
+        currentState={restoreGame}
         restart={setRestoreGame}
         points={points}
         setPoints={setPoints}
