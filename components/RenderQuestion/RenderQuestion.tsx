@@ -132,8 +132,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
         <Image
           alt='image question'
           src={question.content[0]}
-          width={180}
-          height={150}
+          className='question-image'
         />
         <Typography sx={{ color: 'white', marginTop: '2%' }}>{question.content[1] as string}</Typography>
       </Box>
@@ -199,7 +198,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
       return (
         <Box
           sx={{
-            margin: '2% auto 0 auto',
+            margin: '-1% auto 0 auto',
             width: '90vw',
             height: '40vh'
           }}
@@ -213,10 +212,11 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
           </Box>
           <Box
             sx={{
-              // border: '1px solid red',
-              margin: '4% auto 0 auto',
-              width: '90vw',
-              height: '30vh'
+              border: '1px solid red',
+              margin: '0 auto 0 auto',
+              // width: '90vw',
+              width: { xs: '190px', sm: '150px', md: '180px', lg: '65vw', xl: '60vw' },
+              height: { xs: '190px', sm: '150px', md: '180px', lg: '40vh', xl: '42vh' },
             }}
             display='flex'
             alignItems='center'
@@ -226,7 +226,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
           </Box>
           <Box
             sx={{
-              // border: '1px solid green',
+              border: '1px solid green',
               margin: '2% auto 0 auto',
               width: '90vw',
               height: '30vh'
