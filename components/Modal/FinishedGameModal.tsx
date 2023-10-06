@@ -1,5 +1,5 @@
 import React from 'react';
-import { IFinishedGameProps } from '@/interfaces';
+import { IFinishedGameProps } from '../../interfaces';
 import { Box, Button, Modal, Typography } from '@mui/material';
 import oss from '../../app/assets/gifs/osu.gif';
 import Image from 'next/image';
@@ -14,6 +14,7 @@ const FinishedGameModal = ({
   restart,
   setMainLoading
 }: IFinishedGameProps) => {
+
   const restoreGame = () => {
     setMainLoading(true);
     restart(!currentState);
@@ -27,7 +28,6 @@ const FinishedGameModal = ({
     >
       <Box
         sx={{
-          // backgroundColor: 'white',
           height: '90vh',
           width: '100vw'
         }}
@@ -40,14 +40,14 @@ const FinishedGameModal = ({
             backgroundColor: 'white',
             borderRadius: '8px',
             height: '50vh',
-            width: '80vw'
+            width: { xs: '80vw', sm: '60vw', md: '50vw', lg: '40vw', xl: '30vw' }
           }}
           display='flex'
           alignItems='center'
           flexDirection='column'
         >
           <Typography
-            sx={{ margin: '2% auto 1.5% auto' }}
+            sx={{ margin: '5% auto 1.5% auto' }}
             variant='h5'
           >
             Teste Completo

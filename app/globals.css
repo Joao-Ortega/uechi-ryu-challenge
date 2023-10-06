@@ -87,28 +87,28 @@ body {
 
 @media screen and (max-width: 550px) {
   .question-image {
-    width: 180px;
+    width: 160px;
     height: 150px;
   }
 }
 
 @media screen and (min-width: 551px) and (max-width: 768px) {
   .question-image {
-    width: 200px;
-    height: 170px;
+    width: 280px;
+    height: 220px;
   }
 }
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   .question-image {
-    width: 240px;
-    height: 190px;
+    width: 280px;
+    height: 210px;
   }
 }
 
 @media screen and (min-width: 1025px) {
   .question-image {
-    width: 260px;
-    height: 200px;
+    width: 290px;
+    height: 250px;
   }
 }

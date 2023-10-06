@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import { IAnswers, IQuestions, IRenderQuestionProps } from '../../interfaces';
 import {
   Box,
@@ -11,7 +12,6 @@ import {
   Typography
 } from '@mui/material';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
 
 const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   questions,
@@ -41,6 +41,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
     setBlockAnswer(false);
     setIsCorrect(undefined)
     setMainLoading(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [restoreGame]);
 
   const generateQuestionsLimit = (list: IQuestions[]): IQuestions[] => {
@@ -100,7 +101,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
     setIsLoading(true);
     setTimeout(() => {
       buildNextQuestion(isFinished);
-    }, 500)
+    }, 2000)
   };
 
   const returnColor = (rightAnswer: number): string => {
@@ -134,7 +135,15 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
           src={question.content[0]}
           className='question-image'
         />
-        <Typography sx={{ color: 'white', marginTop: '2%' }}>{question.content[1] as string}</Typography>
+        <Typography
+          sx={{
+            color: 'white',
+            marginTop: '2%',
+            fontSize: { xs: '18px', sm: '20px', md: '20px', lg: '22px', xl: '24px' }
+          }}
+        >
+          {question.content[1] as string}
+        </Typography>
       </Box>
     )
   }
@@ -143,7 +152,12 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
       const NUMBER_OF_ANSWERS = 4;
     if (answersList.length === NUMBER_OF_ANSWERS) {
       return (
-        <FormControl>
+        <FormControl
+          sx={{
+            width: { xs: '90vw', sm: '60vw', md: '50vw', lg: '20vw', xl: '15vw' },
+            height: { xs: '30vh', sm: '30vh', md: '30vh', lg: '30vh', xl: '30vh' },
+          }}
+        >
           <RadioGroup
             value={isCorrect !== undefined ? isCorrect : null}
             onChange={handleChange}
@@ -212,11 +226,9 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
           </Box>
           <Box
             sx={{
-              border: '1px solid red',
               margin: '0 auto 0 auto',
-              // width: '90vw',
-              width: { xs: '190px', sm: '150px', md: '180px', lg: '65vw', xl: '60vw' },
-              height: { xs: '190px', sm: '150px', md: '180px', lg: '40vh', xl: '42vh' },
+              width: { xs: '80vw', sm: '65vw', md: '50vw', lg: '45vw', xl: '40vw' },
+              height: { xs: '40vh', sm: '40vh', md: '40vh', lg: '40vh', xl: '42vh' },
             }}
             display='flex'
             alignItems='center'
@@ -226,11 +238,12 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
           </Box>
           <Box
             sx={{
-              border: '1px solid green',
               margin: '2% auto 0 auto',
               width: '90vw',
               height: '30vh'
             }}
+            display='flex'
+            justifyContent='center'
           >
             { copyQuestions.length && buildAnswers(copyQuestions[randomIndex].options) }
           </Box>

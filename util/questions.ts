@@ -73,10 +73,10 @@ const challenges: IQuestions[] = [
     type: 'text',
     content: 'Oque significa Shin Gi Tai?',
     options: [
-      {correct: 1, data: '3 conflitos'},
-      {correct: 2, data: 'Mente de Principiante'},
+      {correct: 1, data: '3 - conflitos'},
+      {correct: 2, data: 'Mente - de - Principiante'},
       {correct: 0, data: 'Mente - Técnica - Corpo'},
-      {correct: 3, data: 'Buscar Excelência'}
+      {correct: 3, data: 'Buscar - Excelência'}
     ]
   },
   {
