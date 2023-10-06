@@ -1,4 +1,4 @@
-import { IQuestionsProps } from "../interfaces";
+import { IQuestions } from "../interfaces";
 import kiba from '../app/assets/images/kiba.png';
 import zen from '../app/assets/images/zen.png';
 import mu from '../app/assets/images/mu.png';
@@ -8,7 +8,7 @@ import shi from '../app/assets/images/shi.png';
 import san from '../app/assets/images/san.png';
 import heisoku from '../app/assets/images/heisoku.png';
 
-const challenges: IQuestionsProps[] = [
+const challenges: IQuestions[] = [
   {
     type: 'text',
     content: 'Qual o nome do fundador do estilo de Karatê Uechi Ryu?',
