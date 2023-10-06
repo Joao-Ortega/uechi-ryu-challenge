@@ -189,23 +189,26 @@ const challenges: IQuestionsProps[] = [
       {correct: 2, data: 'Iniciar'},
     ]
   },
+  {
+    type: 'text',
+    content: 'Qual o nome do filho do fundador do estilo Uechi Ryu?',
+    options: [
+      {correct: 1, data: 'Ryu Tomoyose'},
+      {correct: 0, data: 'Kanei Uechi'},
+      {correct: 2, data: 'Kanbun Uechi'},
+      {correct: 3, data: 'Kanbun Ryu'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o nome do estilo do qual se originou o Karatê Uechi Ryu?',
+    options: [
+      {correct: 0, data: 'Pan Gai Noon'},
+      {correct: 1, data: 'Tai Chi Chuan'},
+      {correct: 2, data: 'Xing Yi'},
+      {correct: 3, data: 'Goju Ryu'}
+    ]
+  },
 ];
 
 export default challenges;
-
-function gerarNumerosAleatorios(): number[] {
-  const numerosAleatorios: number[] = [];
-  
-  while (numerosAleatorios.length < 10) {
-    const numeroAleatorio = Math.floor(Math.random() * 100); // Altere o limite (100) conforme necessário.
-    
-    if (!numerosAleatorios.includes(numeroAleatorio)) {
-      numerosAleatorios.push(numeroAleatorio);
-    }
-  }
-  
-  return numerosAleatorios;
-}
-
-const numeros = gerarNumerosAleatorios();
-console.log(numeros);

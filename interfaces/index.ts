@@ -5,14 +5,14 @@ export interface IAnswers {
   data: string;
 }
 
-export interface IQuestionsProps {
+export interface IQuestions {
   type: string;
   content: string | (string | StaticImageData)[];
   options: IAnswers[]
 }
 
-export interface IQuestionPropsV2 {
-  questions: IQuestionsProps[];
+export interface IRenderQuestionProps {
+  questions: IQuestions[];
   responses: string[];
   countResponse: Function;
   finishGame: Function;

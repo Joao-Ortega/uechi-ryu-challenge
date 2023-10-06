@@ -1,10 +1,10 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import Logo from '../../app/assets/images/logo-dpedra.jpg';
 import Image from 'next/image';
 import RenderQuestion from '../RenderQuestion/RenderQuestion';
-import challenges from '@/util/questions';
+import challenges from '../../util/questions';
 import FinishedGameModal from '../Modal/FinishedGameModal';
 
 const Game = () => {
@@ -17,9 +17,6 @@ const Game = () => {
   return (
     <Box>
       <Box
-        sx={{
-          // border: '1px solid red'
-          }}
         display="flex"
         justifyContent="flex-end"
         padding={2}

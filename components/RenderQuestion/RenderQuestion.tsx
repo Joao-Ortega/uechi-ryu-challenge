@@ -1,10 +1,19 @@
-import { IAnswers, IQuestionPropsV2, IQuestionsProps } from '@/interfaces';
-import { Box, Button, CircularProgress, Container, FormControl, FormControlLabel, LinearProgress, Radio, RadioGroup, Stack, Typography } from '@mui/material';
+import { IAnswers, IQuestions, IRenderQuestionProps } from '../../interfaces';
+import {
+  Box,
+  CircularProgress,
+  FormControl,
+  FormControlLabel,
+  LinearProgress,
+  Radio,
+  RadioGroup,
+  Stack,
+  Typography
+} from '@mui/material';
 import Image from 'next/image';
-import React, { ReactElement, ReactNode, useEffect, useState } from 'react';
-import path from 'path';
+import React, { useEffect, useState } from 'react';
 
-const RenderQuestion: React.FC<IQuestionPropsV2> = ({
+const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   questions,
   responses,
   countResponse,
@@ -14,15 +23,17 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({
   mainLoading,
   setMainLoading,
   restoreGame
-}: IQuestionPropsV2) => {
+}: IRenderQuestionProps) => {
   const [randomIndex, setRandomIndex] = useState<number>(0);
-  const [copyQuestions, setCopyQuestions] = useState<IQuestionsProps[]>([]);
+  const [copyQuestions, setCopyQuestions] = useState<IQuestions[]>([]);
   const [isCorrect, setIsCorrect] = useState<string | undefined>(undefined);
   const [blockAnswer, setBlockAnswer] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    const copyInfos = [...questions];
+    const selectedQuestions = generateQuestionsLimit(questions);
+    const shuffled = shuffleAnswers(selectedQuestions)
+    const copyInfos = [...shuffled];
     const random = Math.floor((Math.random() * copyInfos.length));
     setCopyQuestions(copyInfos);
     setRandomIndex(random);
@@ -32,9 +43,37 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({
     setMainLoading(false);
   }, [restoreGame]);
 
+  const generateQuestionsLimit = (list: IQuestions[]): IQuestions[] => {
+    const randomNumbers: number[] = [];
+    const finalList = []
+    while (randomNumbers.length < 10) {
+      const newRandom = Math.floor(Math.random() * list.length);
+      if (!randomNumbers.includes(newRandom)) {
+        randomNumbers.push(newRandom);
+        finalList.push(list[newRandom]);
+      }
+    }
+    return finalList;
+  }
+
+  const shuffleAnswers = (questionsList: IQuestions[]): IQuestions[] => {
+    questionsList.forEach((answersList: IQuestions, i: number) => {
+      const newList: IAnswers[] = [];
+      const copyAnswers = [...answersList.options];
+      answersList.options.forEach(() => {
+        const randomIndex = generateRandomIndex(copyAnswers);
+        newList.push(copyAnswers[randomIndex])
+        copyAnswers.splice(randomIndex, 1)
+      });
+      answersList.options = newList
+    })
+    return questionsList;
+  }
+
+
   const endGame = (): void => finishGame(true)
 
-  const generateRandomIndex = (list: any): number => Math.floor((Math.random() * list.length));
+  const generateRandomIndex = (list: Array<IAnswers | IQuestions>): number => Math.floor((Math.random() * list.length));
 
   const buildNextQuestion = async (control: string[]) => {
     copyQuestions.splice(randomIndex, 1);
@@ -61,7 +100,7 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({
     setIsLoading(true);
     setTimeout(() => {
       buildNextQuestion(isFinished);
-    }, 2500)
+    }, 500)
   };
 
   const returnColor = (rightAnswer: number): string => {
@@ -70,7 +109,7 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({
     return 'white'
   }
 
-  const buildQuestion = (question: IQuestionsProps): JSX.Element => {
+  const buildQuestion = (question: IQuestions): JSX.Element => {
     if (question.type === 'text' && typeof question.content === 'string') {
       return (
         <Typography
@@ -99,19 +138,6 @@ const RenderQuestion: React.FC<IQuestionPropsV2> = ({
         <Typography sx={{ color: 'white', marginTop: '2%' }}>{question.content[1] as string}</Typography>
       </Box>
     )
-  }
-
-  const shuffleAnswers = (answersList: IAnswers[]): IAnswers[] => {
-    console.log(answersList)
-    const newList: IAnswers[] = [];
-    const copyAnswers = [...answersList];
-    answersList.forEach(() => {
-      const randomIndex = generateRandomIndex(copyAnswers);
-      console.log(randomIndex)
-      newList.push(copyAnswers[randomIndex])
-      copyAnswers.splice(randomIndex, 1)
-    })
-    return newList;
   }
 
   const buildAnswers = (answersList: IAnswers[]): JSX.Element => {
