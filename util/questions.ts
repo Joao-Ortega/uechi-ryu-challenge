@@ -7,6 +7,13 @@ import heiko from '../app/assets/images/heik.png';
 import shi from '../app/assets/images/shi.png';
 import san from '../app/assets/images/san.png';
 import heisoku from '../app/assets/images/heisoku.png';
+import seik from '../app/assets/images/seik.png';
+import hiz from '../app/assets/images/hiz.png';
+import hira from '../app/assets/images/hira.png';
+import sok from '../app/assets/images/sok.png';
+import nuk from '../app/assets/images/nuk.png';
+import shut from '../app/assets/images/shut.png';
+import kos from '../app/assets/images/kos.png';
 
 const challenges: IQuestions[] = [
   {
@@ -23,7 +30,7 @@ const challenges: IQuestions[] = [
     type: 'text',
     content: 'Quais são os 3 Katas "principais" que vieram com Kanbun Uechi após seus anos de estudo na China?',
     options: [
-      {correct: 1, data: 'Sanchin - Seichin - Seryu'},
+      {correct: 1, data: 'Sanchin - Seichin - Seiryu'},
       {correct: 2, data: 'Kanchin - Kanshu - Seisan'},
       {correct: 0, data: 'Seisan - Sanseryu - Sanchin'},
       {correct: 3, data: 'Sanseryu - Seisan - Seichin'}
@@ -207,6 +214,146 @@ const challenges: IQuestions[] = [
       {correct: 1, data: 'Tai Chi Chuan'},
       {correct: 2, data: 'Xing Yi'},
       {correct: 3, data: 'Goju Ryu'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o nome da Província que o fundador do estilo Uechi Ryu foi para estudar artes marciais?',
+    options: [
+      {correct: 1, data: 'Okinawa'},
+      {correct: 0, data: 'Fukien'},
+      {correct: 2, data: 'Xangai'},
+      {correct: 3, data: 'Shenzhen'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o significado de Pan Gai Noon?',
+    options: [
+      {correct: 0, data: 'Metade duro, metade suave'},
+      {correct: 1, data: 'Metade forte, metade relaxado'},
+      {correct: 2, data: 'Metade atento, metade descansado'},
+      {correct: 3, data: 'Metade focado, metade relaxado'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual palavra é conhecida por treinar o fortalecimento/calejamento do ante-braço?',
+    options: [
+      {correct: 1, data: 'Tai Kitae'},
+      {correct: 0, data: 'Kote Kitae'},
+      {correct: 2, data: 'Ashi Kitae'},
+      {correct: 3, data: 'Harai Kitae'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual palavra é conhecida por treinar o fortalecimento/calejamento do corpo em Uechi Ryu?',
+    options: [
+      {correct: 0, data: 'Tai Kitae'},
+      {correct: 1, data: 'Kote Kitae'},
+      {correct: 2, data: 'Ashi Kitae'},
+      {correct: 3, data: 'Harai Kitae'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o significado da palavra Sanchin?',
+    options: [
+      {correct: 3, data: 'Guarda'},
+      {correct: 1, data: 'Meio duro meio suave'},
+      {correct: 2, data: 'Mente de principiante'},
+      {correct: 0, data: '3 Conflitos/Batalhas'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o nome dos exercícios padronizados por Kanei Uechi para treino, muito usado em aquecimentos?',
+    options: [
+      {correct: 3, data: 'Yakusoku Kumite'},
+      {correct: 0, data: 'Hojo Undo'},
+      {correct: 2, data: 'Bunkai'},
+      {correct: 1, data: 'Katas'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o significado da palavra Bunkai?',
+    options: [
+      {correct: 0, data: 'Análise/desmontagem'},
+      {correct: 3, data: 'Técnica'},
+      {correct: 2, data: 'Corpo'},
+      {correct: 1, data: 'Força/Explosão'}
+    ]
+  },
+  {
+    type: 'image',
+    content: [seik, 'Qual o nome desse ponto de golpe?'],
+    options: [
+      {correct: 0, data: 'Seiken'},
+      {correct: 2, data: 'Ippon Ken'},
+      {correct: 1, data: 'Shuto'},
+      {correct: 3, data: 'Keito'},
+    ]
+  },
+  {
+    type: 'image',
+    content: [hiz, 'Qual o nome desse ponto de golpe?'],
+    options: [
+      {correct: 2, data: 'Sei Ken'},
+      {correct: 0, data: 'Hiza'},
+      {correct: 1, data: 'Shuto'},
+      {correct: 3, data: 'Kakuto'},
+    ]
+  },
+  {
+    type: 'image',
+    content: [hira, 'Qual o nome desse ponto de golpe?'],
+    options: [
+      {correct: 0, data: 'Hira Ken'},
+      {correct: 2, data: 'Ura Ken'},
+      {correct: 1, data: 'Shuto'},
+      {correct: 3, data: 'Kakuto'},
+    ]
+  },
+  {
+    type: 'image',
+    content: [sok, 'Qual o nome desse ponto de golpe?'],
+    options: [
+      {correct: 3, data: 'Enpi'},
+      {correct: 2, data: 'Kakato'},
+      {correct: 1, data: 'Shuto'},
+      {correct: 0, data: 'Sokuto'},
+    ]
+  },
+  {
+    type: 'image',
+    content: [nuk, 'Qual o nome desse ponto de golpe?'],
+    options: [
+      {correct: 3, data: 'Enpi'},
+      {correct: 0, data: 'Nukite'},
+      {correct: 1, data: 'Kumite'},
+      {correct: 2, data: 'Shuto'},
+    ]
+  },
+  {
+    type: 'image',
+    content: [shut, 'Qual o nome desse ponto de golpe?'],
+    options: [
+      {correct: 3, data: 'Tetsui'},
+      {correct: 0, data: 'Shuto'},
+      {correct: 1, data: 'Kumite'},
+      {correct: 2, data: 'Haisoku'},
+    ]
+  },
+  {
+    type: 'image',
+    content: [kos, 'Qual o nome desse ponto de golpe?'],
+    options: [
+      {correct: 0, data: 'Koshi'},
+      {correct: 3, data: 'Teisho'},
+      {correct: 1, data: 'Kakato'},
+      {correct: 2, data: 'Teisoku'},
     ]
   },
 ];
