@@ -278,12 +278,12 @@ const challenges: IQuestions[] = [
   },
   {
     type: 'text',
-    content: 'Qual o significado da palavra Bunkai?',
+    content: 'Oque é Bunkai?',
     options: [
-      {correct: 0, data: 'Análise/desmontagem'},
-      {correct: 3, data: 'Técnica'},
-      {correct: 2, data: 'Corpo'},
-      {correct: 1, data: 'Força/Explosão'}
+      {correct: 0, data: 'Aplicações práticas de um Kata'},
+      {correct: 3, data: 'Luta pré determinada'},
+      {correct: 2, data: 'Sequência de movimentos para aquecimento'},
+      {correct: 1, data: 'Treino de fortalecimento/calejamento'}
     ]
   },
   {
@@ -354,6 +354,96 @@ const challenges: IQuestions[] = [
       {correct: 3, data: 'Teisho'},
       {correct: 1, data: 'Kakato'},
       {correct: 2, data: 'Teisoku'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o significado da palavra Karate Do?',
+    options: [
+      {correct: 2, data: 'Mente limpa'},
+      {correct: 3, data: 'Mente Sã, Corpo São'},
+      {correct: 0, data: 'Caminho das mãos vazias'},
+      {correct: 1, data: 'Caminho do Guerreiro'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual estilo de Karate praticamos?',
+    options: [
+      {correct: 2, data: 'Kyokushin'},
+      {correct: 3, data: 'Shotokan'},
+      {correct: 1, data: 'Goju Ryu'},
+      {correct: 0, data: 'Uechi Ryu'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual significado de Uechi Ryu?',
+    options: [
+      {correct: 2, data: 'Caminho de Uechi'},
+      {correct: 3, data: 'Aprendizes de Uechi'},
+      {correct: 0, data: 'Escola de Uechi'},
+      {correct: 1, data: 'Descendentes de Uechi'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque é Tsuki Waza?',
+    options: [
+      {correct: 0, data: 'Técnicas de golpes diretos com os punhos'},
+      {correct: 2, data: 'Técnicas diretas de projeção'},
+      {correct: 3, data: 'Técnicas com golpes baixos'},
+      {correct: 1, data: 'Soco em linha'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque é Uke Waza?',
+    options: [
+      {correct: 3, data: 'Técnicas para glinche'},
+      {correct: 2, data: 'Técnicas diretas de mão aberta'},
+      {correct: 0, data: 'Técnicas de defesa'},
+      {correct: 1, data: 'Técnicas diretas de chão'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque é Geri Waza?',
+    options: [
+      {correct: 3, data: 'Golpes circulares'},
+      {correct: 0, data: 'Técnicas de pernas/chutes'},
+      {correct: 2, data: 'Técnicas para derrubar o adversário'},
+      {correct: 1, data: 'Técnicas de como não ser derrubado'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o significado de Kata?',
+    options: [
+      {correct: 3, data: 'Guerra'},
+      {correct: 0, data: 'Conjunto de movimentos de ataque e defesa'},
+      {correct: 2, data: 'Conjunto de técnicas avançadas'},
+      {correct: 1, data: 'Formulário de luta'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque é Kihon?',
+    options: [
+      {correct: 0, data: 'Técnicas básicas fundamentais'},
+      {correct: 3, data: 'Luta pré determinada com golpes planejados'},
+      {correct: 2, data: 'Treino de chutes'},
+      {correct: 1, data: 'Base de luta'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque é Kumite?',
+    options: [
+      {correct: 2, data: 'Golpe com ponta de dedos'},
+      {correct: 3, data: 'Treino de força'},
+      {correct: 0, data: 'Luta/Combate'},
+      {correct: 1, data: 'Saudação inicial'},
     ]
   },
 ];
