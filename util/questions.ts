@@ -14,6 +14,9 @@ import sok from '../app/assets/images/sok.png';
 import nuk from '../app/assets/images/nuk.png';
 import shut from '../app/assets/images/shut.png';
 import kos from '../app/assets/images/kos.png';
+import tet from '../app/assets/images/tet.png';
+import em from '../app/assets/images/em.png';
+import kei from '../app/assets/images/kei.png';
 
 const challenges: IQuestions[] = [
   {
@@ -444,6 +447,116 @@ const challenges: IQuestions[] = [
       {correct: 3, data: 'Treino de força'},
       {correct: 0, data: 'Luta/Combate'},
       {correct: 1, data: 'Saudação inicial'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o significado da palavra Godai?',
+    options: [
+      {correct: 2, data: 'Repetir'},
+      {correct: 0, data: 'Mudar de lado'},
+      {correct: 3, data: 'Cumprimentar'},
+      {correct: 1, data: 'Perna direita a frente'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o significado da palavra Moikai?',
+    options: [
+      {correct: 0, data: 'Repetir'},
+      {correct: 2, data: 'Perna esquerda a frente'},
+      {correct: 3, data: 'Mudar de lado'},
+      {correct: 1, data: 'Iniciar'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o significado da palavra Migi-ashi?',
+    options: [
+      {correct: 2, data: 'Cumprimento inicial'},
+      {correct: 0, data: 'Perna direita'},
+      {correct: 3, data: 'Virar'},
+      {correct: 1, data: 'Perna esquerda'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o significado da palavra Hidare-ashi?',
+    options: [
+      {correct: 2, data: 'Perna direita'},
+      {correct: 0, data: 'Perna esquerda'},
+      {correct: 3, data: 'Trocar de lado'},
+      {correct: 1, data: 'Repetir'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o significado da palavra Mae?',
+    options: [
+      {correct: 2, data: 'Perna direita'},
+      {correct: 1, data: 'Iniciar'},
+      {correct: 3, data: 'Saudação'},
+      {correct: 0, data: 'Frente'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o significado da palavra Mae?',
+    options: [
+      {correct: 2, data: 'Perna direita'},
+      {correct: 1, data: 'Iniciar'},
+      {correct: 3, data: 'Saudação'},
+      {correct: 0, data: 'Frente'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Ao realizar um golpe altura GEDAN, em qual area ele será desferido?',
+    options: [
+      {correct: 1, data: 'Altura entre ombros e quadril'},
+      {correct: 0, data: 'Altura do quadril para baixo'},
+      {correct: 3, data: 'Altura entre ombros e quadril mas pelas costas'},
+      {correct: 2, data: 'Altura do ombro para cima'}
+    ]
+  },
+  {
+    type: 'image',
+    content: [tet, 'Qual o nome desse ponto de golpe?'],
+    options: [
+      {correct: 0, data: 'Tetsui'},
+      {correct: 3, data: 'Teisho'},
+      {correct: 1, data: 'Shoken'},
+      {correct: 2, data: 'Boshiken'},
+    ]
+  },
+  {
+    type: 'image',
+    content: [em, 'Qual o nome desse ponto de golpe?'],
+    options: [
+      {correct: 1, data: 'Shuto'},
+      {correct: 3, data: 'Nihon Nukite'},
+      {correct: 0, data: 'Empi'},
+      {correct: 2, data: 'Keito'},
+    ]
+  },
+  {
+    type: 'image',
+    content: [kei, 'Qual o nome desse ponto de golpe?'],
+    options: [
+      {correct: 0, data: 'Keito'},
+      {correct: 3, data: 'Haishu'},
+      {correct: 1, data: 'Haito'},
+      {correct: 2, data: 'Seiken'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Tenshin Kosoku Geri. Que movimento é esse?',
+    options: [
+      {correct: 1, data: 'Exercício de golpe com o punho a frente'},
+      {correct: 3, data: 'Exercício de chute frontal '},
+      {correct: 0, data: 'Exercício de giro 45° e chute com perna de trás'},
+      {correct: 2, data: 'Exercício de golpe com cotovelo (frente-lado-trás)'}
     ]
   },
 ];
