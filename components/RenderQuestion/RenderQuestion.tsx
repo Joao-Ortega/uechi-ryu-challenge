@@ -122,7 +122,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
     setIsLoading(true);
     setTimeout(() => {
       newNextQuestion(isFinished);
-    }, 500)
+    }, 1500)
   };
 
   const returnColor = (rightAnswer: number): string => {
