@@ -24,7 +24,6 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   setMainLoading,
   restoreGame,
 }: IRenderQuestionProps) => {
-  // const [randomIndex, setRandomIndex] = useState<number>(0);
   const [copyQuestions, setCopyQuestions] = useState<IQuestions[]>([]);
   const [isCorrect, setIsCorrect] = useState<string | undefined>(undefined);
   const [blockAnswer, setBlockAnswer] = useState<boolean>(false);
@@ -38,16 +37,9 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
       const QUESTIONS_PER_ROUND = 10;
       setRoundLimit(Math.floor(questions.length / QUESTIONS_PER_ROUND));
       setRoundsCount(1);
-      const copyOriginalQuestions = [...questions];
-      const teste = getRandomQuestion(copyOriginalQuestions);
-      setControlList(copyOriginalQuestions);
-      const embaralhaTeste = shuffleAnswers(teste);
-      setCopyQuestions(embaralhaTeste);
-      countResponse(['.']);
-      setBlockAnswer(false);
-      setIsCorrect(undefined)
-      setMainLoading(false);
+      resetStateFromList(questions)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questions])
 
   useEffect(() => {
@@ -56,30 +48,26 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
           setRoundsCount(1);
           const QUESTIONS_PER_ROUND = 10;
           setRoundLimit(Math.floor(questions.length / QUESTIONS_PER_ROUND));
-          const copyOriginalQuestions = [...questions];
-          const teste = getRandomQuestion(copyOriginalQuestions);
-          setControlList(copyOriginalQuestions);
-          const embaralhaTeste = shuffleAnswers(teste);
-          setCopyQuestions(embaralhaTeste);
-          countResponse(['.']);
-          setBlockAnswer(false);
-          setIsCorrect(undefined);
-          setMainLoading(false);
+          resetStateFromList(questions)
         } else {
           setRoundsCount(roundsCount + 1)
-          const mantainList = [...controlList];
-          const currentQuestion = getRandomQuestion(mantainList);
-          setControlList(mantainList);
-          const shuffled = shuffleAnswers(currentQuestion);
-          setCopyQuestions(shuffled);
-          countResponse(['.']);
-          setBlockAnswer(false);
-          setIsCorrect(undefined);
-          setMainLoading(false);
+          resetStateFromList(controlList)
         }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [restoreGame]);
+  
+  const resetStateFromList = (list: IQuestions[]) => {
+    const copyCurrentQuestions = [...list];
+    const getQuestionToShow = getRandomQuestion(copyCurrentQuestions);
+    setControlList(copyCurrentQuestions);
+    const shuffleQuestion = shuffleAnswers(getQuestionToShow);
+    setCopyQuestions(shuffleQuestion);
+    countResponse(['.']);
+    setBlockAnswer(false);
+    setIsCorrect(undefined);
+    setMainLoading(false);
+  }
 
   const getRandomQuestion = (list: IQuestions[]): IQuestions[] => {
     const currentQuestion = []; 
@@ -112,7 +100,6 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
     const nextQuestionIndex = generateRandomIndex(controlList);
     setCopyQuestions([controlList[nextQuestionIndex]]);
     controlList.splice(nextQuestionIndex, 1);
-    console.log('update', controlList)
     setControlList(controlList);
     countResponse(control) 
     setBlockAnswer(false);

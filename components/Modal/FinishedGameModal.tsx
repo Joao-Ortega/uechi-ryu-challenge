@@ -65,7 +65,7 @@ const FinishedGameModal = ({
           >
             <Typography fontSize={18} variant='button' sx={{ margin: '1.5% auto 0 auto' }} >Pontuação</Typography>
             <Box display='flex'>
-              <Typography fontSize={22} sx={{ color: 'green', fontWeight: 900 }}>{points}</Typography>
+              <Typography fontSize={22} sx={{ color: points === 5 ? 'black' : points < 5 ? 'red' : 'green', fontWeight: 900 }}>{points}</Typography>
               <Typography fontSize={22} sx={{ fontWeight: 900 }}>/10</Typography>
             </Box>
             <Button
