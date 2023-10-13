@@ -22,39 +22,59 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   points,
   mainLoading,
   setMainLoading,
-  restoreGame
+  restoreGame,
 }: IRenderQuestionProps) => {
-  const [randomIndex, setRandomIndex] = useState<number>(0);
   const [copyQuestions, setCopyQuestions] = useState<IQuestions[]>([]);
   const [isCorrect, setIsCorrect] = useState<string | undefined>(undefined);
   const [blockAnswer, setBlockAnswer] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [controlList, setControlList] = useState<IQuestions[]>([]);
+  const [roundLimit, setRoundLimit] = useState<number>(0);
+  const [roundsCount, setRoundsCount] = useState<number | null>(null);
 
   useEffect(() => {
-    const selectedQuestions = generateQuestionsLimit(questions);
-    const shuffled = shuffleAnswers(selectedQuestions)
-    const copyInfos = [...shuffled];
-    const random = Math.floor((Math.random() * copyInfos.length));
-    setCopyQuestions(copyInfos);
-    setRandomIndex(random);
-    countResponse(['.']);
-    setBlockAnswer(false);
-    setIsCorrect(undefined)
-    setMainLoading(false);
+    if (questions.length && !controlList.length) {
+      const QUESTIONS_PER_ROUND = 10;
+      setRoundLimit(Math.floor(questions.length / QUESTIONS_PER_ROUND));
+      setRoundsCount(1);
+      resetStateFromList(questions)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [questions])
+
+  useEffect(() => {
+    if (!!roundsCount) {
+        if (roundsCount >= roundLimit) {
+          setRoundsCount(1);
+          const QUESTIONS_PER_ROUND = 10;
+          setRoundLimit(Math.floor(questions.length / QUESTIONS_PER_ROUND));
+          resetStateFromList(questions)
+        } else {
+          setRoundsCount(roundsCount + 1)
+          resetStateFromList(controlList)
+        }
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [restoreGame]);
+  
+  const resetStateFromList = (list: IQuestions[]) => {
+    const copyCurrentQuestions = [...list];
+    const getQuestionToShow = getRandomQuestion(copyCurrentQuestions);
+    setControlList(copyCurrentQuestions);
+    const shuffleQuestion = shuffleAnswers(getQuestionToShow);
+    setCopyQuestions(shuffleQuestion);
+    countResponse(['.']);
+    setBlockAnswer(false);
+    setIsCorrect(undefined);
+    setMainLoading(false);
+  }
 
-  const generateQuestionsLimit = (list: IQuestions[]): IQuestions[] => {
-    const randomNumbers: number[] = [];
-    const finalList = []
-    while (randomNumbers.length < 10) {
-      const newRandom = Math.floor(Math.random() * list.length);
-      if (!randomNumbers.includes(newRandom)) {
-        randomNumbers.push(newRandom);
-        finalList.push(list[newRandom]);
-      }
-    }
-    return finalList;
+  const getRandomQuestion = (list: IQuestions[]): IQuestions[] => {
+    const currentQuestion = []; 
+    const randomIndex = Math.floor(Math.random() * list.length);
+    currentQuestion.push(list[randomIndex]);
+    list.splice(randomIndex, 1);
+    return currentQuestion
   }
 
   const shuffleAnswers = (questionsList: IQuestions[]): IQuestions[] => {
@@ -76,11 +96,12 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
 
   const generateRandomIndex = (list: Array<IAnswers | IQuestions>): number => Math.floor((Math.random() * list.length));
 
-  const buildNextQuestion = async (control: string[]) => {
-    copyQuestions.splice(randomIndex, 1);
-    const nextQuestionIndex = generateRandomIndex(copyQuestions);
-    countResponse(control)
-    setRandomIndex(nextQuestionIndex);
+  const newNextQuestion = (control: string[]) => {
+    const nextQuestionIndex = generateRandomIndex(controlList);
+    setCopyQuestions([controlList[nextQuestionIndex]]);
+    controlList.splice(nextQuestionIndex, 1);
+    setControlList(controlList);
+    countResponse(control) 
     setBlockAnswer(false);
     setIsCorrect(undefined);
     setIsLoading(false);
@@ -100,8 +121,8 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   }
     setIsLoading(true);
     setTimeout(() => {
-      buildNextQuestion(isFinished);
-    }, 2000)
+      newNextQuestion(isFinished);
+    }, 500)
   };
 
   const returnColor = (rightAnswer: number): string => {
@@ -234,7 +255,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
             alignItems='center'
             justifyContent='center'
           >
-            { copyQuestions.length && buildQuestion(copyQuestions[randomIndex]) }
+            { copyQuestions.length && buildQuestion(copyQuestions[0]) }
           </Box>
           <Box
             sx={{
@@ -245,7 +266,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
             display='flex'
             justifyContent='center'
           >
-            { copyQuestions.length && buildAnswers(copyQuestions[randomIndex].options) }
+            { copyQuestions.length && buildAnswers(copyQuestions[0].options) }
           </Box>
           {isLoading && (
             <Stack sx={{ color: 'white' }}>

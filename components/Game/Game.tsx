@@ -1,11 +1,12 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import Logo from '../../app/assets/images/logo-dpedra.jpg';
 import Image from 'next/image';
 import RenderQuestion from '../RenderQuestion/RenderQuestion';
 import challenges from '../../util/questions';
 import FinishedGameModal from '../Modal/FinishedGameModal';
+import { IQuestions } from '@/interfaces';
 
 const Game = () => {
   const [gameEnded, setGameEnded] = useState<boolean>(false);
@@ -13,6 +14,11 @@ const Game = () => {
   const [responsesLength, setResponsesLength] = useState<string[]>([]);
   const [restoreGame, setRestoreGame] = useState<boolean>(false);
   const [mainLoading, setMainLoading] = useState<boolean>(true);
+  const [safeArray, setSafeArray] = useState<IQuestions[]>([]);
+
+  useEffect(() => {
+    setSafeArray([...challenges]);
+  }, [])
 
   return (
     <Box>
@@ -33,7 +39,7 @@ const Game = () => {
         countResponse={setResponsesLength}
         points={points}
         addPoints={setPoints}
-        questions={challenges}
+        questions={safeArray}
         finishGame={setGameEnded}
         mainLoading={mainLoading}
         setMainLoading={setMainLoading}

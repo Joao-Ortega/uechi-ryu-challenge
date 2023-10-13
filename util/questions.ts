@@ -553,10 +553,10 @@ const challenges: IQuestions[] = [
     type: 'text',
     content: 'Tenshin Kosoku Geri. Que movimento é esse?',
     options: [
-      {correct: 1, data: 'Exercício de golpe com o punho a frente'},
-      {correct: 3, data: 'Exercício de chute frontal '},
+      {correct: 1, data: 'Exercício de giro 45° e chute com perna da frente'},
+      {correct: 3, data: 'Exercício de giro 45° e chute lateral'},
       {correct: 0, data: 'Exercício de giro 45° e chute com perna de trás'},
-      {correct: 2, data: 'Exercício de golpe com cotovelo (frente-lado-trás)'}
+      {correct: 2, data: 'Exercício de giro 45° e soco em forma de shoken'}
     ]
   },
 ];
