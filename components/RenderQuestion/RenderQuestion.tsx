@@ -91,16 +91,16 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
     return questionsList;
   }
 
-
   const endGame = (): void => finishGame(true)
 
   const generateRandomIndex = (list: Array<IAnswers | IQuestions>): number => Math.floor((Math.random() * list.length));
 
   const newNextQuestion = (control: string[]) => {
     const nextQuestionIndex = generateRandomIndex(controlList);
+    const changeReference = [...controlList];
     setCopyQuestions([controlList[nextQuestionIndex]]);
-    controlList.splice(nextQuestionIndex, 1);
-    setControlList(controlList);
+    changeReference.splice(nextQuestionIndex, 1);
+    setControlList(changeReference);
     countResponse(control) 
     setBlockAnswer(false);
     setIsCorrect(undefined);

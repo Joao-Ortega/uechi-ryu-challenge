@@ -501,12 +501,12 @@ const challenges: IQuestions[] = [
   },
   {
     type: 'text',
-    content: 'Qual o significado da palavra Mae?',
+    content: 'Ao realizar um golpe altura CHUDAN, em qual area ele será desferido?',
     options: [
-      {correct: 2, data: 'Perna direita'},
-      {correct: 1, data: 'Iniciar'},
-      {correct: 3, data: 'Saudação'},
-      {correct: 0, data: 'Frente'},
+      {correct: 0, data: 'Altura entre ombros e quadril'},
+      {correct: 1, data: 'Altura do quadril para baixo'},
+      {correct: 3, data: 'Altura entre ombros e quadril mas pelas costas'},
+      {correct: 2, data: 'Altura do ombro para cima'}
     ]
   },
   {
