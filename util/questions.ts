@@ -35,8 +35,8 @@ const challenges: IQuestions[] = [
     options: [
       {correct: 1, data: 'Sanchin - Seichin - Seiryu'},
       {correct: 2, data: 'Kanchin - Kanshu - Seisan'},
-      {correct: 0, data: 'Seisan - Sanseryu - Sanchin'},
-      {correct: 3, data: 'Sanseryu - Seisan - Seichin'}
+      {correct: 0, data: 'Seisan - Sanseiryu - Sanchin'},
+      {correct: 3, data: 'Sanseiryu - Seisan - Seichin'}
     ]
   },
   {
@@ -557,6 +557,76 @@ const challenges: IQuestions[] = [
       {correct: 3, data: 'Exercício de giro 45° e chute lateral'},
       {correct: 0, data: 'Exercício de giro 45° e chute com perna de trás'},
       {correct: 2, data: 'Exercício de giro 45° e soco em forma de shoken'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Tenshin Zensoko Geri. Que movimento é esse?',
+    options: [
+      {correct: 0, data: 'Exercício de giro 45° e chute com perna da frente'},
+      {correct: 3, data: 'Exercício de giro 45° e chute lateral'},
+      {correct: 2, data: 'Exercício de giro 45° e chute com perna de trás'},
+      {correct: 1, data: 'Exercício de giro 45° e soco em forma de shoken'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o significado de Kamae?',
+    options: [
+      {correct: 3, data: 'Golpe - Atacar'},
+      {correct: 0, data: 'Postura - Guarda'},
+      {correct: 2, data: 'Soco circular'},
+      {correct: 1, data: 'Saudação'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual motivo o fundador da Uechi Ryu foi para China?',
+    options: [
+      {correct: 3, data: 'Estudar filosofia'},
+      {correct: 2, data: 'Se encontrar com conhecidos'},
+      {correct: 0, data: 'Escapar do alistamento militar'},
+      {correct: 1, data: 'Estava se mudando'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque levou o fundador da Uechi Ryu a parar de ensinar arte marcial durante um tempo?',
+    options: [
+      {correct: 3, data: 'Estava cansado e sem tempo'},
+      {correct: 2, data: 'Não sentia motivação'},
+      {correct: 1, data: 'Foi atacado e perdeu o combate'},
+      {correct: 0, data: 'Um de seus alunos cometeu uma fatalidade'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Quem teve um papel importante para o fundador da Uechi Ryu voltar a ensinar?',
+    options: [
+      {correct: 0, data: 'Ryuyu Tomoyose'},
+      {correct: 2, data: 'Kanei Uechi'},
+      {correct: 1, data: 'Kanbun Uechi'},
+      {correct: 3, data: 'Shū Shiwa'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Shomen Geri, que movimento do Hojo Undo é esse?',
+    options: [
+      {correct: 1, data: 'Defesa Mawashi Uke e chute lateral'},
+      {correct: 2, data: 'Defesa Mawashi Uke e chute de cima para baixo'},
+      {correct: 0, data: 'Defesa Mawashi Uke e chute frontal'},
+      {correct: 3, data: 'Defesa Mawashi Uke e chute rotatório'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Hiji Zuki, que movimento do Hojo Undo é esse?',
+    options: [
+      {correct: 1, data: 'Defesa Mawashi Uke, soco circular altura Jodan (Têmpora).'},
+      {correct: 2, data: 'Defesa Mawashi Uke, soco em Hiraken para cima, trás e lado.'},
+      {correct: 3, data: 'Defesa para cima com mão em Hiraken, soco em Hiraken, defesa fechando e abrindo o plexo e soco em Hiraken.'},
+      {correct: 0, data: 'Defesa Mawashi Uke, cotovelada em Hiraken para cima, lado e para trás.'}
     ]
   },
 ];
