@@ -1,9 +1,11 @@
 'use client'
 import { Box, Button, TextField } from '@mui/material'
-import React, { useState } from 'react'
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 
 export default function InitialPage() {
   const [isCLicked, setIsClicked] = useState<boolean>(false);
+  const router = useRouter();
 
   return (
     <Box
@@ -24,6 +26,7 @@ export default function InitialPage() {
       >
         <Button
           variant='contained'
+          onClick={() => router.push('/game')}
           sx={{
             backgroundColor: 'white',
             color: 'black',
@@ -47,7 +50,7 @@ export default function InitialPage() {
           sx={{ margin: "2% 0 0 0" }}
         >
           <TextField
-            placeholder='Senha'
+            placeholder='Digite a Senha'
             size='small'
             sx={{ backgroundColor: 'white', width: '55vw', borderRadius: '8px' }}
           />
