@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import Logo from '../../app/assets/images/logo-dpedra.jpg';
 import Image from 'next/image';
 import RenderQuestion from '../RenderQuestion/RenderQuestion';
-import challenges from '../../util/questions';
+import { challenges, kotoSimon } from '../../util/questions';
 import FinishedGameModal from '../Modal/FinishedGameModal';
 import { IQuestions } from '@/interfaces';
 
@@ -15,10 +15,19 @@ const Game = () => {
   const [restoreGame, setRestoreGame] = useState<boolean>(false);
   const [mainLoading, setMainLoading] = useState<boolean>(true);
   const [safeArray, setSafeArray] = useState<IQuestions[]>([]);
+  const [mode, setMode] = useState<string>('');
 
   useEffect(() => {
-    setSafeArray([...challenges]);
-  }, [])
+    if (verifyLocal()) {
+      setMode('Black Belt');
+      setSafeArray([...kotoSimon]);
+    } else {
+      setMode('Standard')
+      setSafeArray([...challenges]);
+    }
+  }, []);
+
+  const verifyLocal = () => localStorage.getItem('koto-simon');
 
   return (
     <Box>
@@ -44,6 +53,7 @@ const Game = () => {
         mainLoading={mainLoading}
         setMainLoading={setMainLoading}
         restoreGame={restoreGame}
+        mode={mode}
       />
       <FinishedGameModal
         currentState={restoreGame}
@@ -53,6 +63,7 @@ const Game = () => {
         open={gameEnded}
         setOpen={setGameEnded}
         setMainLoading={setMainLoading}
+        mode={mode}
       />
     </Box>
   )

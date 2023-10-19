@@ -47,7 +47,6 @@ export default function InitialPage() {
         height='15vh'
         justifyContent='space-evenly'
         width='55vw'
-        // sx={{ border: '1px solid red' }}
       >
         <Button
           variant='contained'
@@ -78,13 +77,8 @@ export default function InitialPage() {
           sx={{
             backgroundColor: 'white',
             color: isCLicked ? 'red' : 'black',
-            // '&.MuiButtonBase-root:active': {
-            //   backgroundColor: 'black',
-            //   color: 'white'
-            // },
             '&.MuiButtonBase-root:hover': {
               backgroundColor: 'white',
-              // color: 'white'
             }
           }}
         >

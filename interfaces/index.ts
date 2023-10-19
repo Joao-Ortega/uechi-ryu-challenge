@@ -21,6 +21,7 @@ export interface IRenderQuestionProps {
   mainLoading: boolean;
   setMainLoading: Function;
   restoreGame: boolean;
+  mode: string;
 }
 
 export interface IFinishedGameProps {
@@ -31,4 +32,5 @@ export interface IFinishedGameProps {
   setPoints: Function;
   restart: Function;
   setMainLoading: Function;
+  mode: string;
 }

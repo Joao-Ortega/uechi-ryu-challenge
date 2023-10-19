@@ -23,6 +23,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   mainLoading,
   setMainLoading,
   restoreGame,
+  mode
 }: IRenderQuestionProps) => {
   const [copyQuestions, setCopyQuestions] = useState<IQuestions[]>([]);
   const [isCorrect, setIsCorrect] = useState<string | undefined>(undefined);
@@ -34,7 +35,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
 
   useEffect(() => {
     if (questions.length && !controlList.length) {
-      const QUESTIONS_PER_ROUND = 10;
+      const QUESTIONS_PER_ROUND = mode === 'Standard' ? 10 : 2;
       setRoundLimit(Math.floor(questions.length / QUESTIONS_PER_ROUND));
       setRoundsCount(1);
       resetStateFromList(questions)
@@ -46,7 +47,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
     if (!!roundsCount) {
         if (roundsCount >= roundLimit) {
           setRoundsCount(1);
-          const QUESTIONS_PER_ROUND = 10;
+          const QUESTIONS_PER_ROUND = mode === 'Standard' ? 10 : 2;
           setRoundLimit(Math.floor(questions.length / QUESTIONS_PER_ROUND));
           resetStateFromList(questions)
         } else {
@@ -111,7 +112,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
     setIsCorrect(event.target.value);
     if (!(Number(event.target.value))) addPoints(points + 1)
     setBlockAnswer(true);
-    const TOTAL_RESPONSES = 11;
+    const TOTAL_RESPONSES = mode === 'Standard' ? 11 : 3;
     const isFinished = [...responses, '.'];
     if (isFinished.length === TOTAL_RESPONSES) {
       setTimeout(() => {
@@ -243,7 +244,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
             display='flex'
             justifyContent='center'
           >
-            {`${responses.length}/10`}
+            {`${responses.length}/${mode === 'Standard' ? '10' : '2'}`}
           </Box>
           <Box
             sx={{
