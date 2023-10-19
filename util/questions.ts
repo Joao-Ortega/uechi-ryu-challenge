@@ -18,7 +18,7 @@ import tet from '../app/assets/images/tet.png';
 import em from '../app/assets/images/em.png';
 import kei from '../app/assets/images/kei.png';
 
-const challenges: IQuestions[] = [
+export const challenges: IQuestions[] = [
   {
     type: 'text',
     content: 'Qual o nome do fundador do estilo de Karatê Uechi Ryu?',
@@ -631,4 +631,355 @@ const challenges: IQuestions[] = [
   },
 ];
 
-export default challenges;
+export const kotoSimon: IQuestions[] = [
+  {
+    type: 'text',
+    content: 'Qual nome original do estilo, país de origem e significado?',
+    options: [
+      {correct: 0, data: 'Pangainoon, Origem na China, meio rígido/meio flexível.'},
+      {correct: 2, data: 'Wingchun, Origem na Japonesa, meio focado/meio resiliente.'},
+      {correct: 1, data: 'Tai Xin Chuan, Origem na Okinawana, meio relaxado/meio imprevisível.'},
+      {correct: 3, data: 'Gojo Ryu, Origem na Tailandesa, meio seco/meio molhado.'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Quais são os 3 Katas "principais" que vieram com Kanbun Uechi após seus anos de estudo na China?',
+    options: [
+      {correct: 1, data: 'Sanchin - Seichin - Seiryu'},
+      {correct: 2, data: 'Kanchin - Kanshu - Seisan'},
+      {correct: 0, data: 'Seisan - Sanseiryu - Sanchin'},
+      {correct: 3, data: 'Sanseiryu - Seisan - Seichin'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual significado de Uechi Ryu?',
+    options: [
+      {correct: 2, data: 'Caminho de Uechi'},
+      {correct: 3, data: 'Aprendizes de Uechi'},
+      {correct: 0, data: 'Escola de Uechi'},
+      {correct: 1, data: 'Descendentes de Uechi'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o nome do mestre Chinês de Kanbun Uechi e quanto tempo Kanbun passou na China ao todo?',
+    options: [
+      {correct: 1, data: 'Kanei Uechi, 8 anos, ensinando na província Fujian'},
+      {correct: 0, data: 'Shushiwa. 13 anos, 10 como aprendiz e 3 ensinando na província Nanjing'},
+      {correct: 2, data: 'Yip Man, 10 anos, 5 aprendendo e 5 ministrando aulas'},
+      {correct: 3, data: 'Shimu, 5 anos, ensinando em Okinawa'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque diferencia o estilo Uechi Ryu dos demais estilos?',
+    options: [
+      {correct: 1, data: 'Chutes Giratórios'},
+      {correct: 2, data: 'Chutes altos'},
+      {correct: 0, data: 'Golpes Circulares'},
+      {correct: 3, data: 'Golpes Contundentes'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Quem foi o grande responsável pela difusão do Uechi Ryu pelo mundo?',
+    options: [
+      {correct: 3, data: 'Kanbun Uechi'},
+      {correct: 1, data: 'George Mattson'},
+      {correct: 2, data: 'Takashi Arakaki'},
+      {correct: 0, data: 'Kanei Uechi'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Quem é o presidente de honra da Okikukai e o presidente executivo?',
+    options: [
+      {correct: 0, data: 'Tsutomu Nakahodo (10º DAN) - Keicho Tobaru (9º DAN)'},
+      {correct: 2, data: 'Takashi Arakaki (9º DAN) - Asao Nakasone (6º DAN)'},
+      {correct: 1, data: 'Kanmei Uechi (10º DAN) - Ryuyu Tomoyose (10º DAN)'},
+      {correct: 3, data: 'Keisuke Fujimoto (9º DAN) - Takahiro Sugimoto (8º DAN)'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Onde se estabeleceu o primeiro dojo de Kanbun Uechi?',
+    options: [
+      {correct: 1, data: 'Okinawa - Japão'},
+      {correct: 0, data: 'Wakayama - Japão Central'},
+      {correct: 2, data: 'Nanjing - China'},
+      {correct: 3, data: 'Fujian - China'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual nome da luta que é feita no estilo Uechi Ryu?',
+    options: [
+      {correct: 1, data: 'Uechi Kumite'},
+      {correct: 2, data: 'Sanbon Kumite'},
+      {correct: 0, data: 'Jyu Kumite'},
+      {correct: 3, data: 'Gojo Kumite'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque significa Sanchin?',
+    options: [
+      {correct: 3, data: 'Guarda'},
+      {correct: 1, data: 'Meio duro meio suave'},
+      {correct: 2, data: 'Mente de principiante'},
+      {correct: 0, data: '3 Conflitos (Mente, Corpo e Espírito)'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque significa Boshiken no Karate Uechi Ryu?',
+    options: [
+      {correct: 3, data: 'Golpe com ponta de dedos simbolizando bico de uma garça'},
+      {correct: 0, data: 'Formato da mão com o polegar no meio semelhante a uma pata de tigre'},
+      {correct: 2, data: 'Golpe de mão aberta, acertando com a parte debaixo.'},
+      {correct: 1, data: 'Defesa circular com intuito de envolver braço do adversário'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque significa Sokusen no chute Mae Geri?',
+    options: [
+      {correct: 0, data: 'Chute com a ponta dos dedos do pé'},
+      {correct: 3, data: 'Chute com a lateral/faca do pé'},
+      {correct: 2, data: 'Chute com o calcanhar do pé.'},
+      {correct: 1, data: 'Chute com o peito do pé'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o nome da indumentária do Karate?',
+    options: [
+      {correct: 2, data: 'Kimono - Roupão - Uniforme'},
+      {correct: 3, data: 'Vestimenta - Irui - Kanji'},
+      {correct: 0, data: 'Dogi - Karategi - Keiko Gi'},
+      {correct: 1, data: 'Yubiwa - Burezaa - Uwagi'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o nome do primeiro aluno de Kanbun Uechi?',
+    options: [
+      {correct: 2, data: 'Shushiwa'},
+      {correct: 3, data: 'Kanmei Uechi'},
+      {correct: 1, data: 'Kanei Uechi'},
+      {correct: 0, data: 'Ryu Ryu Tomoyose'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o significado da palavra Karate Do?',
+    options: [
+      {correct: 2, data: 'Mente limpa'},
+      {correct: 3, data: 'Mente Sã, Corpo São'},
+      {correct: 0, data: 'Caminho das mãos vazias'},
+      {correct: 1, data: 'Caminho do Guerreiro'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque significa Hojo Undo?',
+    options: [
+      {correct: 0, data: 'Exercícios Básicos/Preparatórios'},
+      {correct: 3, data: 'Exercício de luta com golpes pré determinados'},
+      {correct: 2, data: 'Luta Combate'},
+      {correct: 1, data: 'Exercícios de concentração'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque significa Yakusoku Kumite?',
+    options: [
+      {correct: 2, data: 'Luta Combate'},
+      {correct: 3, data: 'Forma de Kata'},
+      {correct: 0, data: 'Luta pré combinada/pré arranjada'},
+      {correct: 1, data: 'Começar a luta'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque significa a palavra Seisan?',
+    options: [
+      {correct: 0, data: '13 anos. Quando um jovem era considerado adulto e ao aprender o kata apto para faixa preta.'},
+      {correct: 3, data: '3 conflitos - 3 formas de ataque e defesa.'},
+      {correct: 2, data: '16 Mãos/Posições.'},
+      {correct: 1, data: 'Aptidão.'}
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque significa a palavra Sanseiryu?',
+    options: [
+      {correct: 2, data: '13 anos. Quando um jovem era considerado adulto.'},
+      {correct: 0, data: '36 Mãos/Posições de ataque e defesa'},
+      {correct: 1, data: 'Equilíbrio mental'},
+      {correct: 3, data: 'Defesa do Dragão'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque significa Dojo?',
+    options: [
+      {correct: 2, data: 'Caminho Inverso (Onde se treinam Artes Marciais)'},
+      {correct: 3, data: 'Tatame (Onde se treinam Artes Marciais)'},
+      {correct: 1, data: 'Arena Espiritual (Onde se treinam Artes Marciais)'},
+      {correct: 0, data: 'Local do caminho (Onde se treinam Artes Marciais)'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque significa Kanshiwa?',
+    options: [
+      {correct: 0, data: 'Fusão dos nomes do precursor (Shushiwa + Kanbun Uechi), influência do Okinawa TE e Kenpo Chinês.'},
+      {correct: 3, data: 'Kata das Crianças.'},
+      {correct: 1, data: 'Caminho das mão vazias.'},
+      {correct: 2, data: 'Kata intermediário.'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque significa Kanshu?',
+    options: [
+      {correct: 0, data: 'Antes chamado Daini Seisan, 1970 nome alterado para lembrar dos precursores, criador Seiki Itokazu.'},
+      {correct: 1, data: 'Caminho do Guerreiro.'},
+      {correct: 3, data: 'Criado por Kanei Uechi em homenagem ao pai, após seu falecimento.'},
+      {correct: 2, data: 'Lição de vida.'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque significa a palavra Seichin?',
+    options: [
+      {correct: 1, data: 'Antes chamado Daini Seichin, criado por Kanei Uechi.'},
+      {correct: 0, data: 'Habilidade de um garoto de 10 anos, criado por Saburo Uehara.'},
+      {correct: 3, data: 'Equilibrio mental, simboliza o Dragão.'},
+      {correct: 2, data: 'Controle Emocional.'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque significa a palavra Seiryu?',
+    options: [
+      {correct: 3, data: 'Equilibrio mental, simboliza o Dragão.'},
+      {correct: 1, data: 'Caminho do Guerreiro após adulto'},
+      {correct: 2, data: 'Forma da Garça'},
+      {correct: 0, data: '16 anos, necessidade de treinamento após faixa preta'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque significa a palavra Kanchin?',
+    options: [
+      {correct: 0, data: 'Batalha/Táticas de Kanbun, nível de habilidade e como lidar com dificuldades nesse nível técnico.'},
+      {correct: 1, data: 'Conhecimento de Kanei, Habilidade demonstrada ao chegar nesse Kata.'},
+      {correct: 2, data: '56 formas de ataque e defesa.'},
+      {correct: 3, data: 'Coração de Dragão, Kata Rígido demonstrando força.'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque significa Kote Kitae',
+    options: [
+      {correct: 1, data: 'Calejamento das pernas'},
+      {correct: 2, data: 'Calejamento da região abdominal'},
+      {correct: 3, data: 'Calejamento da região peitoral'},
+      {correct: 0, data: 'Calejamento dos antebraço'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque significa Hara Kitae',
+    options: [
+      {correct: 1, data: 'Calejamento das pernas'},
+      {correct: 0, data: 'Calejamento da região abdominal'},
+      {correct: 3, data: 'Calejamento da região peitoral'},
+      {correct: 2, data: 'Calejamento dos antebraço'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque significa Ashi Kitae',
+    options: [
+      {correct: 0, data: 'Calejamento das pernas'},
+      {correct: 1, data: 'Calejamento da região abdominal'},
+      {correct: 3, data: 'Calejamento da região peitoral'},
+      {correct: 2, data: 'Calejamento dos antebraço'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Quando o nome Pangainoon se transformou em Uechi Ryu?',
+    options: [
+      {correct: 3, data: 'Em meados entre 1945 e 1958, como homenagem ao precursores.'},
+      {correct: 1, data: 'Em 1920, quando Kanbun Uechi abriu seu dojo em Okinawa.'},
+      {correct: 0, data: 'Em 1948, após morte de Kanbun Uechi.'},
+      {correct: 2, data: 'Em 1943, após Kanei Uechi introduzir mais Katas ao sistema.'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Em que período os cinco novos Katas foram adicionados ao estilo?',
+    options: [
+      {correct: 0, data: '1954-1958, com ajuda de antigos alunos Seiki Itokazu e Saburo Uehara.'},
+      {correct: 3, data: 'Em 1948, após morte de Kanbun Uechi.'},
+      {correct: 1, data: 'Em 1911, por Kanbun Uechi após nascimento de seu filho Kanei.'},
+      {correct: 2, data: 'Em 1991, após morte de Kanei Uechi.'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Qual o significado de Kata?',
+    options: [
+      {correct: 3, data: 'Guerra'},
+      {correct: 0, data: 'Forma - Modelo'},
+      {correct: 2, data: 'Conjunto de técnicas avançadas'},
+      {correct: 1, data: 'Formulário de luta'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Oque significa Kumite?',
+    options: [
+      {correct: 2, data: 'Golpe com ponta de dedos'},
+      {correct: 3, data: 'Treino de força'},
+      {correct: 0, data: 'Encontro de mãos. Combate propriamente dito'},
+      {correct: 1, data: 'Saudação inicial'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Quais estilos de Karate sugiram em Okinawa?',
+    options: [
+      {correct: 2, data: 'Matsubarashi Ryu - Shuto Ryu - Pangainoon'},
+      {correct: 3, data: 'Shotokan - Shin Ryu - Uechi Ryu'},
+      {correct: 1, data: 'Goju Ryu - Kyokushin - Shorin Ryu'},
+      {correct: 0, data: 'Shorin Ryu - Goju Ryu - Uechi Ryu'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'Quais foram as linhagens de combate originárias de Okinawa e onde Uechi Ryu se encaixa?',
+    options: [
+      {correct: 0, data: 'Naha Te - Shuri Te - Tomari Te. Semelhante ao Naha Te. Uechi Ryu não possui transformações internas.'},
+      {correct: 3, data: 'Naha Te - Shuto Te - Tomari Te. Semelhante ao Tomari Te. Uechi Ryu não possui transformações externas.'},
+      {correct: 1, data: 'Waza Te - Shuri Te - Nage Waza. Semelhante ao Te Waza. Uechi Ryu possui transformações internas.'},
+      {correct: 2, data: 'Naha Te - Shuri Te - Gedan Te. Semelhante ao Shuri Te. Uechi Ryu possui transformações externas.'},
+    ]
+  },
+  {
+    type: 'text',
+    content: 'De onde surgiu o KarateGi e o sistema de faixas do Karate?',
+    options: [
+      {correct: 1, data: 'Baseado no Pangainoon, onde o Kanei Uechi junto com Kanbun estimularam a uniformização.'},
+      {correct: 2, data: 'Baseado no Pangainoon, onde o Shushiwa com Ryu Ryu Tomoyose estimularam a uniformização.'},
+      {correct: 0, data: 'Baseado no Judo, onde o "pai" do judo junto com Funakoshi estimularam a uniformização.'},
+      {correct: 3, data: 'Baseado no Judo, onde o Kanbun Uechi junto com Funakoshi estimularam a uniformização.'},
+    ]
+  },
+]

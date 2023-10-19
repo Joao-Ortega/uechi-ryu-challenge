@@ -1,9 +1,9 @@
 'use-client'
 import React from 'react';
-import Game from '../components/Game/Game';
+import InitialPage from '../components/InitialPage/InitialPage';
 
 export default function Home() {
   return (
-   <Game />
+   <InitialPage />
   )
 }
