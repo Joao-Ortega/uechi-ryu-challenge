@@ -7,15 +7,18 @@ export default function InitialPage() {
   const [isCLicked, setIsClicked] = useState<boolean>(false);
   const [buttonLoading, setButtonLoading] = useState<boolean>(false);
   const [isDisable, setIsDisable] = useState<boolean>(true);
+  const [password, setPassword] = useState<string>('');
   const router = useRouter();
 
   useEffect(() => {
+    localStorage.clear();
     if (buttonLoading) {
       router.push('/game')
     }
   }, [buttonLoading]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setPassword(e.target.value);
     if (e.target.value.trim().toUpperCase() === 'OKIKUKAI') {
       setIsDisable(false);
     } else {
@@ -24,7 +27,9 @@ export default function InitialPage() {
   }
 
   const handleKotoSimonGame = () => {
-    
+    const pass = password.toUpperCase();
+    localStorage.setItem('koto-simon', pass);
+    router.push('/game')
   }
 
   return (
@@ -71,13 +76,15 @@ export default function InitialPage() {
           onClick={() => setIsClicked(!isCLicked)}
           variant='contained'
           sx={{
-            backgroundColor: isCLicked ? 'black' : 'white',
+            backgroundColor: 'white',
             color: isCLicked ? 'red' : 'black',
             // '&.MuiButtonBase-root:active': {
-            //   backgroundColor: 'black'
+            //   backgroundColor: 'black',
+            //   color: 'white'
             // },
             '&.MuiButtonBase-root:hover': {
               backgroundColor: 'white',
+              // color: 'white'
             }
           }}
         >
@@ -94,6 +101,7 @@ export default function InitialPage() {
             placeholder='Digite a Senha'
             size='small'
             onChange={handleChange}
+            value={password}
             sx={{ backgroundColor: 'white', width: '55vw', borderRadius: '8px' }}
           />
           <Button
