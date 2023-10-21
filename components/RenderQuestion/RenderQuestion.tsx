@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { IAnswers, IQuestions, IRenderQuestionProps } from '../../interfaces';
 import {
   Box,
+  Button,
   CircularProgress,
   FormControl,
   FormControlLabel,
@@ -32,6 +33,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   const [controlList, setControlList] = useState<IQuestions[]>([]);
   const [roundLimit, setRoundLimit] = useState<number>(0);
   const [roundsCount, setRoundsCount] = useState<number | null>(null);
+  const [nextQuestionBtn, setNextQuestionBtn] = useState<boolean>(false);
 
   useEffect(() => {
     if (questions.length && !controlList.length) {
@@ -44,6 +46,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   }, [questions])
 
   useEffect(() => {
+    setNextQuestionBtn(false);
     if (!!roundsCount) {
         if (roundsCount >= roundLimit) {
           setRoundsCount(1);
@@ -51,8 +54,8 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
           setRoundLimit(Math.floor(questions.length / QUESTIONS_PER_ROUND));
           resetStateFromList(questions)
         } else {
-          setRoundsCount(roundsCount + 1)
-          resetStateFromList(controlList)
+          setRoundsCount(roundsCount + 1);
+          resetStateFromList(controlList);
         }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -92,7 +95,10 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
     return questionsList;
   }
 
-  const endGame = (): void => finishGame(true)
+  const endGame = (): void => {
+    finishGame(true);
+    setIsLoading(false);
+  }
 
   const generateRandomIndex = (list: Array<IAnswers | IQuestions>): number => Math.floor((Math.random() * list.length));
 
@@ -105,6 +111,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
     countResponse(control) 
     setBlockAnswer(false);
     setIsCorrect(undefined);
+    setNextQuestionBtn(false);
     setIsLoading(false);
   }
   
@@ -112,19 +119,37 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
     setIsCorrect(event.target.value);
     if (!(Number(event.target.value))) addPoints(points + 1)
     setBlockAnswer(true);
+    setNextQuestionBtn(true);
+  };
+
+  const handleAnswer = () => {
     const TOTAL_RESPONSES = mode === 'Standard' ? 11 : 3;
     const isFinished = [...responses, '.'];
     if (isFinished.length === TOTAL_RESPONSES) {
+      setIsLoading(true)
       setTimeout(() => {
         endGame();
-      }, 1000);
-    return
+      }, 500);
+      return
+    }
+    callNextQuestion(isFinished)
   }
+
+  const callNextQuestion = (responseList: string[]) => {
     setIsLoading(true);
     setTimeout(() => {
-      newNextQuestion(isFinished);
-    }, 1500)
-  };
+      newNextQuestion(responseList);
+    }, 500)
+  }
+
+  const getRightText = (): string => {
+    const TOTAL_RESPONSES = mode === 'Standard' ? 11 : 3;
+    const isFinished = [...responses, '.'];
+    if (isFinished.length === TOTAL_RESPONSES) {
+      return 'Finalizar Teste'
+    }
+    return  'Próxima Pergunta'
+  }
 
   const returnColor = (rightAnswer: number): string => {
     if (blockAnswer && !rightAnswer) return 'green';
@@ -243,8 +268,33 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
             sx={{ color: 'white', fontWeight: 'bold', fontSize: '20px' }}
             display='flex'
             justifyContent='center'
+            alignItems='center'
+            flexDirection='column'
           >
-            {`${responses.length}/${mode === 'Standard' ? '10' : '2'}`}
+            <Typography variant='h6' fontWeight='bold'>
+              {`${responses.length}/${mode === 'Standard' ? '10' : '2'}`}
+            </Typography>
+            { nextQuestionBtn && (
+              <Button
+                variant='contained'
+                size='small'
+                onClick={handleAnswer}
+                sx={{
+                  backgroundColor: 'white',
+                  color: 'black',
+                  '&.MuiButtonBase-root:active': {
+                    backgroundColor: 'white'
+                  },
+                  '&.MuiButtonBase-root:hover': {
+                    backgroundColor: 'white',
+                    color: 'white'
+                  }
+                }}
+              >
+                { isLoading ? <CircularProgress sx={{ color: 'black' }} size={25} /> : getRightText() }
+              </Button>
+              )
+            }
           </Box>
           <Box
             sx={{
