@@ -696,9 +696,9 @@ export const kotoSimon: IQuestions[] = [
     type: 'text',
     content: 'Quem é o presidente de honra da Okikukai e o presidente executivo?',
     options: [
-      {correct: 0, data: 'Tsutomu Nakahodo (10º DAN) - Keicho Tobaru (9º DAN)'},
+      {correct: 1, data: 'Matsushima Yoshiharu (10º DAN) - Keicho Tobaru (9º DAN)'},
       {correct: 2, data: 'Takashi Arakaki (9º DAN) - Asao Nakasone (6º DAN)'},
-      {correct: 1, data: 'Kanmei Uechi (10º DAN) - Ryuyu Tomoyose (10º DAN)'},
+      {correct: 0, data: 'Tsutomu Nakahodo (10º DAN) - Hirokuni Yamashiro (9º DAN)'},
       {correct: 3, data: 'Keisuke Fujimoto (9º DAN) - Takahiro Sugimoto (8º DAN)'}
     ]
   },
