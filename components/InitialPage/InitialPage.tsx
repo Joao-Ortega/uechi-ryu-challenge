@@ -11,7 +11,6 @@ export default function InitialPage() {
   const router = useRouter();
 
   useEffect(() => {
-    localStorage.clear();
     if (buttonLoading) {
       router.push('/game')
     }
@@ -50,7 +49,10 @@ export default function InitialPage() {
       >
         <Button
           variant='contained'
-          onClick={() => setButtonLoading(true)}
+          onClick={() => {
+            localStorage.clear();
+            setButtonLoading(true)
+          }}
           sx={{
             backgroundColor: 'white',
             color: 'black',
@@ -65,13 +67,35 @@ export default function InitialPage() {
         >
           {buttonLoading ?
             <CircularProgress
-              sx={{ color: 'white' }}
+              sx={{ color: 'black' }}
               size={25}
             /> :
-            'Perguntas Gerais'
+            'Exame Infantil'
           }
         </Button>
         <Button
+          onClick={() => {
+            localStorage.setItem('koto-simon', '123');
+            setButtonLoading(true)
+          }}
+          variant='contained'
+          sx={{
+            backgroundColor: 'white',
+            color: isCLicked ? 'red' : 'black',
+            '&.MuiButtonBase-root:hover': {
+              backgroundColor: 'white',
+            }
+          }}
+        >
+          {buttonLoading ?
+            <CircularProgress
+              sx={{ color: 'black' }}
+              size={25}
+            /> :
+            'Exame Teens/Adultos'
+          }
+        </Button>
+        {/* <Button
           onClick={() => setIsClicked(!isCLicked)}
           variant='contained'
           sx={{
@@ -83,7 +107,7 @@ export default function InitialPage() {
           }}
         >
           Koto Simon
-        </Button>
+        </Button> */}
       </Box>
       {isCLicked && (
         <Box
