@@ -70,10 +70,10 @@ export default function InitialPage() {
               sx={{ color: 'black' }}
               size={25}
             /> :
-            'Exame Infantil'
+            'Perguntas Gerais'
           }
         </Button>
-        <Button
+        {/* <Button
           onClick={() => {
             localStorage.setItem('koto-simon', '123');
             setButtonLoading(true)
@@ -94,8 +94,8 @@ export default function InitialPage() {
             /> :
             'Exame Teens/Adultos'
           }
-        </Button>
-        {/* <Button
+        </Button> */}
+        <Button
           onClick={() => setIsClicked(!isCLicked)}
           variant='contained'
           sx={{
@@ -107,7 +107,7 @@ export default function InitialPage() {
           }}
         >
           Koto Simon
-        </Button> */}
+        </Button>
       </Box>
       {isCLicked && (
         <Box
