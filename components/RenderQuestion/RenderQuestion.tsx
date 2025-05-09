@@ -37,8 +37,8 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
 
   useEffect(() => {
     if (questions.length && !controlList.length) {
-      const QUESTIONS_PER_ROUND = mode === 'Standard' ? 10 : 2;
-      // const QUESTIONS_PER_ROUND = 10;
+      // const QUESTIONS_PER_ROUND = mode === 'Standard' ? 10 : 2;
+      const QUESTIONS_PER_ROUND = 10;
       setRoundLimit(Math.floor(questions.length / QUESTIONS_PER_ROUND));
       setRoundsCount(1);
       resetStateFromList(questions)
@@ -49,20 +49,20 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   useEffect(() => {
     setNextQuestionBtn(false);
     if (!!roundsCount) {
-        if (roundsCount >= roundLimit) {
-          setRoundsCount(1);
-          const QUESTIONS_PER_ROUND = mode === 'Standard' ? 10 : 2;
-          // const QUESTIONS_PER_ROUND = 10;
-          setRoundLimit(Math.floor(questions.length / QUESTIONS_PER_ROUND));
-          resetStateFromList(questions)
-        } else {
-          setRoundsCount(roundsCount + 1);
-          resetStateFromList(controlList);
-        }
+      if (roundsCount >= roundLimit) {
+        setRoundsCount(1);
+        // const QUESTIONS_PER_ROUND = mode === 'Standard' ? 10 : 2;
+        const QUESTIONS_PER_ROUND = 10;
+        setRoundLimit(Math.floor(questions.length / QUESTIONS_PER_ROUND));
+        resetStateFromList(questions)
+      } else {
+        setRoundsCount(roundsCount + 1);
+        resetStateFromList(controlList);
+      }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [restoreGame]);
-  
+
   const resetStateFromList = (list: IQuestions[]) => {
     const copyCurrentQuestions = [...list];
     const getQuestionToShow = getRandomQuestion(copyCurrentQuestions);
@@ -76,7 +76,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   }
 
   const getRandomQuestion = (list: IQuestions[]): IQuestions[] => {
-    const currentQuestion = []; 
+    const currentQuestion = [];
     const randomIndex = Math.floor(Math.random() * list.length);
     currentQuestion.push(list[randomIndex]);
     list.splice(randomIndex, 1);
@@ -110,13 +110,13 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
     setCopyQuestions([controlList[nextQuestionIndex]]);
     changeReference.splice(nextQuestionIndex, 1);
     setControlList(changeReference);
-    countResponse(control) 
+    countResponse(control)
     setBlockAnswer(false);
     setIsCorrect(undefined);
     setNextQuestionBtn(false);
     setIsLoading(false);
   }
-  
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsCorrect(event.target.value);
     if (!(Number(event.target.value))) addPoints(points + 1)
@@ -125,8 +125,8 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   };
 
   const handleAnswer = () => {
-    const TOTAL_RESPONSES = mode === 'Standard' ? 11 : 3;
-    // const TOTAL_RESPONSES = 11
+    // const TOTAL_RESPONSES = mode === 'Standard' ? 11 : 3;
+    const TOTAL_RESPONSES = 11
     const isFinished = [...responses, '.'];
     if (isFinished.length === TOTAL_RESPONSES) {
       setIsLoading(true)
@@ -146,13 +146,13 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   }
 
   const getRightText = (): string => {
-    const TOTAL_RESPONSES = mode === 'Standard' ? 11 : 3;
-    // const TOTAL_RESPONSES = 11
+    // const TOTAL_RESPONSES = mode === 'Standard' ? 11 : 3;
+    const TOTAL_RESPONSES = 11
     const isFinished = [...responses, '.'];
     if (isFinished.length === TOTAL_RESPONSES) {
       return 'Finalizar Teste'
     }
-    return  'Próxima Pergunta'
+    return 'Próxima Pergunta'
   }
 
   const returnColor = (rightAnswer: number): string => {
@@ -200,7 +200,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   }
 
   const buildAnswers = (answersList: IAnswers[]): JSX.Element => {
-      const NUMBER_OF_ANSWERS = 4;
+    const NUMBER_OF_ANSWERS = 4;
     if (answersList.length === NUMBER_OF_ANSWERS) {
       return (
         <FormControl
@@ -212,11 +212,13 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
           <RadioGroup
             value={isCorrect !== undefined ? isCorrect : null}
             onChange={handleChange}
+            // sx={{ height: '100%' }}
           >
             {answersList.map((answer: IAnswers, i: number) => (
               <FormControlLabel
                 key={i}
                 value={answer.correct.toString()}
+                // sx={{ borderBottom: '1px solid rgb(131, 130, 130)'}}
                 control={
                   <Radio
                     color='error'
@@ -228,12 +230,23 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
                       },
                       '&.Mui-disabled': {
                         color: returnColor(answer.correct)
-                      }
+                      },
+                      margin: '2% 0 2% 0',
                     }}
-                />
+                  />
                 }
-                label={<Typography sx={{ '&.MuiTypography-body1': { color: returnColor(answer.correct) } }} >{answer.data}</Typography>} />
-              ))
+                label={
+                  <Typography
+                    sx={{
+                      '&.MuiTypography-body1': { color: returnColor(answer.correct) },
+                      // padding: 1
+                    }}
+                  >
+                    {answer.data}
+                  </Typography>
+                }
+              />
+            ))
             }
           </RadioGroup>
         </FormControl>
@@ -260,77 +273,78 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
       </Box>
     )
   } else {
-      return (
+    return (
+      <Box
+        sx={{
+          margin: '-1% auto 0 auto',
+          width: '90vw',
+          height: '40vh'
+        }}
+      >
+        <Box
+          sx={{ color: 'white', fontWeight: 'bold', fontSize: '20px' }}
+          display='flex'
+          justifyContent='center'
+          alignItems='center'
+          flexDirection='column'
+        >
+          <Typography variant='h6' fontWeight='bold'>
+            {/* {`${responses.length}/${mode === 'Standard' ? '10' : '2'}`} */}
+            {`${responses.length}/10`}
+          </Typography>
+          {nextQuestionBtn && (
+            <Button
+              variant='contained'
+              size='small'
+              onClick={handleAnswer}
+              sx={{
+                backgroundColor: 'white',
+                color: 'black',
+                '&.MuiButtonBase-root:active': {
+                  backgroundColor: 'white'
+                },
+                '&.MuiButtonBase-root:hover': {
+                  backgroundColor: 'white',
+                  color: 'white'
+                }
+              }}
+            >
+              {isLoading ? <CircularProgress sx={{ color: 'black' }} size={25} /> : getRightText()}
+            </Button>
+          )
+          }
+        </Box>
         <Box
           sx={{
-            margin: '-1% auto 0 auto',
-            width: '90vw',
-            height: '40vh'
+            margin: '0 auto 0 auto',
+            width: { xs: '80vw', sm: '65vw', md: '50vw', lg: '45vw', xl: '40vw' },
+            height: { xs: '40vh', sm: '40vh', md: '40vh', lg: '40vh', xl: '42vh' },
           }}
+          display='flex'
+          alignItems='center'
+          justifyContent='center'
         >
-          <Box
-            sx={{ color: 'white', fontWeight: 'bold', fontSize: '20px' }}
-            display='flex'
-            justifyContent='center'
-            alignItems='center'
-            flexDirection='column'
-          >
-            <Typography variant='h6' fontWeight='bold'>
-              {`${responses.length}/${mode === 'Standard' ? '10' : '2'}`}
-              {/* {`${responses.length}/10`} */}
-            </Typography>
-            { nextQuestionBtn && (
-              <Button
-                variant='contained'
-                size='small'
-                onClick={handleAnswer}
-                sx={{
-                  backgroundColor: 'white',
-                  color: 'black',
-                  '&.MuiButtonBase-root:active': {
-                    backgroundColor: 'white'
-                  },
-                  '&.MuiButtonBase-root:hover': {
-                    backgroundColor: 'white',
-                    color: 'white'
-                  }
-                }}
-              >
-                { isLoading ? <CircularProgress sx={{ color: 'black' }} size={25} /> : getRightText() }
-              </Button>
-              )
-            }
-          </Box>
-          <Box
-            sx={{
-              margin: '0 auto 0 auto',
-              width: { xs: '80vw', sm: '65vw', md: '50vw', lg: '45vw', xl: '40vw' },
-              height: { xs: '40vh', sm: '40vh', md: '40vh', lg: '40vh', xl: '42vh' },
-            }}
-            display='flex'
-            alignItems='center'
-            justifyContent='center'
-          >
-            { copyQuestions.length && buildQuestion(copyQuestions[0]) }
-          </Box>
-          <Box
-            sx={{
-              margin: '2% auto 0 auto',
-              width: '90vw',
-              height: '30vh'
-            }}
-            display='flex'
-            justifyContent='center'
-          >
-            { copyQuestions.length && buildAnswers(copyQuestions[0].options) }
-          </Box>
-          {isLoading && (
-            <Stack sx={{ color: 'white' }}>
-              <LinearProgress color='inherit' />
-            </Stack>
-          )}
+          {copyQuestions.length && buildQuestion(copyQuestions[0])}
         </Box>
-      )
+        <Box
+          sx={{
+            margin: '-16% auto 0 auto',
+            width: '90vw',
+            height: '40vh',
+            // border: '1px solid red'
+          }}
+          display='flex'
+          justifyContent='center'
+        >
+          {copyQuestions.length && buildAnswers(copyQuestions[0].options)}
+        </Box>
+        {isLoading && (
+          <Stack sx={{ color: 'white' }}>
+            <LinearProgress color='inherit' />
+          </Stack>
+        )}
+      </Box>
+    )
   }
 
 };

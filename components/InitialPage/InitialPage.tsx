@@ -7,7 +7,7 @@ export default function InitialPage() {
   const [isCLicked, setIsClicked] = useState<boolean>(false);
   const [buttonLoading, setButtonLoading] = useState<boolean>(false);
   const [isDisable, setIsDisable] = useState<boolean>(true);
-  const [password, setPassword] = useState<string>('');
+  const [password, setPassword] = useState<string>('OKIKUKAI');
   const router = useRouter();
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export default function InitialPage() {
               sx={{ color: 'black' }}
               size={25}
             /> :
-            'Perguntas Gerais'
+            'Perguntas Kids'
           }
         </Button>
         {/* <Button
@@ -96,7 +96,10 @@ export default function InitialPage() {
           }
         </Button> */}
         <Button
-          onClick={() => setIsClicked(!isCLicked)}
+          onClick={() => {
+            // setIsClicked(!isCLicked)
+            handleKotoSimonGame()
+          }}
           variant='contained'
           sx={{
             backgroundColor: 'white',
@@ -106,7 +109,7 @@ export default function InitialPage() {
             }
           }}
         >
-          Koto Simon
+          Perguntas Teens / Adultos
         </Button>
       </Box>
       {isCLicked && (

@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import Logo from '../../app/assets/images/logo-dpedra.jpg';
 import Image from 'next/image';
 import RenderQuestion from '../RenderQuestion/RenderQuestion';
-import { kotoSimon, challenges } from '../../util/questions';
+import { adultsQuestions, challenges } from '../../util/questions';
 import FinishedGameModal from '../Modal/FinishedGameModal';
 import { IQuestions } from '@/interfaces';
 
@@ -20,7 +20,7 @@ const Game = () => {
   useEffect(() => {
     if (verifyLocal()) {
       setMode('Black Belt');
-      setSafeArray([...kotoSimon]);
+      setSafeArray([...adultsQuestions]);
     } else {
       setMode('Standard')
       setSafeArray([...challenges]);
