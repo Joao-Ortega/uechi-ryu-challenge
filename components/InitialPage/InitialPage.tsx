@@ -12,7 +12,7 @@ export default function InitialPage() {
 
   useEffect(() => {
     if (buttonLoading) {
-      router.push('/game')
+      // router.push('/game')
     }
   }, [buttonLoading]);
 
@@ -37,81 +37,60 @@ export default function InitialPage() {
       justifyContent='center'
       alignItems='center'
       flexDirection='column'
-      height='90vh'
+      height='100vh'
       width='100vw'
+      sx={{ border: '1px solid green' }}
     >
-      <Box
-        display='flex'
-        flexDirection='column'
-        height='15vh'
-        justifyContent='space-evenly'
-        width='55vw'
-      >
-        <Button
-          variant='contained'
-          onClick={() => {
-            localStorage.clear();
-            setButtonLoading(true)
-          }}
-          sx={{
-            backgroundColor: 'white',
-            color: 'black',
-            '&.MuiButtonBase-root:active': {
-              backgroundColor: 'black'
-            },
-            '&.MuiButtonBase-root:hover': {
-              backgroundColor: 'black',
-              color: 'white'
-            }
-          }}
+      {buttonLoading ? (
+        <CircularProgress
+          sx={{ color: 'white' }}
+          size={40}
+        />
+      ) : (
+        <Box
+          display='flex'
+          flexDirection='column'
+          height='150px'
+          sx={{ border: '1px solid red' }}
+          justifyContent='space-evenly'
         >
-          {buttonLoading ?
-            <CircularProgress
-              sx={{ color: 'black' }}
-              size={25}
-            /> :
-            'Perguntas Kids'
-          }
-        </Button>
-        {/* <Button
-          onClick={() => {
-            localStorage.setItem('koto-simon', '123');
-            setButtonLoading(true)
-          }}
-          variant='contained'
-          sx={{
-            backgroundColor: 'white',
-            color: isCLicked ? 'red' : 'black',
-            '&.MuiButtonBase-root:hover': {
+          <Button
+            variant='contained'
+            onClick={() => {
+              localStorage.clear();
+              setButtonLoading(true)
+            }}
+            sx={{
               backgroundColor: 'white',
-            }
-          }}
-        >
-          {buttonLoading ?
-            <CircularProgress
-              sx={{ color: 'black' }}
-              size={25}
-            /> :
-            'Exame Teens/Adultos'
-          }
-        </Button> */}
-        <Button
-          onClick={() => {
-            // setIsClicked(!isCLicked)
-            handleKotoSimonGame()
-          }}
-          variant='contained'
-          sx={{
-            backgroundColor: 'white',
-            color: isCLicked ? 'red' : 'black',
-            '&.MuiButtonBase-root:hover': {
+              color: 'black',
+              '&.MuiButtonBase-root:hover': {
+                backgroundColor: 'rgba(255, 255, 255)',
+                color: 'red'
+              },
+              width: '100%'
+            }}
+          >
+            Perguntas Kids
+          </Button>
+          <Button
+            onClick={() => {
+              handleKotoSimonGame()
+            }}
+            variant='contained'
+            sx={{
               backgroundColor: 'white',
-            }
-          }}
-        >
-          Perguntas Teens / Adultos
-        </Button>
-      </Box>
+              color: 'black',
+              '&.MuiButtonBase-root:hover': {
+                backgroundColor: 'rgba(255, 255, 255)',
+                color: 'red'
+              },
+              width: '100%'
+            }}
+          >
+            Perguntas Teens / Adultos
+          </Button>
+        </Box>
+      )}
       {isCLicked && (
         <Box
           sx={{ margin: "2% 0 0 0" }}
