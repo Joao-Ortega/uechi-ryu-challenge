@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
-import Logo from '../../app/assets/images/logo-dpedra.jpg';
+import Logo from '../../app/assets/images/newLogo.png';
 import Image from 'next/image';
 import RenderQuestion from '../RenderQuestion/RenderQuestion';
 import { adultsQuestions, challenges } from '../../util/questions';
@@ -33,7 +33,7 @@ const Game = () => {
     <Box>
       <Box
         display="flex"
-        justifyContent="flex-end"
+        justifyContent="center"
         padding={2}
       >
         <Image

@@ -1,7 +1,9 @@
 'use client'
 import { Box, Button, CircularProgress, TextField } from '@mui/material'
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import Logo from '../../app/assets/images/newLogo.png';
 
 export default function InitialPage() {
   const [isCLicked, setIsClicked] = useState<boolean>(false);
@@ -40,7 +42,15 @@ export default function InitialPage() {
       alignItems='center'
       flexDirection='column'
       height='100vh'
+      sx={{ position: 'relative' }}
     >
+      <Image
+        width={180}
+        height={180}
+        alt='logo'
+        src={Logo}
+        style={{ marginTop: -100 }}
+      />
       {buttonLoading ? (
         <CircularProgress
           sx={{ color: 'white' }}
