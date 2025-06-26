@@ -8,13 +8,17 @@ export default function InitialPage() {
   const [buttonLoading, setButtonLoading] = useState<boolean>(false);
   const [isDisable, setIsDisable] = useState<boolean>(true);
   const [password, setPassword] = useState<string>('OKIKUKAI');
+  const [type, setType] = useState<string>('');
   const router = useRouter();
 
   useEffect(() => {
-    if (buttonLoading) {
-      // router.push('/game')
+    if (!type) return
+    if (type === '1') {
+      const pass = password.toUpperCase();
+      localStorage.setItem('koto-simon', pass);
     }
-  }, [buttonLoading]);
+    router.push('/game')
+  }, [type]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setPassword(e.target.value);
@@ -26,8 +30,6 @@ export default function InitialPage() {
   }
 
   const handleKotoSimonGame = () => {
-    const pass = password.toUpperCase();
-    localStorage.setItem('koto-simon', pass);
     router.push('/game')
   }
 
@@ -38,8 +40,6 @@ export default function InitialPage() {
       alignItems='center'
       flexDirection='column'
       height='100vh'
-      width='100vw'
-      sx={{ border: '1px solid green' }}
     >
       {buttonLoading ? (
         <CircularProgress
@@ -51,12 +51,15 @@ export default function InitialPage() {
           display='flex'
           flexDirection='column'
           height='150px'
-          sx={{ border: '1px solid red' }}
+          sx={{ width: '85%', maxWidth: '350px' }}
           justifyContent='space-evenly'
         >
           <Button
             variant='contained'
-            onClick={() => {
+            id='0'
+            onClick={(e) => {
+              const button = e.target as HTMLButtonElement
+              setType(button.id)
               localStorage.clear();
               setButtonLoading(true)
             }}
@@ -73,10 +76,13 @@ export default function InitialPage() {
             Perguntas Kids
           </Button>
           <Button
-            onClick={() => {
+            onClick={(e) => {
+              const button = e.target as HTMLButtonElement
+              setType(button.id)
               handleKotoSimonGame()
             }}
             variant='contained'
+            id='1'
             sx={{
               backgroundColor: 'white',
               color: 'black',
