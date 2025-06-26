@@ -1,20 +1,26 @@
 'use client'
 import { Box, Button, CircularProgress, TextField } from '@mui/material'
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import Logo from '../../app/assets/images/newLogo.png';
 
 export default function InitialPage() {
   const [isCLicked, setIsClicked] = useState<boolean>(false);
   const [buttonLoading, setButtonLoading] = useState<boolean>(false);
   const [isDisable, setIsDisable] = useState<boolean>(true);
   const [password, setPassword] = useState<string>('OKIKUKAI');
+  const [type, setType] = useState<string>('');
   const router = useRouter();
 
   useEffect(() => {
-    if (buttonLoading) {
-      router.push('/game')
+    if (!type) return
+    if (type === '1') {
+      const pass = password.toUpperCase();
+      localStorage.setItem('koto-simon', pass);
     }
-  }, [buttonLoading]);
+    router.push('/game')
+  }, [type]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setPassword(e.target.value);
@@ -26,8 +32,6 @@ export default function InitialPage() {
   }
 
   const handleKotoSimonGame = () => {
-    const pass = password.toUpperCase();
-    localStorage.setItem('koto-simon', pass);
     router.push('/game')
   }
 
@@ -37,81 +41,72 @@ export default function InitialPage() {
       justifyContent='center'
       alignItems='center'
       flexDirection='column'
-      height='90vh'
-      width='100vw'
+      height='100vh'
+      sx={{ position: 'relative' }}
     >
-      <Box
-        display='flex'
-        flexDirection='column'
-        height='15vh'
-        justifyContent='space-evenly'
-        width='55vw'
-      >
-        <Button
-          variant='contained'
-          onClick={() => {
-            localStorage.clear();
-            setButtonLoading(true)
-          }}
-          sx={{
-            backgroundColor: 'white',
-            color: 'black',
-            '&.MuiButtonBase-root:active': {
-              backgroundColor: 'black'
-            },
-            '&.MuiButtonBase-root:hover': {
-              backgroundColor: 'black',
-              color: 'white'
-            }
-          }}
+      <Image
+        width={180}
+        height={180}
+        alt='logo'
+        src={Logo}
+        style={{ marginTop: -100 }}
+      />
+      {buttonLoading ? (
+        <CircularProgress
+          sx={{ color: 'white' }}
+          size={40}
+        />
+      ) : (
+        <Box
+          display='flex'
+          flexDirection='column'
+          height='150px'
+          sx={{ width: '85%', maxWidth: '350px' }}
+          justifyContent='space-evenly'
         >
-          {buttonLoading ?
-            <CircularProgress
-              sx={{ color: 'black' }}
-              size={25}
-            /> :
-            'Perguntas Kids'
-          }
-        </Button>
-        {/* <Button
-          onClick={() => {
-            localStorage.setItem('koto-simon', '123');
-            setButtonLoading(true)
-          }}
-          variant='contained'
-          sx={{
-            backgroundColor: 'white',
-            color: isCLicked ? 'red' : 'black',
-            '&.MuiButtonBase-root:hover': {
+          <Button
+            variant='contained'
+            id='0'
+            onClick={(e) => {
+              const button = e.target as HTMLButtonElement
+              setType(button.id)
+              localStorage.clear();
+              setButtonLoading(true)
+            }}
+            sx={{
               backgroundColor: 'white',
-            }
-          }}
-        >
-          {buttonLoading ?
-            <CircularProgress
-              sx={{ color: 'black' }}
-              size={25}
-            /> :
-            'Exame Teens/Adultos'
-          }
-        </Button> */}
-        <Button
-          onClick={() => {
-            // setIsClicked(!isCLicked)
-            handleKotoSimonGame()
-          }}
-          variant='contained'
-          sx={{
-            backgroundColor: 'white',
-            color: isCLicked ? 'red' : 'black',
-            '&.MuiButtonBase-root:hover': {
+              color: 'black',
+              '&.MuiButtonBase-root:hover': {
+                backgroundColor: 'rgba(255, 255, 255)',
+                color: 'red'
+              },
+              width: '100%'
+            }}
+          >
+            Perguntas Kids
+          </Button>
+          <Button
+            onClick={(e) => {
+              const button = e.target as HTMLButtonElement
+              setType(button.id)
+              handleKotoSimonGame()
+            }}
+            variant='contained'
+            id='1'
+            sx={{
               backgroundColor: 'white',
-            }
-          }}
-        >
-          Perguntas Teens / Adultos
-        </Button>
-      </Box>
+              color: 'black',
+              '&.MuiButtonBase-root:hover': {
+                backgroundColor: 'rgba(255, 255, 255)',
+                color: 'red'
+              },
+              width: '100%'
+            }}
+          >
+            Perguntas Teens / Adultos
+          </Button>
+        </Box>
+      )}
       {isCLicked && (
         <Box
           sx={{ margin: "2% 0 0 0" }}

@@ -34,6 +34,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   const [roundLimit, setRoundLimit] = useState<number>(0);
   const [roundsCount, setRoundsCount] = useState<number | null>(null);
   const [nextQuestionBtn, setNextQuestionBtn] = useState<boolean>(false);
+  const [disableBtnNextQuestion, setDisableBtnNextQuestion] = useState<boolean>(false);
 
   useEffect(() => {
     if (questions.length && !controlList.length) {
@@ -125,12 +126,14 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   };
 
   const handleAnswer = () => {
+    setDisableBtnNextQuestion(true)
     // const TOTAL_RESPONSES = mode === 'Standard' ? 11 : 3;
     const TOTAL_RESPONSES = 11
     const isFinished = [...responses, '.'];
     if (isFinished.length === TOTAL_RESPONSES) {
       setIsLoading(true)
       setTimeout(() => {
+        setDisableBtnNextQuestion(false)
         endGame();
       }, 500);
       return
@@ -141,6 +144,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   const callNextQuestion = (responseList: string[]) => {
     setIsLoading(true);
     setTimeout(() => {
+      setDisableBtnNextQuestion(false)
       newNextQuestion(responseList);
     }, 500)
   }
@@ -296,20 +300,14 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
             <Button
               variant='contained'
               size='small'
+              disabled={disableBtnNextQuestion}
               onClick={handleAnswer}
               sx={{
                 backgroundColor: 'white',
                 color: 'black',
-                '&.MuiButtonBase-root:active': {
-                  backgroundColor: 'white'
-                },
-                '&.MuiButtonBase-root:hover': {
-                  backgroundColor: 'white',
-                  color: 'white'
-                }
               }}
             >
-              {isLoading ? <CircularProgress sx={{ color: 'black' }} size={25} /> : getRightText()}
+              {isLoading ? <CircularProgress sx={{ color: 'white' }} size={25} /> : getRightText()}
             </Button>
           )
           }
