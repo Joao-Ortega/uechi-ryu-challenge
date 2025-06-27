@@ -85,17 +85,19 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   }
 
   const shuffleAnswers = (questionsList: IQuestions[]): IQuestions[] => {
-    questionsList.forEach((answersList: IQuestions, i: number) => {
-      const newList: IAnswers[] = [];
+    const copyTest = JSON.parse(JSON.stringify([...questionsList]))
+    const newList: IAnswers[] = [];
+
+    copyTest.forEach((answersList: IQuestions, i: number) => {
       const copyAnswers = [...answersList.options];
       answersList.options.forEach(() => {
         const randomIndex = generateRandomIndex(copyAnswers);
         newList.push(copyAnswers[randomIndex])
         copyAnswers.splice(randomIndex, 1)
       });
-      answersList.options = newList
     })
-    return questionsList;
+    copyTest[0].options = newList
+    return copyTest;
   }
 
   const endGame = (): void => {
@@ -108,7 +110,8 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   const newNextQuestion = (control: string[]) => {
     const nextQuestionIndex = generateRandomIndex(controlList);
     const changeReference = [...controlList];
-    setCopyQuestions([controlList[nextQuestionIndex]]);
+    const shuffleQuestion = shuffleAnswers([controlList[nextQuestionIndex]]);
+    setCopyQuestions(shuffleQuestion);
     changeReference.splice(nextQuestionIndex, 1);
     setControlList(changeReference);
     countResponse(control)
