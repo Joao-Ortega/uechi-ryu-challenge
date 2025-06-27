@@ -15,7 +15,7 @@ export default function InitialPage() {
 
   useEffect(() => {
     if (!type) return
-    if (type === '1') {
+    if (type === 'btn-adults') {
       const pass = password.toUpperCase();
       localStorage.setItem('koto-simon', pass);
     }
@@ -66,12 +66,12 @@ export default function InitialPage() {
         >
           <Button
             variant='contained'
-            id='0'
+            id='btn-kids'
             onClick={(e) => {
+              setButtonLoading(true)
               const button = e.target as HTMLButtonElement
               setType(button.id)
               localStorage.clear();
-              setButtonLoading(true)
             }}
             sx={{
               backgroundColor: 'white',
@@ -87,12 +87,13 @@ export default function InitialPage() {
           </Button>
           <Button
             onClick={(e) => {
+              setButtonLoading(true)
               const button = e.target as HTMLButtonElement
               setType(button.id)
               handleKotoSimonGame()
             }}
             variant='contained'
-            id='1'
+            id='btn-adults'
             sx={{
               backgroundColor: 'white',
               color: 'black',
