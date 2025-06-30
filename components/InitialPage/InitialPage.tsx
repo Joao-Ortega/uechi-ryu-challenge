@@ -63,7 +63,7 @@ export default function InitialPage() {
           display='flex'
           flexDirection='column'
           height='420px'
-          sx={{ width: '85%', maxWidth: '350px'}}
+          sx={{ width: '85%', maxWidth: '350px' }}
           justifyContent='space-evenly'
         >
           <Typography sx={{ color: 'white', margin: '0 auto 0 auto' }}>KIDS</Typography>
@@ -93,6 +93,7 @@ export default function InitialPage() {
           >
             {beltColorsKids.map((filterStr) => (
               <Image
+                key={filterStr}
                 width={80}
                 height={30}
                 alt='logo'
@@ -128,6 +129,7 @@ export default function InitialPage() {
           >
             {adultsWhiteToYellow.map((filterStr) => (
               <Image
+                key={filterStr}
                 width={80}
                 height={30}
                 alt='logo'
@@ -162,6 +164,7 @@ export default function InitialPage() {
           >
             {adultsOrangeToDarkBlue.map((filterStr) => (
               <Image
+                key={filterStr}
                 width={80}
                 height={30}
                 alt='logo'
@@ -196,6 +199,7 @@ export default function InitialPage() {
           >
             {adultsBrownAndBlack.map((filterStr) => (
               <Image
+                key={filterStr}
                 width={85}
                 height={35}
                 alt='logo'
