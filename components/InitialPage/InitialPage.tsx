@@ -1,9 +1,11 @@
 'use client'
-import { Box, Button, CircularProgress, TextField } from '@mui/material'
+import { Box, Button, CircularProgress, TextField, Typography } from '@mui/material'
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import Logo from '../../app/assets/images/newLogo.png';
+import WhiteBelt from '../../app/assets/images/whiteTest.png';
+import { adultsBrownAndBlack, adultsOrangeToDarkBlue, adultsWhiteToYellow, beltColorsKids } from '@/util/beltColors';
 
 export default function InitialPage() {
   const [isCLicked, setIsClicked] = useState<boolean>(false);
@@ -45,8 +47,8 @@ export default function InitialPage() {
       sx={{ position: 'relative' }}
     >
       <Image
-        width={180}
-        height={180}
+        width={150}
+        height={150}
         alt='logo'
         src={Logo}
         style={{ marginTop: -100 }}
@@ -60,17 +62,157 @@ export default function InitialPage() {
         <Box
           display='flex'
           flexDirection='column'
-          height='150px'
-          sx={{ width: '85%', maxWidth: '350px' }}
+          height='420px'
+          sx={{ width: '85%', maxWidth: '350px'}}
           justifyContent='space-evenly'
         >
+          <Typography sx={{ color: 'white', margin: '0 auto 0 auto' }}>KIDS</Typography>
+          <Button
+            variant='contained'
+            className='btn-kids'
+            onClick={(e) => {
+              setButtonLoading(true)
+              const button = e.target as HTMLButtonElement
+              setType(button.className)
+              localStorage.clear();
+            }}
+            sx={{
+              backgroundColor: 'black',
+              border: '1px solid rgb(124, 123, 120)',
+              color: 'black',
+              '&.MuiButtonBase-root:hover': {
+                backgroundColor: 'rgba(0, 0, 0)',
+              },
+              // width: '60%',
+              margin: '0 auto 0 auto',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-evenly',
+              flexWrap: 'wrap'
+            }}
+          >
+            {beltColorsKids.map((filterStr) => (
+              <Image
+                width={80}
+                height={30}
+                alt='logo'
+                src={WhiteBelt}
+                style={{
+                  filter: filterStr,
+                }}
+              />
+            ))}
+          </Button>
+          <Typography sx={{ color: 'white', margin: '0 auto 0 auto' }}>TEEN/ADULTOS</Typography>
+          <Button
+            variant='contained'
+            className='white-yellow'
+            onClick={(e) => {
+              setButtonLoading(true)
+              const button = e.target as HTMLButtonElement
+              setType(button.className)
+              localStorage.clear();
+            }}
+            sx={{
+              backgroundColor: 'black',
+              border: '1px solid rgb(124, 123, 120)',
+              color: 'black',
+              '&.MuiButtonBase-root:hover': {
+                backgroundColor: 'rgba(0, 0, 0)',
+              },
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-evenly'
+            }}
+          >
+            {adultsWhiteToYellow.map((filterStr) => (
+              <Image
+                width={80}
+                height={30}
+                alt='logo'
+                src={WhiteBelt}
+                style={{
+                  filter: filterStr,
+                }}
+              />
+            ))}
+          </Button>
+          <Button
+            variant='contained'
+            className='orange-darkBlue'
+            onClick={(e) => {
+              setButtonLoading(true)
+              const button = e.target as HTMLButtonElement
+              setType(button.className)
+              localStorage.clear();
+            }}
+            sx={{
+              backgroundColor: 'black',
+              border: '1px solid rgb(124, 123, 120)',
+              color: 'black',
+              '&.MuiButtonBase-root:hover': {
+                backgroundColor: 'rgba(0, 0, 0)',
+              },
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-evenly'
+            }}
+          >
+            {adultsOrangeToDarkBlue.map((filterStr) => (
+              <Image
+                width={80}
+                height={30}
+                alt='logo'
+                src={WhiteBelt}
+                style={{
+                  filter: filterStr,
+                }}
+              />
+            ))}
+          </Button>
+          <Button
+            variant='contained'
+            className='brown-black'
+            onClick={(e) => {
+              setButtonLoading(true)
+              const button = e.target as HTMLButtonElement
+              setType(button.className)
+              localStorage.clear();
+            }}
+            sx={{
+              backgroundColor: 'rgb(38, 38, 38)',
+              border: '1px solid rgb(120, 114, 114)',
+              color: 'black',
+              '&.MuiButtonBase-root:hover': {
+                backgroundColor: 'rgb(98, 89, 36)',
+              },
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-evenly'
+            }}
+          >
+            {adultsBrownAndBlack.map((filterStr) => (
+              <Image
+                width={85}
+                height={35}
+                alt='logo'
+                src={WhiteBelt}
+                style={{
+                  filter: filterStr,
+                }}
+              />
+            ))}
+          </Button>
           <Button
             variant='contained'
             id='btn-kids'
             onClick={(e) => {
               setButtonLoading(true)
               const button = e.target as HTMLButtonElement
-              setType(button.id)
+              setType(button.className)
               localStorage.clear();
             }}
             sx={{
@@ -83,13 +225,13 @@ export default function InitialPage() {
               width: '100%'
             }}
           >
-            Perguntas Kids
+            Exame Kids
           </Button>
           <Button
             onClick={(e) => {
               setButtonLoading(true)
               const button = e.target as HTMLButtonElement
-              setType(button.id)
+              setType(button.className)
               handleKotoSimonGame()
             }}
             variant='contained'
@@ -104,7 +246,7 @@ export default function InitialPage() {
               width: '100%'
             }}
           >
-            Perguntas Teens / Adultos
+            Exame Teens / Adultos
           </Button>
         </Box>
       )}
