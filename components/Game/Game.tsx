@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import Logo from '../../app/assets/images/newLogo.png';
 import Image from 'next/image';
 import RenderQuestion from '../RenderQuestion/RenderQuestion';
-import { adultsQuestions, challenges } from '../../util/questions';
+import { adultsOrangeDarkBlue, adultsWhiteYellow, challenges, kotoSimon } from '../../util/questions';
 import FinishedGameModal from '../Modal/FinishedGameModal';
 import { IQuestions } from '@/interfaces';
 
@@ -16,18 +16,36 @@ const Game = () => {
   const [mainLoading, setMainLoading] = useState<boolean>(true);
   const [safeArray, setSafeArray] = useState<IQuestions[]>([]);
   const [mode, setMode] = useState<string>('');
+  
+  const verifyLocal = () => localStorage.getItem('key');
 
   useEffect(() => {
-    if (verifyLocal()) {
-      setMode('Black Belt');
-      setSafeArray([...adultsQuestions]);
-    } else {
-      setMode('Standard')
-      setSafeArray([...challenges]);
+    const gameType = verifyLocal()
+    switch (gameType) {
+      case 'kids-white-orange':
+      case 'btn-kids':
+        setMode('Standard')
+        setSafeArray([...challenges])
+        break;
+      case 'white-yellow':
+        setMode('Standard')
+        setSafeArray([...adultsWhiteYellow])
+        break;
+      case 'orange-darkBlue':
+        setMode('Standard')
+        setSafeArray([...adultsOrangeDarkBlue])
+        break;
+      case 'brown-black':
+        setMode('Standard')
+        setSafeArray([...kotoSimon])
+        break
+      default:
+        setMode('Standard')
+        setSafeArray([...challenges])
+        break;
     }
   }, []);
 
-  const verifyLocal = () => localStorage.getItem('koto-simon');
 
   return (
     <Box>

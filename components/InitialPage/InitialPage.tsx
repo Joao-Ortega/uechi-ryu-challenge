@@ -8,32 +8,37 @@ import WhiteBelt from '../../app/assets/images/whiteTest.png';
 import { adultsBrownAndBlack, adultsOrangeToDarkBlue, adultsWhiteToYellow, beltColorsKids } from '@/util/beltColors';
 
 export default function InitialPage() {
-  const [isCLicked, setIsClicked] = useState<boolean>(false);
+  // const [isCLicked, setIsClicked] = useState<boolean>(false);
   const [buttonLoading, setButtonLoading] = useState<boolean>(false);
-  const [isDisable, setIsDisable] = useState<boolean>(true);
-  const [password, setPassword] = useState<string>('OKIKUKAI');
-  const [type, setType] = useState<string>('');
+  // const [isDisable, setIsDisable] = useState<boolean>(true);
+  // const [password, setPassword] = useState<string>('OKIKUKAI');
+  // const [type, setType] = useState<string>('');
   const router = useRouter();
 
-  useEffect(() => {
-    if (!type) return
-    if (type === 'btn-adults') {
-      const pass = password.toUpperCase();
-      localStorage.setItem('koto-simon', pass);
-    }
-    router.push('/game')
-  }, [type]);
+  // useEffect(() => {
+  //   if (!type) return
+  //   if (type === 'btn-adults') {
+  //     const pass = password.toUpperCase();
+  //     localStorage.setItem('koto-simon', pass);
+  //   }
+  //   router.push('/game')
+  // }, [type]);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setPassword(e.target.value);
-    if (e.target.value.trim().toUpperCase() === 'OKIKUKAI') {
-      setIsDisable(false);
-    } else {
-      setIsDisable(true);
-    }
-  }
+  // const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  //   setPassword(e.target.value);
+  //   if (e.target.value.trim().toUpperCase() === 'OKIKUKAI') {
+  //     setIsDisable(false);
+  //   } else {
+  //     setIsDisable(true);
+  //   }
+  // }
 
-  const handleKotoSimonGame = () => {
+  // const handleKotoSimonGame = () => {
+  //   router.push('/game')
+  // }
+
+  const classNameToLocalAndRedirect = (btnClass: string) => {
+    localStorage.setItem('key', btnClass);
     router.push('/game')
   }
 
@@ -69,12 +74,10 @@ export default function InitialPage() {
           <Typography sx={{ color: 'white', margin: '0 auto 0 auto' }}>KIDS</Typography>
           <Button
             variant='contained'
-            className='btn-kids'
-            onClick={(e) => {
+            className='kids-white-orange'
+            onClick={() => {
               setButtonLoading(true)
-              const button = e.target as HTMLButtonElement
-              setType(button.className)
-              localStorage.clear();
+              classNameToLocalAndRedirect('kids-white-orange')
             }}
             sx={{
               backgroundColor: 'black',
@@ -108,11 +111,9 @@ export default function InitialPage() {
           <Button
             variant='contained'
             className='white-yellow'
-            onClick={(e) => {
+            onClick={() => {
               setButtonLoading(true)
-              const button = e.target as HTMLButtonElement
-              setType(button.className)
-              localStorage.clear();
+              classNameToLocalAndRedirect('white-yellow')
             }}
             sx={{
               backgroundColor: 'black',
@@ -143,11 +144,9 @@ export default function InitialPage() {
           <Button
             variant='contained'
             className='orange-darkBlue'
-            onClick={(e) => {
+            onClick={() => {
               setButtonLoading(true)
-              const button = e.target as HTMLButtonElement
-              setType(button.className)
-              localStorage.clear();
+              classNameToLocalAndRedirect('orange-darkBlue')
             }}
             sx={{
               backgroundColor: 'black',
@@ -178,11 +177,9 @@ export default function InitialPage() {
           <Button
             variant='contained'
             className='brown-black'
-            onClick={(e) => {
+            onClick={() => {
               setButtonLoading(true)
-              const button = e.target as HTMLButtonElement
-              setType(button.className)
-              localStorage.clear();
+              classNameToLocalAndRedirect('brown-black')
             }}
             sx={{
               backgroundColor: 'rgb(38, 38, 38)',
@@ -210,14 +207,12 @@ export default function InitialPage() {
               />
             ))}
           </Button>
-          <Button
+          {/* <Button
             variant='contained'
-            id='btn-kids'
-            onClick={(e) => {
+            className='btn-kids'
+            onClick={() => {
               setButtonLoading(true)
-              const button = e.target as HTMLButtonElement
-              setType(button.className)
-              localStorage.clear();
+              classNameToLocalAndRedirect('btn-kids')
             }}
             sx={{
               backgroundColor: 'white',
@@ -232,14 +227,12 @@ export default function InitialPage() {
             Exame Kids
           </Button>
           <Button
-            onClick={(e) => {
+            onClick={() => {
               setButtonLoading(true)
-              const button = e.target as HTMLButtonElement
-              setType(button.className)
-              handleKotoSimonGame()
+              classNameToLocalAndRedirect('btn-adults')
             }}
             variant='contained'
-            id='btn-adults'
+            className='btn-adults'
             sx={{
               backgroundColor: 'white',
               color: 'black',
@@ -251,10 +244,10 @@ export default function InitialPage() {
             }}
           >
             Exame Teens / Adultos
-          </Button>
+          </Button> */}
         </Box>
       )}
-      {isCLicked && (
+      {/* {isCLicked && (
         <Box
           sx={{ margin: "2% 0 0 0" }}
           display='flex'
@@ -292,7 +285,7 @@ export default function InitialPage() {
             Entrar
           </Button>
         </Box>
-      )}
+      )} */}
     </Box>
   )
 }
