@@ -276,7 +276,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
     return (
       <Box
         sx={{
-          margin: '-1% auto 0 auto',
+          margin: '0 auto',
           width: '90vw',
           height: '80vh',
           display: 'flex',

@@ -1,12 +1,13 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import Logo from '../../app/assets/images/newLogo.png';
 import Image from 'next/image';
 import RenderQuestion from '../RenderQuestion/RenderQuestion';
 import { adultsOrangeDarkBlue, adultsWhiteYellow, challenges, kotoSimon } from '../../util/questions';
 import FinishedGameModal from '../Modal/FinishedGameModal';
 import { IQuestions } from '@/interfaces';
+import { useRouter } from 'next/navigation';
 
 const Game = () => {
   const [gameEnded, setGameEnded] = useState<boolean>(false);
@@ -16,7 +17,8 @@ const Game = () => {
   const [mainLoading, setMainLoading] = useState<boolean>(true);
   const [safeArray, setSafeArray] = useState<IQuestions[]>([]);
   const [mode, setMode] = useState<string>('');
-  
+  const router = useRouter();
+
   const verifyLocal = () => localStorage.getItem('key');
 
   useEffect(() => {
@@ -50,15 +52,35 @@ const Game = () => {
   return (
     <Box>
       <Box
-        display="flex"
-        justifyContent="center"
+        display="grid"
         padding={2}
+        sx={{
+          maxWidth: '400px',
+          margin: '0 auto'
+        }}
       >
+        <Button
+          sx={{
+            justifySelf: 'flex-start',
+            alignSelf: 'center',
+            color: 'white',
+            border: '1px solid white',
+            borderRadius: '6px',
+          }}
+          onClick={() => {
+            setMainLoading(true)
+            router.push('/')
+          }}
+          size='small'
+        >
+          menu
+        </Button>
         <Image
           width={100}
           height={100}
-          alt='logo'
+          alt="logo"
           src={Logo}
+          style={{ justifySelf: 'center' }}
         />
       </Box>
       <RenderQuestion
