@@ -8,6 +8,7 @@ import { adultsOrangeDarkBlue, adultsWhiteYellow, challenges, danTest, kotoSimon
 import FinishedGameModal from '../Modal/FinishedGameModal';
 import { IQuestions } from '@/interfaces';
 import { useRouter } from 'next/navigation';
+import AudioQuestions from '../RenderQuestion/AudioQuestions';
 
 const Game = () => {
   const [gameEnded, setGameEnded] = useState<boolean>(false);
@@ -88,18 +89,33 @@ const Game = () => {
           style={{ justifySelf: 'center' }}
         />
       </Box>
-      <RenderQuestion
-        responses={responsesLength}
-        countResponse={setResponsesLength}
-        points={points}
-        addPoints={setPoints}
-        questions={safeArray}
-        finishGame={setGameEnded}
-        mainLoading={mainLoading}
-        setMainLoading={setMainLoading}
-        restoreGame={restoreGame}
-        mode={mode}
-      />
+      {mode === 'DAN' ? (
+        <AudioQuestions
+          responses={responsesLength}
+          countResponse={setResponsesLength}
+          points={points}
+          addPoints={setPoints}
+          questions={safeArray}
+          finishGame={setGameEnded}
+          mainLoading={mainLoading}
+          setMainLoading={setMainLoading}
+          restoreGame={restoreGame}
+          mode={mode}
+        />
+      ) : (
+        <RenderQuestion
+          responses={responsesLength}
+          countResponse={setResponsesLength}
+          points={points}
+          addPoints={setPoints}
+          questions={safeArray}
+          finishGame={setGameEnded}
+          mainLoading={mainLoading}
+          setMainLoading={setMainLoading}
+          restoreGame={restoreGame}
+          mode={mode}
+        />
+      )}
       <FinishedGameModal
         currentState={restoreGame}
         restart={setRestoreGame}
