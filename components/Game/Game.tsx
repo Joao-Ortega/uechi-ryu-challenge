@@ -4,7 +4,7 @@ import { Box, Button } from '@mui/material';
 import Logo from '../../app/assets/images/newLogo.png';
 import Image from 'next/image';
 import RenderQuestion from '../RenderQuestion/RenderQuestion';
-import { adultsOrangeDarkBlue, adultsWhiteYellow, challenges, kotoSimon } from '../../util/questions';
+import { adultsOrangeDarkBlue, adultsWhiteYellow, challenges, danTest, kotoSimon } from '../../util/questions';
 import FinishedGameModal from '../Modal/FinishedGameModal';
 import { IQuestions } from '@/interfaces';
 import { useRouter } from 'next/navigation';
@@ -23,6 +23,7 @@ const Game = () => {
 
   useEffect(() => {
     const gameType = verifyLocal()
+    console.log('gameType', gameType)
     switch (gameType) {
       case 'kids-white-orange':
       case 'btn-kids':
@@ -41,6 +42,10 @@ const Game = () => {
         setMode('Standard')
         setSafeArray([...kotoSimon])
         break
+      case 'DAN':
+        setMode('DAN')
+        setSafeArray([...danTest])
+        break;
       default:
         setMode('Standard')
         setSafeArray([...challenges])
@@ -69,6 +74,7 @@ const Game = () => {
           }}
           onClick={() => {
             setMainLoading(true)
+            localStorage.clear();
             router.push('/')
           }}
           size='small'
