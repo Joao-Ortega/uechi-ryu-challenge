@@ -37,7 +37,6 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   const [disableBtnNextQuestion, setDisableBtnNextQuestion] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log('MODE', mode)
     if (questions.length && !controlList.length) {
       const QUESTIONS_PER_ROUND = mode === 'DAN' ? 2 : 10;
       // const QUESTIONS_PER_ROUND = 10;

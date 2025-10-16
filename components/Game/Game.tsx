@@ -23,7 +23,6 @@ const Game = () => {
 
   useEffect(() => {
     const gameType = verifyLocal()
-    console.log('gameType', gameType)
     switch (gameType) {
       case 'kids-white-orange':
       case 'btn-kids':
