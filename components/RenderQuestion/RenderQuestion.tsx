@@ -37,9 +37,10 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   const [disableBtnNextQuestion, setDisableBtnNextQuestion] = useState<boolean>(false);
 
   useEffect(() => {
+    console.log('MODE', mode)
     if (questions.length && !controlList.length) {
-      // const QUESTIONS_PER_ROUND = mode === 'Standard' ? 10 : 2;
-      const QUESTIONS_PER_ROUND = 10;
+      const QUESTIONS_PER_ROUND = mode === 'DAN' ? 2 : 10;
+      // const QUESTIONS_PER_ROUND = 10;
       setRoundLimit(Math.floor(questions.length / QUESTIONS_PER_ROUND));
       setRoundsCount(1);
       resetStateFromList(questions)
@@ -52,8 +53,8 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
     if (!!roundsCount) {
       if (roundsCount >= roundLimit) {
         setRoundsCount(1);
-        // const QUESTIONS_PER_ROUND = mode === 'Standard' ? 10 : 2;
-        const QUESTIONS_PER_ROUND = 10;
+        const QUESTIONS_PER_ROUND = mode === 'DAN' ? 2 : 10;
+        // const QUESTIONS_PER_ROUND = 10;
         setRoundLimit(Math.floor(questions.length / QUESTIONS_PER_ROUND));
         resetStateFromList(questions)
       } else {
@@ -130,8 +131,8 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
 
   const handleAnswer = () => {
     setDisableBtnNextQuestion(true)
-    // const TOTAL_RESPONSES = mode === 'Standard' ? 11 : 3;
-    const TOTAL_RESPONSES = 11
+    const TOTAL_RESPONSES = mode === 'DAN' ? 3 : 11;
+    // const TOTAL_RESPONSES = 11
     const isFinished = [...responses, '.'];
     if (isFinished.length === TOTAL_RESPONSES) {
       setIsLoading(true)
@@ -153,8 +154,8 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   }
 
   const getRightText = (): string => {
-    // const TOTAL_RESPONSES = mode === 'Standard' ? 11 : 3;
-    const TOTAL_RESPONSES = 11
+    const TOTAL_RESPONSES = mode === 'DAN' ? 3 : 11;
+    // const TOTAL_RESPONSES = 11
     const isFinished = [...responses, '.'];
     if (isFinished.length === TOTAL_RESPONSES) {
       return 'Finalizar Teste'
@@ -296,8 +297,8 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
           flexDirection='column'
         >
           <Typography variant='h6' fontWeight='bold'>
-            {/* {`${responses.length}/${mode === 'Standard' ? '10' : '2'}`} */}
-            {`${responses.length}/10`}
+            {`${responses.length}/${mode === 'DAN' ? '2' : '10'}`}
+            {/* {`${responses.length}/10`} */}
           </Typography>
           {nextQuestionBtn && (
             <Button

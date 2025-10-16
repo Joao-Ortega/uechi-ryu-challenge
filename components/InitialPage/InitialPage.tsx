@@ -1,5 +1,5 @@
 'use client'
-import { Box, Button, CircularProgress, TextField, Typography } from '@mui/material'
+import { Box, Button, CircularProgress, InputBase, TextField, Typography } from '@mui/material'
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useEffect, useState } from 'react';
@@ -8,10 +8,10 @@ import WhiteBelt from '../../app/assets/images/whiteTest.png';
 import { adultsBrownAndBlack, adultsOrangeToDarkBlue, adultsWhiteToYellow, beltColorsKids } from '@/util/beltColors';
 
 export default function InitialPage() {
-  // const [isCLicked, setIsClicked] = useState<boolean>(false);
+  const [isCLicked, setIsClicked] = useState<boolean>(false);
   const [buttonLoading, setButtonLoading] = useState<boolean>(false);
-  // const [isDisable, setIsDisable] = useState<boolean>(true);
-  // const [password, setPassword] = useState<string>('OKIKUKAI');
+  const [isDisable, setIsDisable] = useState<boolean>(true);
+  const [password, setPassword] = useState<string>('');
   // const [type, setType] = useState<string>('');
   const router = useRouter();
 
@@ -24,18 +24,14 @@ export default function InitialPage() {
   //   router.push('/game')
   // }, [type]);
 
-  // const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-  //   setPassword(e.target.value);
-  //   if (e.target.value.trim().toUpperCase() === 'OKIKUKAI') {
-  //     setIsDisable(false);
-  //   } else {
-  //     setIsDisable(true);
-  //   }
-  // }
-
-  // const handleKotoSimonGame = () => {
-  //   router.push('/game')
-  // }
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setPassword(e.target.value);
+    if (e.target.value.trim().toUpperCase() === 'OKIKUKAI') {
+      setIsDisable(false);
+    } else {
+      setIsDisable(true);
+    }
+  }
 
   const classNameToLocalAndRedirect = (btnClass: string) => {
     localStorage.setItem('key', btnClass);
@@ -225,67 +221,70 @@ export default function InitialPage() {
             }}
           >
             Exame Kids
-          </Button>
-          <Button
-            onClick={() => {
-              setButtonLoading(true)
-              classNameToLocalAndRedirect('btn-adults')
-            }}
-            variant='contained'
-            className='btn-adults'
-            sx={{
-              backgroundColor: 'white',
-              color: 'black',
-              '&.MuiButtonBase-root:hover': {
-                backgroundColor: 'rgba(255, 255, 255)',
-                color: 'red'
-              },
-              width: '100%'
-            }}
-          >
-            Exame Teens / Adultos
-          </Button> */}
-        </Box>
-      )}
-      {/* {isCLicked && (
-        <Box
-          sx={{ margin: "2% 0 0 0" }}
-          display='flex'
-          flexDirection='column'
-        >
-          <TextField
-            placeholder='Digite a Senha'
-            size='small'
-            onChange={handleChange}
-            value={password}
-            sx={{ backgroundColor: 'white', width: '55vw', borderRadius: '8px' }}
-          />
-          <Button
-            variant='outlined'
-            disabled={isDisable}
-            onClick={handleKotoSimonGame}
-            sx={{
-              backgroundColor: 'black',
-              border: 'black',
-              color: 'white',
-              '&.MuiButtonBase-root:active': {
-                backgroundColor: 'black'
-              },
-              '&.MuiButtonBase-root:hover': {
-                backgroundColor: 'black',
-                color: 'white',
-                border: 'black'
-              },
-              '&.MuiButtonBase-root:disabled': {
-                backgroundColor: 'black',
-                color: 'black'
+          </Button>*/}
+          {isCLicked ? (
+            <Box
+              sx={{
+                display: 'flex',
+                width: '100%',
+                justifyContent: 'space-evenly'
+              }}
+            >
+              <InputBase
+                placeholder='Digite a Senha...'
+                size='small'
+                onChange={handleChange}
+                sx={{
+                  backgroundColor: 'white',
+                  borderRadius: '6px',
+                  color: 'black',
+                  padding: 0.5
+                }}
+              />
+              <Button
+                size='small'
+                onClick={() => {
+                  setButtonLoading(true);
+                  classNameToLocalAndRedirect('DAN');
+                }}
+                sx={{
+                  backgroundColor: 'black',
+                  borderRadius: '6px',
+                  border: isDisable ? 'none' : '1px solid white',
+                  color: isDisable ? 'black' : 'white',
+                }}
+              >
+                Entrar
+              </Button>
+            </Box>
+          ) : (
+            <Button
+              onClick={
+                () => {
+                  setIsClicked(!isCLicked);
+                }
               }
-            }}
-          >
-            Entrar
-          </Button>
+              variant='contained'
+              className='btn-adults'
+              sx={{
+                backgroundColor: 'black',
+                border: '1px solid rgb(124, 123, 120)',
+                color: 'white',
+                '&.MuiButtonBase-root:hover': {
+                  backgroundColor: 'rgba(0, 0, 0)',
+                },
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-evenly'
+              }}
+            >
+              EXAME DE DAN 22 NOV 2025
+            </Button>
+          )}
         </Box>
-      )} */}
-    </Box>
+      )
+      }
+    </Box >
   )
 }
