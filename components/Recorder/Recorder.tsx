@@ -139,11 +139,10 @@ const Recorder: React.FC<IRecorderProps> = ({
     formData.append("answer", correctAnswer);
     try {
       const res = await axios.post(
-        "http://localhost:3333/transcribe",
+        `${process.env.NEXT_PUBLIC_API_URL}/transcribe`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
-      console.log("Transcrição:", res);
       setReturnAi(res.data.message)
       setStatus(res.data.message.correto ? 'success' : 'error')
       setAiVerification(res.data.message.correto ? '0' : '1')
