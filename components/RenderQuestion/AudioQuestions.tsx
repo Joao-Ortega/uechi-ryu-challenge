@@ -25,10 +25,8 @@ const AudioQuestions: React.FC<IRenderQuestionProps> = ({
 	const [roundsCount, setRoundsCount] = useState<number | null>(null);
 	const [nextQuestionBtn, setNextQuestionBtn] = useState<boolean>(false);
 	const [disableBtnNextQuestion, setDisableBtnNextQuestion] = useState<boolean>(false);
-	const [recording, setRecording] = useState(false);
-	const [audioURL, setAudioURL] = useState<string | null>(null);
-	const mediaRecorder = useRef<MediaRecorder | null>(null);
-	const chunks = useRef<Blob[]>([]);
+	const [aiVerification, setAiVerification] = useState<string>('');
+	const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
 	useEffect(() => {
 		if (questions.length && !controlList.length) {
@@ -57,6 +55,12 @@ const AudioQuestions: React.FC<IRenderQuestionProps> = ({
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [restoreGame]);
+
+	useEffect(() => {
+		if (aiVerification) {
+			handleChange(aiVerification)
+		}
+	}, [aiVerification])
 
 	const resetStateFromList = (list: IQuestions[]) => {
 		const copyCurrentQuestions = [...list];
@@ -115,10 +119,9 @@ const AudioQuestions: React.FC<IRenderQuestionProps> = ({
 		setIsLoading(false);
 	}
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setIsCorrect(event.target.value);
-		if (!(Number(event.target.value))) addPoints(points + 1)
-		setBlockAnswer(true);
+	const handleChange = (result: string) => {
+		setIsCorrect(result);
+		if (!(Number(result))) addPoints(points + 1)
 		setNextQuestionBtn(true);
 	};
 
@@ -127,6 +130,8 @@ const AudioQuestions: React.FC<IRenderQuestionProps> = ({
 		const TOTAL_RESPONSES = mode === 'DAN' ? 3 : 11;
 		// const TOTAL_RESPONSES = 11
 		const isFinished = [...responses, '.'];
+		setStatus('idle')
+		setAiVerification('')
 		if (isFinished.length === TOTAL_RESPONSES) {
 			setIsLoading(true)
 			setTimeout(() => {
@@ -154,12 +159,6 @@ const AudioQuestions: React.FC<IRenderQuestionProps> = ({
 			return 'Finalizar Teste'
 		}
 		return 'Próxima Pergunta'
-	}
-
-	const returnColor = (rightAnswer: number): string => {
-		if (blockAnswer && !rightAnswer) return 'green';
-		if (blockAnswer && rightAnswer) return 'red';
-		return 'white'
 	}
 
 	const buildQuestion = (question: IQuestions): JSX.Element => {
@@ -201,55 +200,6 @@ const AudioQuestions: React.FC<IRenderQuestionProps> = ({
 		)
 	}
 
-	const buildAnswers = (answersList: IAnswers[]): JSX.Element => {
-		const NUMBER_OF_ANSWERS = 4;
-		if (answersList.length === NUMBER_OF_ANSWERS) {
-			return (
-				<FormControl>
-					<RadioGroup
-						value={isCorrect !== undefined ? isCorrect : null}
-						onChange={handleChange}
-					>
-						{answersList.map((answer: IAnswers, i: number) => (
-							<FormControlLabel
-								key={i}
-								value={answer.correct.toString()}
-								control={
-									<Radio
-										color='error'
-										disabled={blockAnswer}
-										sx={{
-											color: 'blue',
-											'&.Mui-checked': {
-												color: 'blue',
-											},
-											'&.Mui-disabled': {
-												color: returnColor(answer.correct)
-											},
-											margin: '2% 0 2% 0',
-										}}
-									/>
-								}
-								label={
-									<Typography
-										sx={{
-											'&.MuiTypography-body1': { color: returnColor(answer.correct) },
-										}}
-									>
-										{answer.data}
-									</Typography>
-								}
-							/>
-						))
-						}
-					</RadioGroup>
-				</FormControl>
-			)
-		} else {
-			return <Box>Erro</Box>
-		}
-	}
-
 	if (mainLoading) {
 		return (
 			<Box
@@ -278,66 +228,73 @@ const AudioQuestions: React.FC<IRenderQuestionProps> = ({
 					alignItems: 'center'
 				}}
 			>
-				<Box
-					sx={{
-						color: 'white',
-						fontWeight: 'bold',
-						fontSize: '20px',
-					}}
-					display='flex'
-					justifyContent='center'
-					alignItems='center'
-					flexDirection='column'
-				>
-					<Typography variant='h6' fontWeight='bold'>
-						{`${responses.length}/${mode === 'DAN' ? '2' : '10'}`}
-						{/* {`${responses.length}/10`} */}
-					</Typography>
-					{nextQuestionBtn && (
-						<Button
-							variant='contained'
-							size='small'
-							disabled={disableBtnNextQuestion}
-							onClick={handleAnswer}
-							sx={{
-								backgroundColor: 'white',
-								color: 'black',
-							}}
-						>
-							{isLoading ? <CircularProgress sx={{ color: 'white' }} size={25} /> : getRightText()}
-						</Button>
-					)
-					}
-				</Box>
-				<Box
-					sx={{
-						minHeight: '30%',
-						// border: '1px solid white'
-					}}
-					display='flex'
-					alignItems='center'
-					justifyContent='center'
-				>
-					{copyQuestions.length && buildQuestion(copyQuestions[0])}
-				</Box>
-				<Box
-					sx={{
-						width: '90vw',
-						minHeight: '40%',
-						maxWidth: '700px',
-						// paddingLeft: 1.5
-					}}
-					display='flex'
-					justifyContent='space-evenly'
-					alignItems='flex-start'
-				>
-					<Recorder />
-					{/* {copyQuestions.length && buildAnswers(copyQuestions[0].options)} */}
-				</Box>
-				{isLoading && (
+				{isLoading ? (
 					<Stack sx={{ color: 'white' }}>
-						<LinearProgress color='inherit' />
+						<CircularProgress size={50} color='inherit' />
 					</Stack>
+				) : (
+					<Box>
+						<Box
+							sx={{
+								color: 'white',
+								fontWeight: 'bold',
+								fontSize: '20px',
+							}}
+							display='flex'
+							justifyContent='center'
+							alignItems='center'
+							flexDirection='column'
+						>
+							<Typography variant='h6' fontWeight='bold'>
+								{`${responses.length}/${mode === 'DAN' ? '2' : '10'}`}
+								{/* {`${responses.length}/10`} */}
+							</Typography>
+							{nextQuestionBtn && (
+								<Button
+									variant='contained'
+									size='small'
+									disabled={disableBtnNextQuestion}
+									onClick={handleAnswer}
+									sx={{
+										backgroundColor: 'white',
+										color: 'black',
+									}}
+								>
+									{getRightText()}
+								</Button>
+							)
+							}
+						</Box>
+						<Box
+							sx={{
+								minHeight: '30%',
+								// border: '1px solid white'
+							}}
+							display='flex'
+							alignItems='center'
+							justifyContent='center'
+						>
+							{copyQuestions.length && buildQuestion(copyQuestions[0])}
+						</Box>
+						<Box
+							sx={{
+								width: '90vw',
+								minHeight: '40%',
+								maxWidth: '700px',
+								// paddingLeft: 1.5
+							}}
+							display='flex'
+							justifyContent='space-evenly'
+							alignItems='flex-start'
+						>
+							<Recorder
+								correctAnswer={copyQuestions[0].options.find((answer) => answer.correct === 0)?.data ?? ''}
+								setAiVerification={setAiVerification}
+								status={status}
+								setStatus={setStatus}
+							/>
+						</Box>
+					</Box>
 				)}
 			</Box>
 		)
