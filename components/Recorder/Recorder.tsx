@@ -8,28 +8,29 @@ import {
   IconButton,
   CircularProgress,
 } from "@mui/material";
-import { Check, Close, Delete, Mic, Stop } from "@mui/icons-material";
+import { Check, Close, Delete, HorizontalRule, Mic, Stop } from "@mui/icons-material";
 import axios from "axios";
 
 interface IRecorderProps {
   correctAnswer: string;
   setAiVerification: React.Dispatch<React.SetStateAction<string>>
-  status: "idle" | "loading" | "success" | "error"
-  setStatus: React.Dispatch<React.SetStateAction<"idle" | "loading" | "success" | "error">>
+  status: "idle" | "loading" | "success" | "error" | "parcial"
+  setStatus: React.Dispatch<React.SetStateAction<"idle" | "loading" | "success" | "error" | "parcial">>
 }
 
 const Recorder: React.FC<IRecorderProps> = ({
-    correctAnswer,
-    setAiVerification,
-    status,
-    setStatus
-  }: IRecorderProps) => {
+  correctAnswer,
+  setAiVerification,
+  status,
+  setStatus
+}: IRecorderProps) => {
   const [recording, setRecording] = useState(false);
   const [clips, setClips] = useState<{ name: string; url: string }[]>([]);
   const [audioCtx, setAudioCtx] = useState<AudioContext | null>(null);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
   const [returnAi, setReturnAi] = useState<{ correto: boolean, explicacao: string } | null>(null);
-  
+  const [alertMsg, setAlertMsg] = useState<string>('');
+
   const chunks = useRef<Blob[]>([]);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -59,6 +60,13 @@ const Recorder: React.FC<IRecorderProps> = ({
       };
 
       recorder.start();
+      setTimeout(() => {
+        if (recorder.state === "recording") {
+          recorder.stop();
+          setAlertMsg('Aúdios de no máximo 12 segundos!')
+          setRecording(false)
+        }
+      }, 12000);
       setRecording(true);
     } catch (err) {
       console.error("Erro ao iniciar gravação:", err);
@@ -129,6 +137,19 @@ const Recorder: React.FC<IRecorderProps> = ({
     draw();
   };
 
+  const switchReturn = (response: boolean | string): "idle" | "loading" | "success" | "error" | "parcial" => {
+    switch (response) {
+      case true:
+        return 'success'
+      case false:
+        return 'error'
+      case 'parcial':
+        return 'parcial'
+      default:
+        return 'error';
+    }
+  }
+
   const sendAudio = async () => {
     setStatus('loading')
     if (!chunks.current.length) return;
@@ -144,7 +165,7 @@ const Recorder: React.FC<IRecorderProps> = ({
         { headers: { "Content-Type": "multipart/form-data" } }
       );
       setReturnAi(res.data.message)
-      setStatus(res.data.message.correto ? 'success' : 'error')
+      setStatus(switchReturn(res.data.message.correto))
       setAiVerification(res.data.message.correto ? '0' : '1')
     } catch (err) {
       console.error("Erro ao enviar áudio:", err);
@@ -161,22 +182,26 @@ const Recorder: React.FC<IRecorderProps> = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    if (alertMsg) {
+      setTimeout(() => {
+        setAlertMsg('')
+        setClips([])
+      }, 2500)
+    }
+  }, [alertMsg])
+
   return (
     <Card sx={{
       backgroundColor: 'black',
-      // mx: "auto",
-      // mt: 4,
       p: 0.5,
-      // boxShadow: 4
-      // display: 'flex',
-      // flexDirection: 'column'
     }}
     >
       <Box
         sx={{
           position: "relative",
-          width: 60,
-          height: 60,
+          width: 80,
+          height: 80,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -186,7 +211,7 @@ const Recorder: React.FC<IRecorderProps> = ({
         }}
       >
         <CircularProgress
-          size={50}
+          size={60}
           sx={{
             opacity: status === "loading" ? 1 : 0,
             transition: "opacity 0.5s ease",
@@ -196,7 +221,7 @@ const Recorder: React.FC<IRecorderProps> = ({
 
         <Check
           sx={{
-            fontSize: 45,
+            fontSize: 70,
             color: "green",
             opacity: status === "success" ? 1 : 0,
             transform: `${status === "success" ? "translate(-50%, -50%) scale(1)" : "translate(-50%, -50%) scale(0.8)"}`,
@@ -207,9 +232,22 @@ const Recorder: React.FC<IRecorderProps> = ({
           }}
         />
 
+        <HorizontalRule
+          sx={{
+            fontSize: 70,
+            color: "grey",
+            opacity: status === "parcial" ? 1 : 0,
+            transform: `${status === "parcial" ? "translate(-50%, -50%) scale(1)" : "translate(-50%, -50%) scale(0.8)"}`,
+            transition: "all 0.5s ease",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+          }}
+        />
+
         <Close
           sx={{
-            fontSize: 45,
+            fontSize: 70,
             color: "red",
             opacity: status === "error" ? 1 : 0,
             transform: `${status === "error" ? "translate(-50%, -50%) scale(1)" : "translate(-50%, -50%) scale(0.8)"}`,
@@ -221,7 +259,7 @@ const Recorder: React.FC<IRecorderProps> = ({
         />
       </Box>
       {status === 'idle' && (
-        <CardContent>
+        <CardContent sx={{ position: 'relative' }}>
           <Typography color="white" align="center" variant="h6" gutterBottom>
             Grave sua resposta
           </Typography>
@@ -239,9 +277,9 @@ const Recorder: React.FC<IRecorderProps> = ({
                 borderRadius: '6px',
                 backgroundColor: 'black',
                 '&.Mui-disabled': {
-                  color: '#171717ff',                // cor do texto/ícone
-                  borderColor: '#8b8b8bff',          // cor da borda
-                  backgroundColor: '#8b8b8bff',      // fundo
+                  color: '#171717ff',
+                  borderColor: '#8b8b8bff',
+                  backgroundColor: '#8b8b8bff',
                 },
               }}
             >
@@ -257,9 +295,9 @@ const Recorder: React.FC<IRecorderProps> = ({
               onClick={stopRecording}
               sx={{
                 '&.Mui-disabled': {
-                  color: '#171717ff',                // cor do texto/ícone
-                  borderColor: '#8b8b8bff',          // cor da borda
-                  backgroundColor: '#8b8b8bff',      // fundo
+                  color: '#171717ff',
+                  borderColor: '#8b8b8bff',
+                  backgroundColor: '#8b8b8bff',
                 },
               }}
             >
@@ -289,7 +327,6 @@ const Recorder: React.FC<IRecorderProps> = ({
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  // boxShadow: 2,
                 }}
               >
                 <Box display="flex" alignItems="center" gap={0.5}>
@@ -306,6 +343,7 @@ const Recorder: React.FC<IRecorderProps> = ({
             <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 1 }}>
               <Button
                 onClick={sendAudio}
+                disabled={status !== 'idle'}
                 size="small"
                 sx={{
                   backgroundColor: '#134e13ff',
@@ -316,16 +354,35 @@ const Recorder: React.FC<IRecorderProps> = ({
               </Button>
             </Box>
           )}
+          {alertMsg && (
+            <Typography
+              sx={{
+                position: 'absolute',
+                top: -50, // distância do rodapé do CardContent
+                left: '50%',
+                transform: 'translateX(-50%)',
+                color: 'black',
+                textAlign: 'center',
+                backgroundColor: 'white',
+                p: 0.5,
+                borderRadius: '6px',
+                width: '100%', // para garantir que fique centralizado
+              }}
+            >
+              {alertMsg}
+            </Typography>
+          )}
         </CardContent>
       )}
       {returnAi && returnAi.explicacao && (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <Typography sx={{ color: 'white' }}>
-            {returnAi.explicacao}
-          </Typography>
-          <Typography sx={{ color: 'red' }} variant="h6">Resposta</Typography>
+          <Typography sx={{ color: 'white', fontWeight: 600 }} variant="h6">Resposta</Typography>
           <Typography sx={{ color: 'white' }}>
             {correctAnswer}
+          </Typography>
+          <Typography sx={{ color: 'white', fontWeight: 600 }} variant="h6">Feedback</Typography>
+          <Typography sx={{ color: 'white' }}>
+            {returnAi.explicacao}
           </Typography>
         </Box>
       )}

@@ -26,7 +26,7 @@ const AudioQuestions: React.FC<IRenderQuestionProps> = ({
 	const [nextQuestionBtn, setNextQuestionBtn] = useState<boolean>(false);
 	const [disableBtnNextQuestion, setDisableBtnNextQuestion] = useState<boolean>(false);
 	const [aiVerification, setAiVerification] = useState<string>('');
-	const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+	const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "parcial">("idle");
 
 	useEffect(() => {
 		if (questions.length && !controlList.length) {
