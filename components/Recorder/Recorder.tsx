@@ -33,6 +33,7 @@ const Recorder: React.FC<IRecorderProps> = ({
 
   const chunks = useRef<Blob[]>([]);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationId = useRef<number | null>(null);
 
   // 📱 Tratativa iOS — escolher tipo suportado
   const getSupportedMimeType = () => {
@@ -74,8 +75,24 @@ const Recorder: React.FC<IRecorderProps> = ({
     }
   };
 
+  // const stopRecording = () => {
+  //   mediaRecorder?.stop();
+  //   setRecording(false);
+  // };
+
   const stopRecording = () => {
-    mediaRecorder?.stop();
+    if (animationId.current) {
+      cancelAnimationFrame(animationId.current);
+      animationId.current = null
+    }
+    if (mediaRecorder) {
+      mediaRecorder.stop();
+      mediaRecorder.stream.getTracks().forEach(track => track.stop()); // libera o microfone
+    }
+    if (audioCtx) {
+      audioCtx.close().catch(() => { }); // encerra o contexto de áudio
+      setAudioCtx(null);
+    }
     setRecording(false);
   };
 
@@ -102,7 +119,7 @@ const Recorder: React.FC<IRecorderProps> = ({
     const HEIGHT = canvas.height;
 
     const draw = () => {
-      requestAnimationFrame(draw);
+      animationId.current = requestAnimationFrame(draw);
 
       analyser.getByteTimeDomainData(dataArray);
 
