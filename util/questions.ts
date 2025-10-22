@@ -1459,7 +1459,7 @@ export const danTest: IQuestions[] = [
     content: 'Qual o nome do mestre Chinês de Kanbun Uechi e quanto tempo Kanbun passou na China ao todo?',
     options: [
       { correct: 1, data: 'Kanei Uechi, 8 anos, ensinando na província Fujian' },
-      { correct: 0, data: 'Shushiwa. 13 anos, 10 como aprendiz e 3 ensinando na província Nanjing' },
+      { correct: 0, data: 'Shushiwa. 13 anos, sendo dez anos como aprendiz e três anos ensinando em outra província, chamada Nanjing, próxima a Fujian, onde Kanbun aprendeu PANGAINOON.' },
       { correct: 2, data: 'Yip Man, 10 anos, 5 aprendendo e 5 ministrando aulas' },
       { correct: 3, data: 'Shimu, 5 anos, ensinando em Okinawa' }
     ]
@@ -1480,7 +1480,7 @@ export const danTest: IQuestions[] = [
     options: [
       { correct: 1, data: 'Sanchin - Seichin - Seiryu' },
       { correct: 2, data: 'Kanchin - Kanshu - Seisan' },
-      { correct: 0, data: 'Seisan - Sanseiryu - Sanchin' },
+      { correct: 0, data: 'Sanchin - Seisan - Sanseiryu' },
       { correct: 3, data: 'Sanseiryu - Seisan - Seichin' }
     ]
   },
@@ -1608,7 +1608,7 @@ export const danTest: IQuestions[] = [
     type: 'text',
     content: 'Oque significa a palavra Seisan?',
     options: [
-      { correct: 0, data: '13 anos. Quando um jovem era considerado adulto e ao aprender o kata apto para faixa preta.' },
+      { correct: 0, data: '13 anos. Quando um jovem era considerado adulto em Okinawa e ao aprender este kata, significa que já tem tempo e experiência pra se tornar faixa preta.' },
       { correct: 3, data: '3 conflitos - 3 formas de ataque e defesa.' },
       { correct: 2, data: '16 Mãos/Posições.' },
       { correct: 1, data: 'Aptidão.' }
@@ -1631,14 +1631,14 @@ export const danTest: IQuestions[] = [
       { correct: 2, data: 'Caminho Inverso (Onde se treinam Artes Marciais)' },
       { correct: 3, data: 'Tatame (Onde se treinam Artes Marciais)' },
       { correct: 1, data: 'Arena Espiritual (Onde se treinam Artes Marciais)' },
-      { correct: 0, data: 'Local do caminho (Onde se treinam Artes Marciais)' },
+      { correct: 0, data: 'Local do caminho (Onde se treinam Artes Marciais Japonesas mesclando o combate com os aspectos culturais).' },
     ]
   },
   {
     type: 'text',
     content: 'Oque significa Kanshiwa?',
     options: [
-      { correct: 0, data: 'Fusão dos nomes do precursor (Shushiwa + Kanbun Uechi), influência do Okinawa TE e Kenpo Chinês.' },
+      { correct: 0, data: 'É a fusão dos nomes do precursor do estilo, Shushiwa, com o fundador do estilo, Kanbun Uechi, é o kata que tem a influência do Okinawa TE (Mãos Fechadas) com o Kenpo Chinês (Mãos Abertas).' },
       { correct: 3, data: 'Kata das Crianças.' },
       { correct: 1, data: 'Caminho das mão vazias.' },
       { correct: 2, data: 'Kata intermediário.' },
@@ -1648,7 +1648,7 @@ export const danTest: IQuestions[] = [
     type: 'text',
     content: 'Oque significa Kanshu?',
     options: [
-      { correct: 0, data: 'Antes chamado Daini Seisan, 1970 nome alterado para lembrar dos precursores, criador Seiki Itokazu.' },
+      { correct: 0, data: 'Inicialmente era chamado de Daini Seisan, para que o iniciante aprendesse os movimentos iniciais do kata Seisan. Teve seu nome alterado em 1970 para Kanshu, para lembrar o precursor Shushiwa e do fundador, Kanbun Uechi, criado por Seiki Itokazu.' },
       { correct: 1, data: 'Caminho do Guerreiro.' },
       { correct: 3, data: 'Criado por Kanei Uechi em homenagem ao pai, após seu falecimento.' },
       { correct: 2, data: 'Lição de vida.' },
@@ -1671,14 +1671,14 @@ export const danTest: IQuestions[] = [
       { correct: 3, data: 'Equilibrio mental, simboliza o Dragão.' },
       { correct: 1, data: 'Caminho do Guerreiro após adulto' },
       { correct: 2, data: 'Forma da Garça' },
-      { correct: 0, data: '16 anos, necessidade de treinamento após faixa preta' },
+      { correct: 0, data: '16 anos, é a necessidade de treinamento após faixa preta' },
     ]
   },
   {
     type: 'text',
     content: 'Oque significa a palavra Kanchin?',
     options: [
-      { correct: 0, data: 'Batalha/Táticas de Kanbun, nível de habilidade e como lidar com dificuldades nesse nível técnico.' },
+      { correct: 0, data: 'Batalha/Táticas de Kanbun, nível de habilidade adquirida do indivíduo neste patamar e como lidar com dificuldades nesse nível técnico.' },
       { correct: 1, data: 'Conhecimento de Kanei, Habilidade demonstrada ao chegar nesse Kata.' },
       { correct: 2, data: '56 formas de ataque e defesa.' },
       { correct: 3, data: 'Coração de Dragão, Kata Rígido demonstrando força.' },
@@ -1691,7 +1691,7 @@ export const danTest: IQuestions[] = [
       { correct: 1, data: 'Calejamento das pernas' },
       { correct: 2, data: 'Calejamento da região abdominal' },
       { correct: 3, data: 'Calejamento da região peitoral' },
-      { correct: 0, data: 'Calejamento do antebraço' },
+      { correct: 0, data: 'Calejamento dos antebraços' },
     ]
   },
   {
@@ -1728,7 +1728,7 @@ export const danTest: IQuestions[] = [
     type: 'text',
     content: 'Em que período os cinco novos Katas foram adicionados ao estilo?',
     options: [
-      { correct: 0, data: '1954-1958, com ajuda de antigos alunos Seiki Itokazu e Saburo Uehara.' },
+      { correct: 0, data: 'Entre 1954 e 1958, com ajuda de antigos alunos entre eles Seiki Itokazu e Saburo Uehara. 5 novos katas foram acrescentados como etapas complementares dos katas aprendidos na China.' },
       { correct: 3, data: 'Em 1948, após morte de Kanbun Uechi.' },
       { correct: 1, data: 'Em 1911, por Kanbun Uechi após nascimento de seu filho Kanei.' },
       { correct: 2, data: 'Em 1991, após morte de Kanei Uechi.' },
@@ -1739,7 +1739,7 @@ export const danTest: IQuestions[] = [
     content: 'Qual o significado da palavra Kata?',
     options: [
       { correct: 3, data: 'Guerra' },
-      { correct: 0, data: 'Forma - Modelo' },
+      { correct: 0, data: 'Forma ou Modelo' },
       { correct: 2, data: 'Conjunto de técnicas avançadas' },
       { correct: 1, data: 'Formulário de luta' },
     ]
@@ -1750,7 +1750,7 @@ export const danTest: IQuestions[] = [
     options: [
       { correct: 2, data: 'Golpe com ponta de dedos' },
       { correct: 3, data: 'Treino de força' },
-      { correct: 0, data: 'Encontro de mãos. Combate propriamente dito' },
+      { correct: 0, data: 'Encontro de mãos. É o combate propriamente dito' },
       { correct: 1, data: 'Saudação inicial' },
     ]
   },
@@ -1768,7 +1768,7 @@ export const danTest: IQuestions[] = [
     type: 'text',
     content: 'Quais foram as linhagens de combate originárias de Okinawa e onde Uechi Ryu se encaixa?',
     options: [
-      { correct: 0, data: 'Naha Te - Shuri Te - Tomari Te. Semelhante ao Naha Te. Uechi Ryu não possui transformações internas.' },
+      { correct: 0, data: 'Naha Te, Shuri Te e Tomari Te que são regiões onde surgiram formas de combate em Okinawa. Semelhante ao Naha Te mas Uechi Ryu não possui transformações internas.' },
       { correct: 3, data: 'Naha Te - Shuto Te - Tomari Te. Semelhante ao Tomari Te. Uechi Ryu não possui transformações externas.' },
       { correct: 1, data: 'Waza Te - Shuri Te - Nage Waza. Semelhante ao Te Waza. Uechi Ryu possui transformações internas.' },
       { correct: 2, data: 'Naha Te - Shuri Te - Gedan Te. Semelhante ao Shuri Te. Uechi Ryu possui transformações externas.' },
@@ -1780,7 +1780,7 @@ export const danTest: IQuestions[] = [
     options: [
       { correct: 1, data: 'Baseado no Pangainoon, onde o Kanei Uechi junto com Kanbun estimularam a uniformização.' },
       { correct: 2, data: 'Baseado no Pangainoon, onde o Shushiwa com Ryu Ryu Tomoyose estimularam a uniformização.' },
-      { correct: 0, data: 'Baseado no Judo, onde o "pai" do judo junto com Funakoshi estimularam a uniformização.' },
+      { correct: 0, data: 'Baseado no Judo, onde Sensei Jigorokano, o "pai" do judo, junto com Gichin Funakoshi e outros mestres de karatê da época estimularam a uniformização como forma de apresentar ao Japão central e ao mundo.' },
       { correct: 3, data: 'Baseado no Judo, onde o Kanbun Uechi junto com Funakoshi estimularam a uniformização.' },
     ]
   },

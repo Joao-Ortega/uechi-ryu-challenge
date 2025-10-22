@@ -63,10 +63,10 @@ const Recorder: React.FC<IRecorderProps> = ({
       setTimeout(() => {
         if (recorder.state === "recording") {
           recorder.stop();
-          setAlertMsg('Aúdios de no máximo 12 segundos!')
+          setAlertMsg('Aúdios de no máximo 15 segundos!')
           setRecording(false)
         }
-      }, 12000);
+      }, 15000);
       setRecording(true);
     } catch (err) {
       console.error("Erro ao iniciar gravação:", err);
