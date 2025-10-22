@@ -6,27 +6,19 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import Logo from '../../app/assets/images/newLogo.png';
 import WhiteBelt from '../../app/assets/images/whiteTest.png';
 import { adultsBrownAndBlack, adultsOrangeToDarkBlue, adultsWhiteToYellow, beltColorsKids } from '@/util/beltColors';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 export default function InitialPage() {
   const [isCLicked, setIsClicked] = useState<boolean>(false);
   const [buttonLoading, setButtonLoading] = useState<boolean>(false);
   const [isDisable, setIsDisable] = useState<boolean>(true);
   const [password, setPassword] = useState<string>('');
-  // const [type, setType] = useState<string>('');
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const router = useRouter();
-
-  // useEffect(() => {
-  //   if (!type) return
-  //   if (type === 'btn-adults') {
-  //     const pass = password.toUpperCase();
-  //     localStorage.setItem('koto-simon', pass);
-  //   }
-  //   router.push('/game')
-  // }, [type]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setPassword(e.target.value);
-    if (e.target.value.trim().toUpperCase() === 'OKIKUKAI') {
+    if (e.target.value.trim().toUpperCase() === `${process.env.NEXT_PUBLIC_PASSWORD}`) {
       setIsDisable(false);
     } else {
       setIsDisable(true);
@@ -203,25 +195,6 @@ export default function InitialPage() {
               />
             ))}
           </Button>
-          {/* <Button
-            variant='contained'
-            className='btn-kids'
-            onClick={() => {
-              setButtonLoading(true)
-              classNameToLocalAndRedirect('btn-kids')
-            }}
-            sx={{
-              backgroundColor: 'white',
-              color: 'black',
-              '&.MuiButtonBase-root:hover': {
-                backgroundColor: 'rgba(255, 255, 255)',
-                color: 'red'
-              },
-              width: '100%'
-            }}
-          >
-            Exame Kids
-          </Button>*/}
           {isCLicked ? (
             <Box
               sx={{
@@ -233,6 +206,7 @@ export default function InitialPage() {
               <InputBase
                 placeholder='Digite a Senha...'
                 size='small'
+                type={showPassword ? 'text' : 'password'}
                 onChange={handleChange}
                 sx={{
                   backgroundColor: 'white',
@@ -240,9 +214,15 @@ export default function InitialPage() {
                   color: 'black',
                   padding: 0.5
                 }}
+                endAdornment={
+                  showPassword
+                    ? <VisibilityOff onClick={() => setShowPassword(false)} sx={{ color: 'black' }} />
+                    : <Visibility onClick={() => setShowPassword(true)} sx={{ color: 'black' }} />
+                }
               />
               <Button
                 size='small'
+                disabled={isDisable}
                 onClick={() => {
                   setButtonLoading(true);
                   classNameToLocalAndRedirect('DAN');
