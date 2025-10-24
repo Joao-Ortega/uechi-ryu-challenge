@@ -195,6 +195,51 @@ export default function InitialPage() {
               />
             ))}
           </Button>
+          <Button
+            variant='contained'
+            onClick={() => {
+              setButtonLoading(true)
+              classNameToLocalAndRedirect('btn-kids')
+            }}
+            sx={{
+              backgroundColor: 'black',
+              border: '1px solid rgb(124, 123, 120)',
+              color: 'white',
+              '&.MuiButtonBase-root:hover': {
+                backgroundColor: 'rgba(0, 0, 0)',
+              },
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-evenly',
+              margin: '1% 0 1% 0'
+            }}
+          >
+            EXAME KIDS 10 NOV 2025
+          </Button>
+          <Button
+            variant='contained'
+            className='teens-adults-exam'
+            onClick={() => {
+              setButtonLoading(true)
+              classNameToLocalAndRedirect('teens-adults-exam')
+            }}
+            sx={{
+              backgroundColor: 'black',
+              border: '1px solid rgb(124, 123, 120)',
+              color: 'white',
+              '&.MuiButtonBase-root:hover': {
+                backgroundColor: 'rgba(0, 0, 0)',
+              },
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-evenly',
+              margin: '1% 0 1% 0'
+            }}
+          >
+            EXAME TEENS/ADULTOS 10 NOV 2025
+          </Button>
           {isCLicked ? (
             <Box
               sx={{
@@ -256,7 +301,8 @@ export default function InitialPage() {
                 width: '100%',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'space-evenly'
+                justifyContent: 'space-evenly',
+                margin: '1% 0 0 0'
               }}
             >
               EXAME DE DAN 22 NOV 2025
