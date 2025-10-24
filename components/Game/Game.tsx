@@ -27,7 +27,7 @@ const Game = () => {
     switch (gameType) {
       case 'kids-white-orange':
       case 'btn-kids':
-        setMode('Standard')
+        setMode('Exam')
         setSafeArray([...challenges])
         break;
       case 'white-yellow':
@@ -43,7 +43,7 @@ const Game = () => {
         setSafeArray([...kotoSimon])
         break
       case 'teens-adults-exam':
-        setMode('Standard')
+        setMode('Exam')
         setSafeArray([...teensAdultsTest])
         break
       case 'DAN':
