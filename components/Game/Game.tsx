@@ -4,7 +4,7 @@ import { Box, Button } from '@mui/material';
 import Logo from '../../app/assets/images/newLogo.png';
 import Image from 'next/image';
 import RenderQuestion from '../RenderQuestion/RenderQuestion';
-import { adultsOrangeDarkBlue, adultsWhiteYellow, challenges, danTest, kotoSimon } from '../../util/questions';
+import { adultsOrangeDarkBlue, adultsWhiteYellow, challenges, danTest, kotoSimon, teensAdultsTest } from '../../util/questions';
 import FinishedGameModal from '../Modal/FinishedGameModal';
 import { IQuestions } from '@/interfaces';
 import { useRouter } from 'next/navigation';
@@ -27,7 +27,7 @@ const Game = () => {
     switch (gameType) {
       case 'kids-white-orange':
       case 'btn-kids':
-        setMode('Standard')
+        setMode('Exam')
         setSafeArray([...challenges])
         break;
       case 'white-yellow':
@@ -41,6 +41,10 @@ const Game = () => {
       case 'brown-black':
         setMode('Standard')
         setSafeArray([...kotoSimon])
+        break
+      case 'teens-adults-exam':
+        setMode('Exam')
+        setSafeArray([...teensAdultsTest])
         break
       case 'DAN':
         setMode('DAN')

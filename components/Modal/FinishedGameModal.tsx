@@ -69,14 +69,14 @@ const FinishedGameModal = ({
               <Typography
                 fontSize={22}
                 sx={{
-                  color: points === (mode === 'DAN' ? 1 : 5) ? 'black' : points < (mode === 'DAN' ? 1 : 5) ? 'red' : 'green',
+                  color: points === (mode === 'DAN' || mode === 'Exam' ? 1 : 5) ? 'black' : points < (mode === 'DAN' || mode === 'Exam' ? 1 : 5) ? 'red' : 'green',
                   // color: points === 5 ? 'black' : points < 5  ? 'red' : 'green',
                   fontWeight: 900 }}
               >
                 {points}
               </Typography>
               {/* <Typography fontSize={22} sx={{ fontWeight: 900 }}>/10</Typography> */}
-              <Typography fontSize={22} sx={{ fontWeight: 900 }}>{mode === 'DAN' ? '/2'  : '/10'}</Typography>
+              <Typography fontSize={22} sx={{ fontWeight: 900 }}>{mode === 'DAN' || mode === 'Exam' ? '/2'  : '/10'}</Typography>
             </Box>
             <Button
               variant='contained'

@@ -38,7 +38,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
 
   useEffect(() => {
     if (questions.length && !controlList.length) {
-      const QUESTIONS_PER_ROUND = mode === 'DAN' ? 2 : 10;
+      const QUESTIONS_PER_ROUND = mode === 'Exam' ? 2 : 10;
       // const QUESTIONS_PER_ROUND = 10;
       setRoundLimit(Math.floor(questions.length / QUESTIONS_PER_ROUND));
       setRoundsCount(1);
@@ -52,7 +52,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
     if (!!roundsCount) {
       if (roundsCount >= roundLimit) {
         setRoundsCount(1);
-        const QUESTIONS_PER_ROUND = mode === 'DAN' ? 2 : 10;
+        const QUESTIONS_PER_ROUND = mode === 'Exam' ? 2 : 10;
         // const QUESTIONS_PER_ROUND = 10;
         setRoundLimit(Math.floor(questions.length / QUESTIONS_PER_ROUND));
         resetStateFromList(questions)
@@ -130,7 +130,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
 
   const handleAnswer = () => {
     setDisableBtnNextQuestion(true)
-    const TOTAL_RESPONSES = mode === 'DAN' ? 3 : 11;
+    const TOTAL_RESPONSES = mode === 'Exam' ? 3 : 11;
     // const TOTAL_RESPONSES = 11
     const isFinished = [...responses, '.'];
     if (isFinished.length === TOTAL_RESPONSES) {
@@ -153,7 +153,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
   }
 
   const getRightText = (): string => {
-    const TOTAL_RESPONSES = mode === 'DAN' ? 3 : 11;
+    const TOTAL_RESPONSES = mode === 'Exam' ? 3 : 11;
     // const TOTAL_RESPONSES = 11
     const isFinished = [...responses, '.'];
     if (isFinished.length === TOTAL_RESPONSES) {
@@ -296,7 +296,7 @@ const RenderQuestion: React.FC<IRenderQuestionProps> = ({
           flexDirection='column'
         >
           <Typography variant='h6' fontWeight='bold'>
-            {`${responses.length}/${mode === 'DAN' ? '2' : '10'}`}
+            {`${responses.length}/${mode === 'Exam' ? '2' : '10'}`}
             {/* {`${responses.length}/10`} */}
           </Typography>
           {nextQuestionBtn && (
