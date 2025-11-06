@@ -238,7 +238,7 @@ export default function InitialPage() {
               margin: '1% 0 1% 0'
             }}
           >
-            EXAME TEENS/ADULTOS 10 NOV 2025
+            EXAME TEENS/ADULTOS 12 NOV 2025
           </Button>
           {isCLicked ? (
             <Box
