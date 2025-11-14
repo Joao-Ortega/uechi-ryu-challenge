@@ -195,7 +195,7 @@ export default function InitialPage() {
               />
             ))}
           </Button>
-          <Button
+          {/* <Button
             variant='contained'
             onClick={() => {
               setButtonLoading(true)
@@ -216,8 +216,8 @@ export default function InitialPage() {
             }}
           >
             EXAME KIDS 10 NOV 2025
-          </Button>
-          <Button
+          </Button> */}
+          {/* <Button
             variant='contained'
             className='teens-adults-exam'
             onClick={() => {
@@ -239,7 +239,7 @@ export default function InitialPage() {
             }}
           >
             EXAME TEENS/ADULTOS 12 NOV 2025
-          </Button>
+          </Button> */}
           {isCLicked ? (
             <Box
               sx={{
