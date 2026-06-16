@@ -305,7 +305,7 @@ export default function InitialPage() {
                 margin: '1% 0 0 0'
               }}
             >
-              EXAME DE DAN 22 NOV 2025
+              EXAME DE DAN
             </Button>
           )}
         </Box>
